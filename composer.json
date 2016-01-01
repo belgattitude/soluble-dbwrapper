@@ -6,7 +6,7 @@
         "database",
         "mysql",
         "pdo_mysql",
-        "pdi"
+        "pdo"
     ],
     "homepage": "https://github.com/belgattitude/soluble-dbwrapper",
     "type": "library",
