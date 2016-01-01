@@ -1,4 +1,4 @@
-# DbWrapper
+# soluble/dbwrapper
 
 [![PHP Version](http://img.shields.io/badge/php-5.3+-ff69b4.svg)](https://packagist.org/packages/soluble/dbwrapper)
 [![HHVM Status](http://hhvm.h4cc.de/badge/soluble/dbwrapper.png?style=flat)](http://hhvm.h4cc.de/package/soluble/dbwrapper)
@@ -15,7 +15,7 @@ Extra minimalist PHP database wrapper.
 
 ## Features
 
-- Abstract pdo_mysql / mysqli queries.
+- Currently only abstract pdo_mysql / mysqli drivers with minimal functions.
 
 ## Requirements
 
