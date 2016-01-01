@@ -2,12 +2,12 @@
 
 namespace Soluble\DbWrapper\Adapter;
 
-class MysqlAdapterPDOTest extends \PHPUnit_Framework_TestCase
+class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      *
-     * @var MysqlAdapter
+     * @var MysqliAdapter
      */
     protected $adapter;
 
@@ -17,23 +17,26 @@ class MysqlAdapterPDOTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new MysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
+        $this->adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
     }
 
     public function testGetCurrentSchema()
     {
         $current = $this->adapter->getCurrentSchema();
-        $this->assertEquals(\SolubleTestFactories::getDatabaseName('pdo:mysql'), $current);
+        $this->assertEquals(\SolubleTestFactories::getDatabaseName('mysqli'), $current);
 
-        $config = \SolubleTestFactories::getDbConfiguration('pdo:mysql');
+        $config = \SolubleTestFactories::getDbConfiguration('mysqli');
         unset($config['database']);
 
-        $adapter = new MysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql', $config));
+        $adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli', $config));
         $current = $adapter->getCurrentSchema();
 
         $this->assertFalse($current);
-
     }
+
+
+
+
     public function testExecute()
     {
         $this->adapter->execute('set @psbtest=1');
@@ -49,7 +52,6 @@ class MysqlAdapterPDOTest extends \PHPUnit_Framework_TestCase
 
     public function testQuery()
     {
-
         $this->adapter->execute('set @psbtest=1');
         $results = $result = $this->adapter->query('select * from product');
         $this->assertInstanceOf('ArrayObject', $results);

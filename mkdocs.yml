@@ -3,12 +3,12 @@ site_dir: build/doc
 pages:
     - index.md
     - { 'Contributing': CONTRIBUTING.md }
-site_name: soluble-schema
-site_description: "soluble-schema"
+site_name: soluble-dbwrapper
+site_description: "soluble-dbwrapper"
 theme: readthedocs
 #theme: bootstrap
 #theme: united
-repo_url: 'https://github.com/belgattitude/soluble-schema'
+repo_url: 'https://github.com/belgattitude/soluble-dbwrapper'
 markdown_extensions:
     - toc:
         permalink: True

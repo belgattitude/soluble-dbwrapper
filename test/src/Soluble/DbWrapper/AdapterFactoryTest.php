@@ -10,7 +10,7 @@ class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
         $conn = \SolubleTestFactories::getDbConnection('mysqli');
         $adapter = AdapterFactory::createAdapterFromConnection($conn);
         $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\AdapterInterface', $adapter);
-        $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\MysqlAdapter', $adapter);
+        $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\MysqliAdapter', $adapter);
     }
 
 
@@ -19,7 +19,7 @@ class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
         $conn = \SolubleTestFactories::getDbConnection('pdo:mysql');
         $adapter = AdapterFactory::createAdapterFromConnection($conn);
         $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\AdapterInterface', $adapter);
-        $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\MysqlAdapter', $adapter);
+        $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\PdoMysqlAdapter', $adapter);
     }
 
     public function testCreateAdapterThrowsException()

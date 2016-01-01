@@ -2,12 +2,12 @@
 
 namespace Soluble\DbWrapper\Adapter;
 
-class MysqlAdapterMysqliTest extends \PHPUnit_Framework_TestCase
+class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      *
-     * @var MysqlAdapter
+     * @var PdoMysqlAdapter
      */
     protected $adapter;
 
@@ -17,18 +17,18 @@ class MysqlAdapterMysqliTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new MysqlAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
+        $this->adapter = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
     }
 
     public function testGetCurrentSchema()
     {
         $current = $this->adapter->getCurrentSchema();
-        $this->assertEquals(\SolubleTestFactories::getDatabaseName('mysqli'), $current);
+        $this->assertEquals(\SolubleTestFactories::getDatabaseName('pdo:mysql'), $current);
 
-        $config = \SolubleTestFactories::getDbConfiguration('mysqli');
+        $config = \SolubleTestFactories::getDbConfiguration('pdo:mysql');
         unset($config['database']);
 
-        $adapter = new MysqlAdapter(\SolubleTestFactories::getDbConnection('mysqli', $config));
+        $adapter = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql', $config));
         $current = $adapter->getCurrentSchema();
 
         $this->assertFalse($current);
@@ -36,12 +36,6 @@ class MysqlAdapterMysqliTest extends \PHPUnit_Framework_TestCase
 
 
 
-    public function testConstructorThrowsException()
-    {
-        $this->setExpectedException('\Soluble\DbWrapper\Exception\InvalidArgumentException');
-        $connection = new \PDO('sqlite::memory:');
-        $adapter = new MysqlAdapter($connection);
-    }
 
     public function testExecute()
     {

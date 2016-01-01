@@ -97,10 +97,10 @@ Once a `DbWrapper\Adapter\AdapterInterface is intitalized, you have access to th
 
 Currently only pdo_mysql and mysqli drivers  are supported. 
 
-| Drivers            | Adapter interface implementation                     |
+| Drivers            | DbWrapper\Adapter\AdapterInterface implementations   |
 |--------------------|------------------------------------------------------|
-| pdo_mysql          | `Soluble\DbAdapter\Adapter\MysqlAdapter`             |
-| mysqli             | `Soluble\DbAdapter\Adapter\MysqlAdapter`             |
+| pdo_mysql          | `Soluble\DbWrapper\Adapter\PdoMysqlAdapter`          |
+| mysqli             | `Soluble\DbWrapper\Adapter\MysqliAdapter`            |
 
 
 ## Contributing
