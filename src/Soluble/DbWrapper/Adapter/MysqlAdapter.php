@@ -49,7 +49,7 @@ class MysqlAdapter implements AdapterInterface
             $this->pdo = $conn;
             $this->type = self::DRIVER_TYPE_PDO;
         } else {
-            $msg = "MysqlConnectionAdapter requires connection to be either 'pdo:mysql' or 'mysqli'";
+            $msg = "MysqlAdapter requires connection to be either 'pdo:mysql' or 'mysqli'";
             throw new Exception\InvalidArgumentException($msg);
         }
     }
