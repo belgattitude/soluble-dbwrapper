@@ -1,0 +1,33 @@
+{
+    "name": "soluble/dbwrapper",
+    "description": "Extra minimalist database wrapper",
+    "license": "MIT",
+    "keywords": [
+        "database",
+        "mysql",
+        "pdo_mysql",
+        "pdi"
+    ],
+    "homepage": "https://github.com/belgattitude/soluble-dbwrapper",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Sébastien Vanvelthem",
+            "homepage": "http://www.nuvolia.com/",
+            "role": "Lead developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Soluble\\DbWrapper\\": "src/Soluble/DbWrapper"
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "ext-mysqli": "*",
+        "ext-pdo": "*"
+    },
+    "archive": {
+        "exclude": ["test", "doc", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore"]
+    }
+}

@@ -1,0 +1,20 @@
+docs_dir: doc
+site_dir: build/doc
+pages:
+    - index.md
+    - { 'Contributing': CONTRIBUTING.md }
+site_name: soluble-schema
+site_description: "soluble-schema"
+theme: readthedocs
+#theme: bootstrap
+#theme: united
+repo_url: 'https://github.com/belgattitude/soluble-schema'
+markdown_extensions:
+    - toc:
+        permalink: True
+    - codehilite:
+        linenums: False
+        guess_lang: True
+        #pygments_style: monokai
+        #use_pygments: True
+    
