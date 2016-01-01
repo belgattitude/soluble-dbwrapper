@@ -10,13 +10,13 @@ class MysqliAdapter implements AdapterInterface
 {
 
     use Mysql\MysqlCommonTrait;
-    
+
     /**
      *
      * @var \mysqli
      */
     protected $connection;
-    
+
 
     /**
      * Constructor
@@ -65,12 +65,12 @@ class MysqliAdapter implements AdapterInterface
         }
         return $results;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function execute($query)
     {
         $this->query($query);
-    }    
+    }
 }

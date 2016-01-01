@@ -80,5 +80,4 @@ class PdoMysqlAdapter implements AdapterInterface
         }
         return $results;
     }
-
 }

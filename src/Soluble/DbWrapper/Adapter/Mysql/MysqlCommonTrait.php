@@ -19,7 +19,4 @@ trait MysqlCommonTrait
         }
         return $results[0]['current_schema'];
     }
-    
-    
 }
-
