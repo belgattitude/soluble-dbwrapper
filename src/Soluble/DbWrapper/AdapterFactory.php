@@ -14,7 +14,6 @@ class AdapterFactory
      */
     public static function createAdapterFromConnection($connection)
     {
-        $adapter = null;
         if ($connection instanceof \PDO) {
             switch ($connection->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
                 case 'mysql':
