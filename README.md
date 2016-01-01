@@ -41,127 +41,66 @@ require 'vendor/autoload.php';
 
 ### Connection
 
-Initialize the `Schema\Source\MysqlInformationSchema` with a valid `PDO` or `mysqli` connection.
+Create an adapter from an existing PDO connection
 
 ```php
 <?php
 
-use Soluble\Schema;
+use Soluble\DbWrapper;
 
 $conn = new \PDO("mysql:host=$hostname", $username, $password, [
             \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
 ]);
 
-/* Alternatively, use a \mysqli connection instead of PDO */
-// $conn = new \mysqli($hostname,$username,$password,$database);
-// $conn->set_charset($charset);
+try {
+    $adapter = DbWrapperAdapterFactory::createFromConnection($conn);
+} catch (DbWrapper\Exception\InvalidArgumentException $e) {
+    // ...
+}
 
-$schema = new Schema\Source\MysqlInformationSchema($conn);
-
-// By default the schema (database) is taken from current connection. 
-// If you wnat to query a different schema, set it in the second parameter.
-$otherDbSchema = new Schema\Source\MysqlInformationSchema($conn, 'otherDbSchema');
 ```
 
-
-### API methods
-
-Once a `Schema\Source\SchemaSourceInterface` is intitalized, you have access to the following methods
-
-| Methods                         | Return        | Description                                 |
-|---------------------------------|---------------|---------------------------------------------|
-| `getSchemaConfig()`             | `ArrayObject` | Retrieve full extended schema config        |
-| `getTables()`                   | `array`       | Retrieve table names                        |
-| `getTablesInformation()`        | `array`       | Retrieve extended tables information        |
-| `hasTable()`                    | `boolean`     | Whether table exists                        |
-| `getColumns($table)`            | `array`       | Retrieve column names                       |
-| `getColumnsInformation($table)` | `array`       | Retrieve extended columns information       |
-| `getPrimaryKey($table)`         | `string`      | Retrieve primary key (unique)               |
-| `getPrimaryKeys($table)`        | `array`       | Retrieve primary keys (multiple)            |
-| `getUniqueKeys($table)`         | `array`       | Retrieve unique keys                        |
-| `getForeignKeys($table)`        | `array`       | Retrieve foreign keys information           |
-| `getReferences($table)`         | `array`       | Retrieve referencing tables (relations)     |
-| `getIndexes($table)`            | `array`       | Retrieve indexes info                       |
-
-
-## Examples
-
-
-### Retrieve table informations in a database schema
+Create an adapter from an existing Mysqli connection
 
 ```php
 <?php
 
-// Retrieve table names defined in schema
-$tables = $schema->getTables();
+use Soluble\DbWrapper;
 
-// Retrieve full information of tables defined in schema
-$infos = $schema->getTablesInformation();
+$conn = new \mysqli($hostname,$username,$password,$database);
+$conn->set_charset($charset);
 
-// The resulting array looks like
-[
- ["table_name_1"] => [
-    ["name"]    => (string) 'Table name'
-    ["columns"] => [ // Columns information, 
-                     // @see AbstractSource::getColumnsInformation()
-                     "col name_1" => ["name" => "", "type" => "", ...]',
-                     "col name_2" => ["name" => "", "type" => "", ...]'
-                   ]
-    ["primary_keys"] => [ // Primary key column(s) or empty
-                      "pk_col1", "pk_col2"
-                   ],
-    ["unique_keys"]  => [ // Uniques constraints or empty if none
-                      "unique_index_name_1" => ["col1", "col3"],
-                      "unique_index_name_2" => ["col4"]
-                   ],
-    ["foreign_keys"] => [ // Foreign keys columns and their references or empty if none
-                       "col_1" => [
-                                    "referenced_table"  => "Referenced table name",
-                                    "referenced_column" => "Referenced column name",
-                                    "constraint_name"   => "Constraint name i.e. 'FK_6A2CA10CBC21F742'"
-                                  ],
-                       "col_2" => [ // ...  
-                                  ]
-                      ],
-    ["references"] => [ // Relations referencing this table
-                        "ref_table:ref_column->column1" => [
-                             "column"             => "Colum name in this table",
-                             "referencing_table"  => "Referencing table name", 
-                             "referencing_column" => "Column name in the referencing table", 
-                             "constraint_name"    => "Constraint name i.e. 'FK_6A2CA10CBC21F742'"
-                           ],
-                        "ref_table:ref_column->column2" => [ 
-                             //...
-                           ]
-                      ]
-    ["indexes"]  => [],
-    ["options"]  => [ // Specific table creation options
-                      "comment"   => (string) "Table comment",
-                      "collation" => (string) "Table collation, i.e. 'utf8_general_ci'",
-                      "type"      => (string) "Table type, i.e: 'BASE TABLE'",
-                      "engine"    => (string) "Engine type if applicable, i.e. 'InnoDB'",
-                    ]
- ],
- ["table_name_2"] => [
-   //...
- ]
-]
-     
-// Test if table exists in schema
-if ($schema->hasTable($table)) {
-    //...
+try {
+    $adapter = DbWrapper\AdapterFactory::createFromConnection($conn);
+} catch (DbWrapper\Exception\InvalidArgumentException $e) {
+    // ...
 }
+
+
 ```
+
+### API methods
+
+Once a `DbWrapper\Adapter\AdapterInterface is intitalized, you have access to the following methods
+
+| Methods                         | Return        | Description                                 |
+|---------------------------------|---------------|---------------------------------------------|
+| `query($query)`                 | `ArrayObject` | Retrieve full query results                 |
+| `execute($query)`               | `void`        | Execute command (set, ...)                  |
+| `quoteValue($value)`            | `string`      | Quote value                                 |
+| `getCurrentSchema()`            | `string|false`| Return current schema                       |
+
+
 
 
 ## Supported drivers
 
-Currently only MySQL and MariaDB are supported. 
+Currently only pdo_mysql and mysqli drivers  are supported. 
 
-| Drivers            | Source class                                         |
+| Drivers            | Adapter interface implementation                     |
 |--------------------|------------------------------------------------------|
-| pdo_mysql          | `Soluble\Schema\Source\MysqlInformationSchema`       |
-| mysqli             | `Soluble\Schema\Source\MysqlInformationSchema`       |
+| pdo_mysql          | `Soluble\DbAdapter\Adapter\MysqlAdapter`             |
+| mysqli             | `Soluble\DbAdapter\Adapter\MysqlAdapter`             |
 
 
 ## Contributing
