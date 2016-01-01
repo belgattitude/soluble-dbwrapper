@@ -1,6 +1,6 @@
 # soluble/dbwrapper
 
-[![PHP Version](http://img.shields.io/badge/php-5.3+-ff69b4.svg)](https://packagist.org/packages/soluble/dbwrapper)
+[![PHP Version](http://img.shields.io/badge/php-5.4+-ff69b4.svg)](https://packagist.org/packages/soluble/dbwrapper)
 [![HHVM Status](http://hhvm.h4cc.de/badge/soluble/dbwrapper.png?style=flat)](http://hhvm.h4cc.de/package/soluble/dbwrapper)
 [![Build Status](https://travis-ci.org/belgattitude/soluble-dbwrapper.png?branch=master)](https://travis-ci.org/belgattitude/soluble-dbwrapper)
 [![Code Coverage](https://scrutinizer-ci.com/g/belgattitude/soluble-dbwrapper/badges/coverage.png?s=aaa552f6313a3a50145f0e87b252c84677c22aa9)](https://scrutinizer-ci.com/g/belgattitude/soluble-dbwrapper)
