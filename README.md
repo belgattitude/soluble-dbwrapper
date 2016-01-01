@@ -20,7 +20,7 @@ Extra minimalist PHP database wrapper.
 ## Requirements
 
 - PHP engine 5.4+, 7.0+ or HHVM >= 3.2.
-- Currently tester drivers (pdo_mysql, mysqli)
+- PHP extensions pfo, pdo_mysql and  mysqli.
 
 ## Installation
 
