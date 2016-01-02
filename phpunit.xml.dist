@@ -24,7 +24,7 @@
 
     <testsuites>
         <testsuite name="soluble/dbwrapper">
-            <directory>./test/src/Soluble/DbWrapper</directory>
+            <directory>./test/src/SolubleTest/DbWrapper</directory>
         </testsuite>
     </testsuites>
     

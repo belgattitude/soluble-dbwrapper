@@ -1,6 +1,8 @@
 <?php
 
-namespace Soluble\DbWrapper\Adapter;
+namespace SolubleTest\DbWrapper\Adapter;
+
+use Soluble\DbWrapper\Adapter\PdoMysqlAdapter;
 
 class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
 {

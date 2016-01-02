@@ -11,16 +11,26 @@
 
 ## Introduction
 
-Extra minimalist PHP database wrapper.
+Minimalist modern PHP database wrapper.
 
 ## Features
 
-- Currently only abstract pdo_mysql / mysqli drivers with minimal functions.
+- Small, fast and modern database abstraction layer.
+- Provides mysqli, pdo_mysql, pdo_sqlite driver implementations.
+- Thoroughly tested and documented.
+- Adhere to soluble standards.
 
 ## Requirements
 
 - PHP engine 5.4+, 7.0+ or HHVM >= 3.2.
-- PHP extensions pfo, pdo_mysql and  mysqli.
+
+## Motivations
+
+Initially the reason behind the development of `soluble/dbwrapper` was to get
+a reliable, modern and lightweight library to abstract the `PDO_mysql` and `mysqli` driver interfaces.
+
+*If you are looking for a more complete library with extra drivers and a SQL abstraction, 
+take a look at the excellent [`zendframework/zend-db`](https://github.com/zendframework/zend-db) package.*
 
 ## Installation
 
@@ -53,11 +63,12 @@ $conn = new \PDO("mysql:host=$hostname", $username, $password, [
 ]);
 
 try {
-    $adapter = DbWrapperAdapterFactory::createFromConnection($conn);
+    $adapter = DbWrapperAdapterFactory::createAdapterFromResource($conn);
+} catch (DbWrapper\Exception\UnsupportedDriverException $e) {
+    // ...
 } catch (DbWrapper\Exception\InvalidArgumentException $e) {
     // ...
 }
-
 ```
 
 Create an adapter from an existing Mysqli connection
@@ -70,18 +81,37 @@ use Soluble\DbWrapper;
 $conn = new \mysqli($hostname,$username,$password,$database);
 $conn->set_charset($charset);
 
-try {
-    $adapter = DbWrapper\AdapterFactory::createFromConnection($conn);
-} catch (DbWrapper\Exception\InvalidArgumentException $e) {
-    // ...
-}
-
+$adapter = DbWrapper\AdapterFactory::createAdapterFromResource($conn);
 
 ```
 
-### API methods
+### Querying database
 
-Once a `DbWrapper\Adapter\AdapterInterface is intitalized, you have access to the following methods
+Execute 
+
+```php
+<?php
+$results = $adapter->query("select * from my_table");
+foreach($results as $result) {
+    echo $result['my_column'];
+}
+```
+
+
+## API methods
+
+### AdapterFactory
+
+The `DbWrapper\AdapterFactory` allows to instanciate an Adapter from en existing connection link or resource.
+ 
+| Methods                                       | Return             | Comment                             |
+|-----------------------------------------------|--------------------|-------------------------------------|
+| static `createAdapterFromResource($resource)` | `AdapterInterface` | Create an adapter from existing resource |
+
+
+### AdapterInterface
+
+Once a `DbWrapper\Adapter\AdapterInterface` is intitalized, you have access to the following methods
 
 | Methods                         | Return        | Description                                   |
 |---------------------------------|---------------|-----------------------------------------------|
@@ -91,6 +121,15 @@ Once a `DbWrapper\Adapter\AdapterInterface is intitalized, you have access to th
 | `getCurrentSchema()`            | `string|false`| Return current schema                         |
 | `getResource()`                 | `mixed`       | Return internal connection (pdo, mysqli...)   |
 
+### Resultset
+
+The `DbWrapper\Result\Resultset` is can be easily iterated through a simple foreach loop. 
+Additionnaly you can call the following methods :
+
+| Methods                         | Return        | Description                                   |
+|---------------------------------|---------------|-----------------------------------------------|
+| `count()`                       | `int`         | Count the number of results                   |
+
 
 ## Supported drivers
 
@@ -99,12 +138,14 @@ Currently only pdo_mysql and mysqli drivers  are supported.
 | Drivers            | DbWrapper\Adapter\AdapterInterface implementations   |
 |--------------------|------------------------------------------------------|
 | pdo_mysql          | `Soluble\DbWrapper\Adapter\PdoMysqlAdapter`          |
+| pdo_sqlite         | `Soluble\DbWrapper\Adapter\PdoSqliteAdapter`         |
 | mysqli             | `Soluble\DbWrapper\Adapter\MysqliAdapter`            |
 
+You can easily add new drivers by implementing the `DbWrapper\Adapter\AdapterInterface`.
 
 ## Contributing
 
-Contribution are welcome see [contribution guide](./CONTRIBUTING.md)
+Contribution and pull request are more than welcome, see the [contribution guide](./CONTRIBUTING.md)
 
 ## Coding standards
 
@@ -112,8 +153,3 @@ Contribution are welcome see [contribution guide](./CONTRIBUTING.md)
 * [PSR 2 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
 * [PSR 1 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
 * [PSR 0 Autoloading standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
-
-
-
-
-
