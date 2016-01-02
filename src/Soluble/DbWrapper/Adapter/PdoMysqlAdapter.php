@@ -16,6 +16,11 @@ class PdoMysqlAdapter extends GenericPdo implements AdapterInterface
      */
     protected $resource;
 
+    /**
+     *
+     * @var MysqlConnection
+     */
+    protected $connection;
 
     /**
      * Constructor
@@ -23,7 +28,6 @@ class PdoMysqlAdapter extends GenericPdo implements AdapterInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      * @param \PDO $resource
-     * @param \PDO $connection
      */
     public function __construct(PDO $resource)
     {
