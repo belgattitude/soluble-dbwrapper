@@ -8,6 +8,11 @@ use Soluble\DbWrapper\Result\Resultset;
 
 abstract class GenericPdo implements AdapterInterface
 {
+    /**
+     *
+     * @var \PDO
+     */
+    protected $resource;    
 
     /**
      * {@inheritdoc}

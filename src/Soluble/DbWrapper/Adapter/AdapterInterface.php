@@ -34,7 +34,7 @@ interface AdapterInterface
 
     /**
      * Return current schema/database name
-     *
+     * @throws \Soluble\DbWrapper\Exception\RuntimeException
      * @return string|false
      */
     public function getCurrentSchema();
