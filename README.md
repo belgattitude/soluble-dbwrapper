@@ -89,8 +89,7 @@ Once a `DbWrapper\Adapter\AdapterInterface is intitalized, you have access to th
 | `execute($query)`               | `void`        | Execute command (set, ...)                    |
 | `quoteValue($value)`            | `string`      | Quote value                                   |
 | `getCurrentSchema()`            | `string|false`| Return current schema                         |
-
-
+| `getResource()`                 | `mixed`       | Return internal connection (pdo, mysqli...)   |
 
 
 ## Supported drivers
