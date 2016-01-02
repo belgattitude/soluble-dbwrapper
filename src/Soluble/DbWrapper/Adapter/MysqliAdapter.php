@@ -5,27 +5,33 @@ namespace Soluble\DbWrapper\Adapter;
 use Soluble\DbWrapper\Exception;
 use mysqli;
 use Soluble\DbWrapper\Result\Resultset;
+use Soluble\DbWrapper\Connection\MysqlConnection;
 
 class MysqliAdapter implements AdapterInterface
 {
-
-    use Mysql\MysqlCommonTrait;
 
     /**
      *
      * @var \mysqli
      */
     protected $resource;
+    
+    /**
+     *
+     * @var MysqlConnection
+     */
+    protected $connection;
 
 
     /**
      * Constructor
      *
-     * @param mysqli $connection
+     * @param mysqli $resource
      */
-    public function __construct(mysqli $connection)
+    public function __construct(mysqli $resource)
     {
-        $this->resource = $connection;
+        $this->resource = $resource;
+        $this->connection = new MysqlConnection($this, $resource);
     }
 
 
@@ -68,18 +74,10 @@ class MysqliAdapter implements AdapterInterface
 
     /**
      * {@inheritdoc}
+     * @return MysqlConnection
      */
-    public function execute($query)
+    public function getConnection() 
     {
-        $this->query($query);
-    }
-
-    /**
-     * {@ineritdoc}
-     * @return \mysqli
-     */
-    public function getResource()
-    {
-        return $this->resource;
+        return $this->connection;
     }
 }

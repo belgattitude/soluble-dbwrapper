@@ -14,24 +14,6 @@ abstract class GenericPdo implements AdapterInterface
      */
     protected $resource;    
 
-    /**
-     * {@inheritdoc}
-     */
-    public function execute($query)
-    {
-        try {
-            $ret = $this->resource->exec($query);
-            if ($ret === false) {
-                throw new Exception\InvalidArgumentException("Cannot execute [$query].");
-            }
-        } catch (Exception\InvalidArgumentException $e) {
-            throw $e;
-        } catch (\Exception $e) {
-            $msg = "PDOException : {$e->getMessage()} [$query]";
-            throw new Exception\InvalidArgumentException($msg);
-        }
-    }
-
 
     /**
      * {@inheritdoc}
@@ -64,14 +46,6 @@ abstract class GenericPdo implements AdapterInterface
         return $this->resource->quote($value);
     }
 
-    /**
-     * {@ineritdoc}
-     * @return \PDO
-     */
-    public function getResource()
-    {
-        return $this->resource;
-    }
 
     /**
      * Check extension
@@ -84,11 +58,6 @@ abstract class GenericPdo implements AdapterInterface
             throw new Exception\RuntimeException('The PDO extension is not loaded');
         }
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    abstract public function getCurrentSchema();
-    
+        
     
 }

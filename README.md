@@ -111,15 +111,14 @@ The `DbWrapper\AdapterFactory` allows to instanciate an Adapter from en existing
 
 ### AdapterInterface
 
-Once a `DbWrapper\Adapter\AdapterInterface` is intitalized, you have access to the following methods
+The `DbWrapper\Adapter\AdapterInterface` provides common operation on your database.
 
-| Methods                         | Return        | Description                                   |
-|---------------------------------|---------------|-----------------------------------------------|
-| `query($query)`                 | `Resultset`   | Iterable results `DbWrapper\Result\Resultset` |
-| `execute($query)`               | `void`        | Execute command (set, ...)                    |
-| `quoteValue($value)`            | `string`      | Quote value                                   |
-| `getCurrentSchema()`            | `string|false`| Return current schema                         |
-| `getResource()`                 | `mixed`       | Return internal connection (pdo, mysqli...)   |
+| Methods                  | Return        | Description                                   |
+|--------------------------|---------------|-----------------------------------------------|
+| `query($query)`          | `Resultset`   | Iterable results `DbWrapper\Result\Resultset` |
+| `execute($query)`        | `void`        | Execute command (set, ...)                    |
+| `quoteValue($value)`     | `string`      | Quote value                                   |
+| `getConnection()`        | `ConnectionInterface`  | ConnectionInterface                  |
 
 ### Resultset
 
@@ -129,6 +128,16 @@ Additionnaly you can call the following methods :
 | Methods                         | Return        | Description                                   |
 |---------------------------------|---------------|-----------------------------------------------|
 | `count()`                       | `int`         | Count the number of results                   |
+
+
+### ConnectionInterface
+
+The `DbWrapper\Connection\ConnectionInterface` provides information about your connection
+
+| Methods                  | Return        | Description                                   |
+|--------------------------|---------------|-----------------------------------------------|
+| `getCurrentSchema()`     | `string|false`| Return current schema                         |
+| `getResource()`          | `mixed`       | Return internal connection (pdo, mysqli...)   |
 
 
 ## Supported drivers

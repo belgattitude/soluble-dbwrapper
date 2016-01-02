@@ -40,16 +40,6 @@ class PdoSqliteAdapterTest extends \PHPUnit_Framework_TestCase {
         $adapter = new PdoSqliteAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
     }
 
-    public function testGetCurrentSchema() {
-        $current = $this->adapter->getCurrentSchema();
-        $this->assertEquals('main', $current);
-
-    }
-
-    public function testGetResource() {
-        $conn = $this->adapter->getResource();
-        $this->assertInstanceOf('PDO', $conn);
-    }
 
     public function testQuery() {
         $results = $result = $this->adapter->query('select * from test');

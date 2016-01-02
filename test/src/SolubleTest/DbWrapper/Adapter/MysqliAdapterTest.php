@@ -2,14 +2,14 @@
 
 namespace SolubleTest\DbWrapper\Adapter;
 
-use Soluble\DbWrapper\Adapter\PdoMysqlAdapter;
+use Soluble\DbWrapper\Adapter\MysqliAdapter;
 
-class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
+class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      *
-     * @var PdoMysqlAdapter
+     * @var MysqliAdapter
      */
     protected $adapter;
 
@@ -19,35 +19,9 @@ class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
-    }
-
-    public function testConstructorThrowsException() {
-        
-        $this->setExpectedException('\Soluble\DbWrapper\Exception\InvalidArgumentException');
-        $adapter = new PdoMysqlAdapter(new \PDO('sqlite::memory:'));
+        $this->adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
     }
     
-    
-    public function testGetCurrentSchema()
-    {
-        $current = $this->adapter->getCurrentSchema();
-        $this->assertEquals(\SolubleTestFactories::getDatabaseName('pdo:mysql'), $current);
-
-        $config = \SolubleTestFactories::getDbConfiguration('pdo:mysql');
-        unset($config['database']);
-
-        $adapter = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql', $config));
-        $current = $adapter->getCurrentSchema();
-
-        $this->assertFalse($current);
-    }
-
-    public function testGetResource()
-    {
-        $conn = $this->adapter->getResource();
-        $this->assertInstanceOf('PDO', $conn);
-    }
 
 
     public function testQueryWithSet()
@@ -65,6 +39,7 @@ class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testQuery()
     {
+        $this->adapter->query('set @psbtest=1');
         $results = $result = $this->adapter->query('select * from product');
         $this->assertInstanceOf('ArrayObject', $results);
         $this->assertInternalType('array', $results[0]);

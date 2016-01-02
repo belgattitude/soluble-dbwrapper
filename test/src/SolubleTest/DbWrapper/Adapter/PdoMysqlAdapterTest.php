@@ -2,14 +2,14 @@
 
 namespace SolubleTest\DbWrapper\Adapter;
 
-use Soluble\DbWrapper\Adapter\MysqliAdapter;
+use Soluble\DbWrapper\Adapter\PdoMysqlAdapter;
 
-class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
+class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      *
-     * @var MysqliAdapter
+     * @var PdoMysqlAdapter
      */
     protected $adapter;
 
@@ -19,31 +19,16 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
+        $this->adapter = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
+    }
+
+    public function testConstructorThrowsException() {
+        
+        $this->setExpectedException('\Soluble\DbWrapper\Exception\InvalidArgumentException');
+        $adapter = new PdoMysqlAdapter(new \PDO('sqlite::memory:'));
     }
     
-
-    public function testGetCurrentSchema()
-    {
-        $current = $this->adapter->getCurrentSchema();
-        $this->assertEquals(\SolubleTestFactories::getDatabaseName('mysqli'), $current);
-
-        $config = \SolubleTestFactories::getDbConfiguration('mysqli');
-        unset($config['database']);
-
-        $adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli', $config));
-        $current = $adapter->getCurrentSchema();
-
-        $this->assertFalse($current);
-    }
-
-    public function testGetResource()
-    {
-        $conn = $this->adapter->getResource();
-        $this->assertInstanceOf('mysqli', $conn);
-    }
-
-
+    
     public function testQueryWithSet()
     {
         $this->adapter->query('set @psbtest=1');
@@ -59,7 +44,6 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testQuery()
     {
-        $this->adapter->query('set @psbtest=1');
         $results = $result = $this->adapter->query('select * from product');
         $this->assertInstanceOf('ArrayObject', $results);
         $this->assertInternalType('array', $results[0]);
