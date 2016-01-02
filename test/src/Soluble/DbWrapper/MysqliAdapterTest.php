@@ -34,7 +34,11 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($current);
     }
 
-
+    public function testGetResource()
+    {
+        $conn = $this->adapter->getResource();
+        $this->assertInstanceOf('mysqli', $conn);
+    }
 
 
     public function testExecute()
