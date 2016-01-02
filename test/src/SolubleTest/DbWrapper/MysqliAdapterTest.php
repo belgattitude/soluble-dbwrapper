@@ -21,6 +21,7 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
     }
+    
 
     public function testGetCurrentSchema()
     {
@@ -43,12 +44,12 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testExecute()
+    public function testQueryWithSet()
     {
-        $this->adapter->execute('set @psbtest=1');
+        $this->adapter->query('set @psbtest=1');
 
         try {
-            $this->adapter->execute('set qsd=');
+            $this->adapter->query('set qsd=');
             $this->assertTrue(false, "wrong execute command didn't throw an exception");
         } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
             $this->assertTrue(true);
@@ -58,7 +59,7 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testQuery()
     {
-        $this->adapter->execute('set @psbtest=1');
+        $this->adapter->query('set @psbtest=1');
         $results = $result = $this->adapter->query('select * from product');
         $this->assertInstanceOf('ArrayObject', $results);
         $this->assertInternalType('array', $results[0]);

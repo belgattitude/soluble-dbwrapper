@@ -22,6 +22,13 @@ class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
         $this->adapter = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
     }
 
+    public function testConstructorThrowsException() {
+        
+        $this->setExpectedException('\Soluble\DbWrapper\Exception\InvalidArgumentException');
+        $adapter = new PdoMysqlAdapter(new \PDO('sqlite::memory:'));
+    }
+    
+    
     public function testGetCurrentSchema()
     {
         $current = $this->adapter->getCurrentSchema();
@@ -43,12 +50,12 @@ class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testExecute()
+    public function testQueryWithSet()
     {
-        $this->adapter->execute('set @psbtest=1');
+        $this->adapter->query('set @psbtest=1');
 
         try {
-            $this->adapter->execute('set qsd=');
+            $this->adapter->query('set qsd=');
             $this->assertTrue(false, "wrong execute command didn't throw an exception");
         } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
             $this->assertTrue(true);
@@ -58,7 +65,6 @@ class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testQuery()
     {
-        $this->adapter->execute('set @psbtest=1');
         $results = $result = $this->adapter->query('select * from product');
         $this->assertInstanceOf('ArrayObject', $results);
         $this->assertInternalType('array', $results[0]);

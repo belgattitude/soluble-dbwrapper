@@ -21,10 +21,12 @@ class PdoMysqlAdapter extends GenericPdo implements AdapterInterface
      * Constructor
      *
      * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      * @param \PDO $connection
      */
     public function __construct(PDO $connection)
     {
+        $this->checkEnvironment();
         if ($connection->getAttribute(\PDO::ATTR_DRIVER_NAME) != 'mysql') {
             $msg = __CLASS__ . " requires pdo connection to be 'mysql'";
             throw new Exception\InvalidArgumentException($msg);

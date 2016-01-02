@@ -20,10 +20,12 @@ class PdoSqliteAdapter extends GenericPdo implements AdapterInterface
      * Constructor
      *
      * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      * @param \PDO $connection
      */
     public function __construct(PDO $connection)
     {
+        $this->checkEnvironment();
         if ($connection->getAttribute(\PDO::ATTR_DRIVER_NAME) != 'sqlite') {
             $msg = __CLASS__ . " requires pdo connection to be 'sqlite'";
             throw new Exception\InvalidArgumentException($msg);
@@ -31,11 +33,12 @@ class PdoSqliteAdapter extends GenericPdo implements AdapterInterface
         $this->resource = $connection;
     }
     
+    
     /**
      * {@inheritdoc}
      */
     public function getCurrentSchema() 
     {
-        throw new \Exception('nope');
+        return 'main';
     }
 }

@@ -74,7 +74,21 @@ abstract class GenericPdo implements AdapterInterface
     }
 
     /**
+     * Check extension
+     * @throws Exception\RuntimeException
+     * @return void
+     */
+    protected function checkEnvironment()
+    {
+        if (!extension_loaded('PDO')) {
+            throw new Exception\RuntimeException('The PDO extension is not loaded');
+        }
+    }
+    
+    /**
      * {@inheritdoc}
      */
     abstract public function getCurrentSchema();
+    
+    
 }
