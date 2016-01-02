@@ -83,12 +83,12 @@ try {
 
 Once a `DbWrapper\Adapter\AdapterInterface is intitalized, you have access to the following methods
 
-| Methods                         | Return        | Description                                 |
-|---------------------------------|---------------|---------------------------------------------|
-| `query($query)`                 | `ArrayObject` | Retrieve full query results                 |
-| `execute($query)`               | `void`        | Execute command (set, ...)                  |
-| `quoteValue($value)`            | `string`      | Quote value                                 |
-| `getCurrentSchema()`            | `string|false`| Return current schema                       |
+| Methods                         | Return        | Description                                   |
+|---------------------------------|---------------|-----------------------------------------------|
+| `query($query)`                 | `Resultset`   | Iterable results `DbWrapper\Result\Resultset` |
+| `execute($query)`               | `void`        | Execute command (set, ...)                    |
+| `quoteValue($value)`            | `string`      | Quote value                                   |
+| `getCurrentSchema()`            | `string|false`| Return current schema                         |
 
 
 
