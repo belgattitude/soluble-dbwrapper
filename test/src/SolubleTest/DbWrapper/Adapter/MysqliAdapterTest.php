@@ -21,7 +21,7 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
     }
-    
+
 
 
     public function testQueryWithSet()

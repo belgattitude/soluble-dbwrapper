@@ -24,10 +24,27 @@ class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\PdoMysqlAdapter', $adapter);
     }
 
-    public function testCreateAdapterThrowsException()
+    public function testCreateAdapterFromPDOSqliteConnection()
     {
-        $this->setExpectedException('Soluble\DbWrapper\Exception\UnsupportedDriverException');
         $connection = new \PDO('sqlite::memory:');
         $adapter = AdapterFactory::createAdapterFromResource($connection);
+        $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\AdapterInterface', $adapter);
+        $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\PdoSqliteAdapter', $adapter);
+    }
+
+    public function testCreateAdapterThrowsException2()
+    {
+        $this->setExpectedException('Soluble\DbWrapper\Exception\InvalidArgumentException');
+        $adapter = AdapterFactory::createAdapterFromResource("a");
+    }
+
+    public function testCreateAdapterThrowsException()
+    {
+        $this->setExpectedException('Soluble\DbWrapper\Exception\InvalidArgumentException');
+        $fct = function () {
+            return true;
+
+        };
+        $adapter = AdapterFactory::createAdapterFromResource($fct);
     }
 }

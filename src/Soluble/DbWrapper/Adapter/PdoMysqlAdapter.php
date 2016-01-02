@@ -35,14 +35,13 @@ class PdoMysqlAdapter extends GenericPdo implements AdapterInterface
         $this->resource = $resource;
         $this->connection = new MysqlConnection($this, $resource);
     }
-    
+
     /**
      * {@inheritdoc}
      * @return MysqlConnection
      */
-    public function getConnection() 
+    public function getConnection()
     {
         return $this->connection;
     }
-    
 }

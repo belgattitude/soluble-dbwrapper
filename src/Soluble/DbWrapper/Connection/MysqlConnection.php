@@ -12,16 +12,16 @@ class MysqlConnection implements ConnectionInterface
      * @var AdapterInterface
      */
     protected $adapter;
-    
-    
+
+
     /**
      *
      * @var mixed
      */
     protected $resource;
-    
+
     /**
-     * 
+     *
      * @param AdapterInterface $adapter
      * @param mixed $resource
      */
@@ -30,7 +30,7 @@ class MysqlConnection implements ConnectionInterface
         $this->adapter = $adapter;
         $this->resource = $resource;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -47,14 +47,13 @@ class MysqlConnection implements ConnectionInterface
         }
         return $results[0]['current_schema'];
     }
-    
+
     /**
      * {@inheritdoc}
      * @return \mysqli|\PDO
      */
-    public function getResource() {
-        return $this->resource;    
+    public function getResource()
+    {
+        return $this->resource;
     }
-    
 }
-

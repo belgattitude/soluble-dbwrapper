@@ -26,9 +26,8 @@ interface AdapterInterface
 
     /**
      * Return connection object
-     * 
+     *
      * @return \Soluble\DbWrapper\Connection\ConnectionInterface
      */
     public function getConnection();
-    
 }

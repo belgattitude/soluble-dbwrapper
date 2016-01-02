@@ -22,13 +22,14 @@ class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
         $this->adapter = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
     }
 
-    public function testConstructorThrowsException() {
-        
+    public function testConstructorThrowsException()
+    {
+
         $this->setExpectedException('\Soluble\DbWrapper\Exception\InvalidArgumentException');
         $adapter = new PdoMysqlAdapter(new \PDO('sqlite::memory:'));
     }
-    
-    
+
+
     public function testQueryWithSet()
     {
         $this->adapter->query('set @psbtest=1');

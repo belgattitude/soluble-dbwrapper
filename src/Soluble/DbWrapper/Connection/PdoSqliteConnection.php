@@ -13,16 +13,16 @@ class PdoSqliteConnection implements ConnectionInterface
      * @var AdapterInterface
      */
     protected $adapter;
-    
-    
+
+
     /**
      *
      * @var \PDO
      */
     protected $resource;
-    
+
     /**
-     * 
+     *
      * @param AdapterInterface $adapter
      * @param \PDO $resource
      */
@@ -31,7 +31,7 @@ class PdoSqliteConnection implements ConnectionInterface
         $this->adapter = $adapter;
         $this->resource = $resource;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -39,14 +39,13 @@ class PdoSqliteConnection implements ConnectionInterface
     {
         return 'main';
     }
-    
+
     /**
      * {@inheritdoc}
      * @return \PDO
      */
-    public function getResource() {
-        return $this->resource;    
+    public function getResource()
+    {
+        return $this->resource;
     }
-    
 }
-

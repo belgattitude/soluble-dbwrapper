@@ -7,7 +7,6 @@ use Soluble\DbWrapper\Adapter\Pdo\GenericPdo;
 use Soluble\DbWrapper\Connection\PdoSqliteConnection;
 use PDO;
 
-
 class PdoSqliteAdapter extends GenericPdo implements AdapterInterface
 {
 
@@ -35,14 +34,14 @@ class PdoSqliteAdapter extends GenericPdo implements AdapterInterface
         $this->resource = $resource;
         $this->connection = new PdoSqliteConnection($this, $resource);
     }
-    
-    
+
+
     /**
      * {@inheritdoc}
      * @return PdoSqliteConnection
      */
-    public function getConnection() {
-        return $this->connection;    
-    }    
-    
+    public function getConnection()
+    {
+        return $this->connection;
+    }
 }

@@ -14,7 +14,7 @@ class MysqlConnectionPdoTest extends MysqlConnectionMysqliTest
      */
     protected $connection;
 
-    
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -24,13 +24,11 @@ class MysqlConnectionPdoTest extends MysqlConnectionMysqliTest
         $adapter = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
         $this->connection = $adapter->getConnection();
     }
-    
+
 
     public function testGetResource()
     {
         $conn = $this->connection->getResource();
         $this->assertInstanceOf('PDO', $conn);
     }
-
 }
-

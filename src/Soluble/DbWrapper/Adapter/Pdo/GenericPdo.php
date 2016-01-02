@@ -12,7 +12,7 @@ abstract class GenericPdo implements AdapterInterface
      *
      * @var \PDO
      */
-    protected $resource;    
+    protected $resource;
 
 
     /**
@@ -58,6 +58,4 @@ abstract class GenericPdo implements AdapterInterface
             throw new Exception\RuntimeException('The PDO extension is not loaded');
         }
     }
-        
-    
 }

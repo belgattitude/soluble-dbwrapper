@@ -15,7 +15,7 @@ class MysqliAdapter implements AdapterInterface
      * @var \mysqli
      */
     protected $resource;
-    
+
     /**
      *
      * @var MysqlConnection
@@ -76,7 +76,7 @@ class MysqliAdapter implements AdapterInterface
      * {@inheritdoc}
      * @return MysqlConnection
      */
-    public function getConnection() 
+    public function getConnection()
     {
         return $this->connection;
     }
