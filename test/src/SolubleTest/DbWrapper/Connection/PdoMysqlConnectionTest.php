@@ -5,7 +5,7 @@ namespace SolubleTest\DbWrapper\Connection;
 use Soluble\DbWrapper\Connection;
 use Soluble\DbWrapper\Adapter\PdoMysqlAdapter;
 
-class MysqlConnectionPdoTest extends MysqlConnectionMysqliTest
+class PdoMysqlConnectionTest extends MysqliConnectionTest
 {
 
     /**
@@ -30,5 +30,12 @@ class MysqlConnectionPdoTest extends MysqlConnectionMysqliTest
     {
         $conn = $this->connection->getResource();
         $this->assertInstanceOf('PDO', $conn);
+    }
+
+    public function testGetHost()
+    {
+        $params = \SolubleTestFactories::getDbConfiguration('pdo:mysql');
+        $host = strtolower($params['hostname']);
+        $this->assertEquals($host, $this->connection->getHost());
     }
 }

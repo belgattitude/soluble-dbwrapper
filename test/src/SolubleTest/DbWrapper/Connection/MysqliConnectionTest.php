@@ -5,7 +5,7 @@ namespace SolubleTest\DbWrapper\Connection;
 use Soluble\DbWrapper\Connection;
 use Soluble\DbWrapper\Adapter\MysqliAdapter;
 
-class MysqlConnectionMysqliTest extends \PHPUnit_Framework_TestCase
+class MysqliConnectionTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -43,5 +43,12 @@ class MysqlConnectionMysqliTest extends \PHPUnit_Framework_TestCase
     {
         $conn = $this->connection->getResource();
         $this->assertInstanceOf('mysqli', $conn);
+    }
+
+    public function testGetHost()
+    {
+        $params = \SolubleTestFactories::getDbConfiguration('mysqli');
+        $host = strtolower($params['hostname']);
+        $this->assertEquals($host, $this->connection->getHost());
     }
 }

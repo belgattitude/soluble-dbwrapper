@@ -4,7 +4,7 @@ namespace Soluble\DbWrapper\Adapter;
 
 use Soluble\DbWrapper\Exception;
 use Soluble\DbWrapper\Adapter\Pdo\GenericPdo;
-use Soluble\DbWrapper\Connection\MysqlConnection;
+use Soluble\DbWrapper\Connection\PdoMysqlConnection;
 use PDO;
 
 class PdoMysqlAdapter extends GenericPdo implements AdapterInterface
@@ -18,7 +18,7 @@ class PdoMysqlAdapter extends GenericPdo implements AdapterInterface
 
     /**
      *
-     * @var MysqlConnection
+     * @var PdoMysqlConnection
      */
     protected $connection;
 
@@ -37,7 +37,7 @@ class PdoMysqlAdapter extends GenericPdo implements AdapterInterface
             throw new Exception\InvalidArgumentException($msg);
         }
         $this->resource = $resource;
-        $this->connection = new MysqlConnection($this, $resource);
+        $this->connection = new PdoMysqlConnection($this, $resource);
     }
 
     /**

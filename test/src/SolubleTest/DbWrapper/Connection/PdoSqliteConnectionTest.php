@@ -36,4 +36,9 @@ class PdoSqliteConnectionTest extends \PHPUnit_Framework_TestCase
         $conn = $this->connection->getResource();
         $this->assertInstanceOf('PDO', $conn);
     }
+
+    public function testGetHost()
+    {
+        $this->assertEquals('localhost', $this->connection->getHost());
+    }
 }

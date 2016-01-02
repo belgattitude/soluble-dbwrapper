@@ -21,7 +21,7 @@ class PdoSqliteAdapter extends GenericPdo implements AdapterInterface
      * @var PdoSqliteConnection
      */
     protected $connection;
-    
+
     /**
      * Constructor
      *

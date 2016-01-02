@@ -19,4 +19,11 @@ interface ConnectionInterface
      * @return mixed
      */
     public function getResource();
+
+    /**
+     * Return connection host name or IP
+     *
+     * @return string
+     */
+    public function getHost();
 }

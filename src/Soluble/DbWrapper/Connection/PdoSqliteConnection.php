@@ -37,7 +37,7 @@ class PdoSqliteConnection implements ConnectionInterface
      */
     public function getCurrentSchema()
     {
-        return 'main';
+        return "main";
     }
 
     /**
@@ -47,5 +47,13 @@ class PdoSqliteConnection implements ConnectionInterface
     public function getResource()
     {
         return $this->resource;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHost()
+    {
+        return "localhost";
     }
 }

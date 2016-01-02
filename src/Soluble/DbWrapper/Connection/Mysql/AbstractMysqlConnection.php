@@ -1,24 +1,14 @@
 <?php
 
-namespace Soluble\DbWrapper\Connection;
+namespace Soluble\DbWrapper\Connection\Mysql;
 
-use Soluble\DbWrapper\Adapter\AdapterInterface;
-
-class MysqlConnection implements ConnectionInterface
+abstract class AbstractMysqlConnection
 {
-
     /**
      *
-     * @var AdapterInterface
+     * @var \Soluble\DbWrapper\Adapter\AdapterInterface
      */
     protected $adapter;
-
-
-    /**
-     *
-     * @var mixed
-     */
-    protected $resource;
 
     /**
      *
@@ -31,8 +21,11 @@ class MysqlConnection implements ConnectionInterface
         $this->resource = $resource;
     }
 
+
     /**
-     * {@inheritdoc}
+     * Return current schema/database name
+     * @throws \Soluble\DbWrapper\Exception\RuntimeException
+     * @return string|false
      */
     public function getCurrentSchema()
     {
@@ -46,14 +39,5 @@ class MysqlConnection implements ConnectionInterface
             throw new Exception\RuntimeException($e->getMessage());
         }
         return $results[0]['current_schema'];
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \mysqli|\PDO
-     */
-    public function getResource()
-    {
-        return $this->resource;
     }
 }

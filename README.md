@@ -138,6 +138,7 @@ The `DbWrapper\Connection\ConnectionInterface` provides information about your c
 |--------------------------|---------------|-----------------------------------------------|
 | `getCurrentSchema()`     | `string|false`| Return current schema                         |
 | `getResource()`          | `mixed`       | Return internal connection (pdo, mysqli...)   |
+| `getHost()`              | `string`      | Return server hostname or IP                  |
 
 
 ## Supported drivers
