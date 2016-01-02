@@ -87,7 +87,7 @@ $adapter = DbWrapper\AdapterFactory::createAdapterFromResource($conn);
 
 ### Querying database
 
-Execute 
+Execute SQL
 
 ```php
 <?php
@@ -96,6 +96,20 @@ foreach($results as $result) {
     echo $result['my_column'];
 }
 ```
+
+### Get connection infos
+
+Execute SQL
+
+```php
+<?php
+$connection = $adapter->getConnection()
+echo $connection->getCurrentSchema();
+echo $connection->getHost();
+
+$resource = $connection->getResource();
+```
+
 
 
 ## API methods
