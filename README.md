@@ -37,7 +37,7 @@ take a look at the excellent [`zendframework/zend-db`](https://github.com/zendfr
 Instant installation via [composer](http://getcomposer.org/).
 
 ```console
-php composer require soluble/dbwrapper:0.*
+php composer require soluble/dbwrapper:1.*
 ```
 Most modern frameworks will include Composer out of the box, but ensure the following file is included:
 
@@ -109,8 +109,6 @@ echo $connection->getHost();
 
 $resource = $connection->getResource();
 ```
-
-
 
 ## API methods
 
