@@ -3,8 +3,8 @@
 namespace Soluble\DbWrapper\Adapter;
 
 use Soluble\DbWrapper\Exception;
-use ArrayObject;
 use mysqli;
+use Soluble\DbWrapper\Result\Resultset;
 
 class MysqliAdapter implements AdapterInterface
 {
@@ -15,7 +15,7 @@ class MysqliAdapter implements AdapterInterface
      *
      * @var \mysqli
      */
-    protected $connection;
+    protected $resource;
 
 
     /**
@@ -25,7 +25,7 @@ class MysqliAdapter implements AdapterInterface
      */
     public function __construct(mysqli $connection)
     {
-        $this->connection = $connection;
+        $this->resource = $connection;
     }
 
 
@@ -34,7 +34,7 @@ class MysqliAdapter implements AdapterInterface
      */
     public function quoteValue($value)
     {
-        return "'" . $this->connection->real_escape_string($value) . "'";
+        return "'" . $this->resource->real_escape_string($value) . "'";
     }
 
 
@@ -44,9 +44,9 @@ class MysqliAdapter implements AdapterInterface
     public function query($query)
     {
         try {
-            $r = $this->connection->query($query);
+            $r = $this->resource->query($query);
 
-            $results = new ArrayObject();
+            $results = new Resultset();
 
             if ($r === false) {
                 throw new Exception\InvalidArgumentException("Query cannot be executed [$query].");
@@ -72,5 +72,14 @@ class MysqliAdapter implements AdapterInterface
     public function execute($query)
     {
         $this->query($query);
+    }
+
+    /**
+     * {@ineritdoc}
+     * @return \mysqli
+     */
+    public function getResource()
+    {
+        return $this->resource;
     }
 }

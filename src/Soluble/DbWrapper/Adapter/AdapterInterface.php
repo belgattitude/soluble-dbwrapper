@@ -10,7 +10,7 @@ interface AdapterInterface
      *
      * @throws \Soluble\DbWrapper\Exception\InvalidArgumentException
      * @param string $query
-     * @return \ArrayObject
+     * @return \Soluble\DbWrapper\Result\Resultset
      */
     public function query($query);
 
@@ -38,4 +38,12 @@ interface AdapterInterface
      * @return string|false
      */
     public function getCurrentSchema();
+
+
+    /**
+     * Return internal connection (pdo, mysqli...)
+     *
+     * @return mixed
+     */
+    public function getResource();
 }
