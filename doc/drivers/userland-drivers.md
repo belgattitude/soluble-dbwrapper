@@ -13,11 +13,11 @@ The choice of an *userland* driver over a native one can be considered whether :
  
 ## Current *userland* implemented drivers.
 
-| Driver                   | Version | DbWrapper\Adapter\AdapterInterface implementations   |
-|--------------------------|--------+|------------------------------------------------------|
-| `zendframework/zend-db`  |     2.* | `Soluble\DbWrapper\Adapter\Zend\ZendDb2Adapter`      |
-| `doctrine/dbal`          |     2.* | `Soluble\DbWrapper\Adapter\Doctrine\Dbal2Adapter`    |
-| `illuminate/database`    |     5.* | `Soluble\DbWrapper\Adapter\Laravel\Capsule5Adapter`  |
+| Driver                   | Version | `DbWrapper\Adapter\AdapterInterface` implementations   |
+|--------------------------|---------|--------------------------------------------------------|
+| `zendframework/zend-db`  |     2.* | `Soluble\DbWrapper\Adapter\Zend\ZendDb2Adapter`        |
+| `doctrine/dbal`          |     2.* | `Soluble\DbWrapper\Adapter\Doctrine\Dbal2Adapter`      |
+| `illuminate/database`    |     5.* | `Soluble\DbWrapper\Adapter\Laravel\Capsule5Adapter`    |
 
 
 ## Dependencies
@@ -106,7 +106,7 @@ $params = [
     'password'  => 'password',
     'host'      => 'hostname',
     'driver'    => 'mysqli',
-    'charset'   => "utf8'
+    'charset'   => 'utf8'
 ];
 $dbal = \Doctrine\DBAL\DriverManager::getConnection($params);  
 

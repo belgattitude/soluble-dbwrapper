@@ -11,7 +11,7 @@
 
 ## Introduction
 
-Universal minimalist database wrapper to rule them all.
+Universal minimalist database wrapper to rule them all (and to not choose).
 
 ## Features
 
@@ -49,26 +49,6 @@ require 'vendor/autoload.php';
 ## Quick start
 
 ### Connection
-
-Create an adapter from an existing PDO connection
-
-```php
-<?php
-
-use Soluble\DbWrapper;
-
-$conn = new \PDO("mysql:host=$hostname", $username, $password, [
-            \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
-]);
-
-try {
-    $adapter = DbWrapperAdapterFactory::createAdapterFromResource($conn);
-} catch (DbWrapper\Exception\UnsupportedDriverException $e) {
-    // ...
-} catch (DbWrapper\Exception\InvalidArgumentException $e) {
-    // ...
-}
-```
 
 Create an adapter from an existing Mysqli connection
 
@@ -118,6 +98,9 @@ The `DbWrapper\AdapterFactory` allows to instanciate an Adapter from en existing
 | Methods                                       | Return             | Comment                             |
 |-----------------------------------------------|--------------------|-------------------------------------|
 | static `createAdapterFromResource($resource)` | `AdapterInterface` | Create an adapter from existing resource |
+| static `createAdapterFromDbal2($dbal)`        | `AdapterInterface` | Create an adapter from doctrine dbal connection |
+| static `createAdapterFromCapsule5($capsule)`  | `AdapterInterface` | Create an adapter from laravel connection |
+| static `createAdapterFromZendDb2($zend)`      | `AdapterInterface` | Create an adapter from zend-db connection |
 
 
 ### AdapterInterface
@@ -152,68 +135,44 @@ The `DbWrapper\Connection\ConnectionInterface` provides information about your c
 | `getHost()`              | `string`      | Return server hostname or IP                  |
 
 
-## Supported drivers
+## Supported databases
+
+### Native 
+
+`soluble/dbwrapper` supports natively :
+
+| Database   | PHP ext                                              |
+|------------|------------------------------------------------------|
+| Mysql      | mysqli, pdo_mysql                                    |
+| MariaDb    | mysqli, pdo_mysql                                    |
+| Sqlite     | pdo_sqlite                                           |
+
+For examples, see the [native drivers doc](./doc/driver/native-drivers.md)
+
+### *Userland* implementations
+
+Some of the supported databases can be (incomplete list) :
+
+| Database   | Doctrine   | Laravel | Zend      |
+|------------|------------|---------|-----------|
+| Mysql      | Yes        | Yes     | Yes       |
+| MariaDb    | Yes        | Yes     | Yes       | 
+| Sqlite     | Yes        | Yes     | Yes       |
+| Oracle     | Yes        | No      | Yes       |
+| Sqlserver  | Yes        | Yes     | Yes       |
+| Postgres   | Yes        | Yes     | Yes       |
+(...)
 
 
-### Native implementions
-
-Native implementations does not require any external libraries in order to run.
-
-| PHP extension      | DbWrapper\Adapter\AdapterInterface implementations   |
-|--------------------|------------------------------------------------------|
-| pdo_mysql          | `Soluble\DbWrapper\Adapter\PdoMysqlAdapter`          |
-| pdo_sqlite         | `Soluble\DbWrapper\Adapter\PdoSqliteAdapter`         |
-| mysqli             | `Soluble\DbWrapper\Adapter\MysqliAdapter`            |
-
-
-### Bridged implementations
-
-In addition to native support, `soluble/dbwrapper` allows to bridge over the following *userland* db abstraction layers :
-
-| Bridge                   | Version | DbWrapper\Adapter\AdapterInterface implementations   |
-|--------------------------|--------+|------------------------------------------------------|
-| `zendframework/zend-db`  |     2.* | `Soluble\DbWrapper\Adapter\Zend\ZendDb2Adapter`      |
-| `doctrine/dbal`          |     2.* | `Soluble\DbWrapper\Adapter\Doctrine\Dbal2Adapter`    |
-| `illuminate/database`    |     5.* | `Soluble\DbWrapper\Adapter\Laravel\Capsule5Adapter`  |
-
-
-The use of a bridged layer over a native implementation should be considered :
-
- - Your current project or library is already based on one of the supported bridged implementations
- - The native implementation does not exists for your database vendor (Oracle, PostgreSQL, Firebird, MS-SQL...)
-
-In order to use a bridged implementation, you must add it to your dependencies in composer.json file if it's not already the case.
-
-Additionnaly you can install dependencies from the command line :
-
-For zendframework/zend-db :
-
-```console
-$ composer require zendframework/zend-db:~2
-```
-
-For doctrine/dbal :
-
-```console
-$ composer require doctrine/dbal:~2
-```
-
-For illuminate/database :
-
-```console
-$ composer require illuminate/database:~5
-```
-
-*You can easily add new drivers by implementing the `DbWrapper\Adapter\AdapterInterface`.*
-
+For examples, see the [userland drivers doc](./doc/driver/userland-drivers.md)
 
 ## Motivations
 
 Initially the reason behind the development of `soluble/dbwrapper` was to get
-a reliable, modern and lightweight library to abstract the `PDO_mysql` and `mysqli` driver interfaces.
+a reliable and lightweight library to abstract the `PDO_mysql` and `mysqli` driver interfaces.
 
-*If you are looking for a more complete library with extra drivers and a SQL abstraction, 
-take a look at the excellent [`zendframework/zend-db`](https://github.com/zendframework/zend-db) package.*
+Later on, while developing some libraries, I feel the need for something more framework agnostic that could still
+be integrated easily into any modern framework. The *userland* drivers idea was born.
 
 ## Contributing
 
