@@ -174,7 +174,7 @@ In addition to native support, `soluble/dbwrapper` allows to bridge over the fol
 |--------------------------|--------+|------------------------------------------------------|
 | `zendframework/zend-db`  |     2.* | `Soluble\DbWrapper\Adapter\Zend\ZendDb2Adapter`      |
 | `doctrine/dbal`          |     2.* | `Soluble\DbWrapper\Adapter\Doctrine\Dbal2Adapter`    |
-| `illuminate/database`    |     5.* | `Soluble\DbWrapper\Adapter\Illuminate\Db5Adapter`    |
+| `illuminate/database`    |     5.* | `Soluble\DbWrapper\Adapter\Laravel\Capsule5Adapter`  |
 
 
 The use of a bridged layer over a native implementation should be considered :
