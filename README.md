@@ -36,7 +36,7 @@ Universal minimalist database wrapper to rule them all (and to not choose).
 Instant installation via [composer](http://getcomposer.org/).
 
 ```console
-php composer require soluble/dbwrapper:1.*
+$ composer require soluble/dbwrapper:1.*
 ```
 Most modern frameworks will include Composer out of the box, but ensure the following file is included:
 
