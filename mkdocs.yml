@@ -2,6 +2,12 @@ docs_dir: doc
 site_dir: build/doc
 pages:
     - index.md
+    - { 'Drivers': [
+            { 'Native': drivers/native-drivers.md }, 
+            { 'Userland': drivers/userland-drivers.md }
+        ] 
+      }
+    
 site_name: soluble-dbwrapper
 site_description: "soluble-dbwrapper"
 theme: readthedocs
