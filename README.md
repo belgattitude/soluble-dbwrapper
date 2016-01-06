@@ -97,10 +97,10 @@ The `DbWrapper\AdapterFactory` allows to instanciate an Adapter from en existing
  
 | Methods                                       | Return             | Comment                             |
 |-----------------------------------------------|--------------------|-------------------------------------|
-| static `createAdapterFromResource($resource)` | `AdapterInterface` | Create an adapter from existing resource |
-| static `createAdapterFromDbal2($dbal)`        | `AdapterInterface` | Create an adapter from doctrine dbal connection |
-| static `createAdapterFromCapsule5($capsule)`  | `AdapterInterface` | Create an adapter from laravel connection |
-| static `createAdapterFromZendDb2($zend)`      | `AdapterInterface` | Create an adapter from zend-db connection |
+| static `createAdapterFromResource($resource)` | `AdapterInterface` | From existing resource (mysqli, pdo) |
+| static `createAdapterFromDbal2($dbal)`        | `AdapterInterface` | From doctrine/dbal connection |
+| static `createAdapterFromCapsule5($capsule)`  | `AdapterInterface` | From Laravel connection |
+| static `createAdapterFromZendDb2($zend)`      | `AdapterInterface` | From zend-db connection |
 
 
 ### AdapterInterface
@@ -147,7 +147,7 @@ The `DbWrapper\Connection\ConnectionInterface` provides information about your c
 | MariaDb    | mysqli, pdo_mysql                                    |
 | Sqlite     | pdo_sqlite                                           |
 
-For examples, see the [native drivers doc](./doc/driver/native-drivers.md)
+For examples, see the [native drivers doc](./doc/drivers/native-drivers.md)
 
 ### *Userland* implementations
 
@@ -164,7 +164,7 @@ Some of the supported databases can be (incomplete list) :
 (...)
 
 
-For examples, see the [userland drivers doc](./doc/driver/userland-drivers.md)
+For examples, see the [userland drivers doc](./doc/drivers/userland-drivers.md)
 
 ## Motivations
 
