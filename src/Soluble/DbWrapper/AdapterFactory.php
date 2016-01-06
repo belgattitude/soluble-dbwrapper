@@ -6,6 +6,43 @@ class AdapterFactory
 {
 
     /**
+     * Create adapter from an existing doctrine/dbal connection
+     *
+     * @param \Illuminate\Database\Capsule\Manager $capsule
+     * @return \Soluble\DbWrapper\Adapter\Illuminate\Capsule5Adapter
+     */
+
+    public static function createAdapterFromCapsule5(\Illuminate\Database\Capsule\Manager $capsule)
+    {
+        return new \Soluble\DbWrapper\Adapter\Laravel\Capsule5Adapter($capsule);
+    }
+
+    /**
+     * Create adapter from an existing doctrine/dbal connection
+     *
+     * @param \Doctrine\DBAL\Connection $dbalConnection
+     * @return \Soluble\DbWrapper\Adapter\Doctrine\Dbal2Adapter
+     */
+
+    public static function createAdapterFromDoctrine2(\Doctrine\DBAL\Connection $dbalConnection)
+    {
+        return new \Soluble\DbWrapper\Adapter\Doctrine\Dbal2Adapter($dbalConnection);
+    }
+
+
+    /**
+     * Create adapter from an existing zendframework/zend-db adapter
+     *
+     * @param \Zend\Db\Adapter\Adapter $zendAdapter
+     * @return \Soluble\DbWrapper\Adapter\Zend\ZendDb2Adapter
+     */
+
+    public static function createAdapterFromZendDb2(\Zend\Db\Adapter\Adapter $zendAdapter)
+    {
+        return new \Soluble\DbWrapper\Adapter\Zend\ZendDb2Adapter($zendAdapter);
+    }
+
+    /**
      * Create adapter from an existing connection resource
      *
      * @param mixed $resource database connection object (mysqli, pdo_mysql,...)

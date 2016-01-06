@@ -3,6 +3,10 @@ filter:
     excluded_paths: [test/*, vendor/*, bin/*, doc/*]
 before_commands:
     - "composer update --prefer-source"
+    - composer require --no-dev zendframework/zend-db:~2 --update-no-dev 
+    - composer require --no-dev doctrine/dbal:~2 --update-no-dev 
+    - composer require --no-dev illuminate/database:~5 --update-no-dev 
+    
 tools:
     external_code_coverage: 
         timeout: 600

@@ -1,12 +1,19 @@
 {
     "name": "soluble/dbwrapper",
-    "description": "Extra minimalist database wrapper",
+    "description": "Universal minimalist database wrapper",
     "license": "MIT",
     "keywords": [
         "database",
         "mysql",
         "pdo_mysql",
-        "pdo"
+        "pdo",
+        "zend-db",
+        "doctrine",
+        "dbal",
+        "illuminate",
+        "eloquent",
+        "laravel",
+        "zend-framework"
     ],
     "homepage": "https://github.com/belgattitude/soluble-dbwrapper",
     "type": "library",
@@ -23,8 +30,14 @@
         }
     },
     "require": {
-        "php": ">=5.4.4",
+        "php": ">=5.4.4|~7.0",
         "ext-pdo": "*"
+    },
+    "require-dev": {
+        "doctrine/dbal": ">=2.4.0|<3.0.0", 
+        "doctrine/common": ">=2.4.0|<3.0.0",
+        "zendframework/zend-db": ">=2.2.0|<3.0.0",        
+        "illuminate/database": ">=4.0.0|<6.0.0"        
     },
     "archive": {
         "exclude": ["test", "doc", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore"]

@@ -27,6 +27,9 @@ before_script:
   - mysql -e "CONNECT phpunit_soluble_schema_db; SHOW TABLES;" -u root  
   - travis_retry composer self-update
   - travis_retry composer --prefer-source --dev install
+  - travis_retry composer require --no-dev zendframework/zend-db:~2 --update-no-dev 
+  - travis_retry composer require --no-dev doctrine/dbal:~2 --update-no-dev 
+  - travis_retry composer require --no-dev illuminate/database:~5 --update-no-dev 
 script: 
   - phpunit -v 
 

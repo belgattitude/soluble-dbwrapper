@@ -2,7 +2,6 @@ docs_dir: doc
 site_dir: build/doc
 pages:
     - index.md
-    - { 'Contributing': CONTRIBUTING.md }
 site_name: soluble-dbwrapper
 site_description: "soluble-dbwrapper"
 theme: readthedocs

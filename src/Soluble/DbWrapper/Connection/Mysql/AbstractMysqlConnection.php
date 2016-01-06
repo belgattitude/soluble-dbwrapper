@@ -2,6 +2,8 @@
 
 namespace Soluble\DbWrapper\Connection\Mysql;
 
+use Soluble\DbWrapper\Exception;
+
 abstract class AbstractMysqlConnection
 {
     /**
@@ -24,7 +26,7 @@ abstract class AbstractMysqlConnection
 
     /**
      * Return current schema/database name
-     * @throws \Soluble\DbWrapper\Exception\RuntimeException
+     * @throws Exception\RuntimeException
      * @return string|false
      */
     public function getCurrentSchema()

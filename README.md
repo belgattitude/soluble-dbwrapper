@@ -11,26 +11,25 @@
 
 ## Introduction
 
-Minimalist modern PHP database wrapper.
+Universal minimalist database wrapper to rule them all.
 
 ## Features
 
-- Small, fast and modern database abstraction layer.
-- Provides mysqli, pdo_mysql, pdo_sqlite driver implementations.
-- Thoroughly tested and documented.
-- Adhere to soluble standards.
+- Provide a generic API for handling database access across various implementations.
+- Lightweight, framework adaptive and agnostic. 
+- Natively supports `mysqli`, `pdo_mysql`, `pdo_sqlite` drivers.
+- Bridged implementations of `zend-db`, `laravel` and `doctrine`.
+  - Access to Oracle, SQL-Server, PostgreSql,...
+  - Allow to develop database portable libraries.
+- Adhere to soluble programming standards.
 
 ## Requirements
 
 - PHP engine 5.4+, 7.0+ or HHVM >= 3.2.
 
-## Motivations
+## Documentation
 
-Initially the reason behind the development of `soluble/dbwrapper` was to get
-a reliable, modern and lightweight library to abstract the `PDO_mysql` and `mysqli` driver interfaces.
-
-*If you are looking for a more complete library with extra drivers and a SQL abstraction, 
-take a look at the excellent [`zendframework/zend-db`](https://github.com/zendframework/zend-db) package.*
+ - [Manual](http://docs.soluble.io/soluble-dbwrapper/manual/) in progress and [API documentation](http://docs.soluble.io/soluble-dbwrapper/api/) available.
 
 ## Installation
 
@@ -155,15 +154,66 @@ The `DbWrapper\Connection\ConnectionInterface` provides information about your c
 
 ## Supported drivers
 
-Currently only pdo_mysql and mysqli drivers  are supported. 
 
-| Drivers            | DbWrapper\Adapter\AdapterInterface implementations   |
+### Native implementions
+
+Native implementations does not require any external libraries in order to run.
+
+| PHP extension      | DbWrapper\Adapter\AdapterInterface implementations   |
 |--------------------|------------------------------------------------------|
 | pdo_mysql          | `Soluble\DbWrapper\Adapter\PdoMysqlAdapter`          |
 | pdo_sqlite         | `Soluble\DbWrapper\Adapter\PdoSqliteAdapter`         |
 | mysqli             | `Soluble\DbWrapper\Adapter\MysqliAdapter`            |
 
-You can easily add new drivers by implementing the `DbWrapper\Adapter\AdapterInterface`.
+
+### Bridged implementations
+
+In addition to native support, `soluble/dbwrapper` allows to bridge over the following *userland* db abstraction layers :
+
+| Bridge                   | Version | DbWrapper\Adapter\AdapterInterface implementations   |
+|--------------------------|--------+|------------------------------------------------------|
+| `zendframework/zend-db`  |     2.* | `Soluble\DbWrapper\Adapter\Zend\ZendDb2Adapter`      |
+| `doctrine/dbal`          |     2.* | `Soluble\DbWrapper\Adapter\Doctrine\Dbal2Adapter`    |
+| `illuminate/database`    |     5.* | `Soluble\DbWrapper\Adapter\Illuminate\Db5Adapter`    |
+
+
+The use of a bridged layer over a native implementation should be considered :
+
+ - Your current project or library is already based on one of the supported bridged implementations
+ - The native implementation does not exists for your database vendor (Oracle, PostgreSQL, Firebird, MS-SQL...)
+
+In order to use a bridged implementation, you must add it to your dependencies in composer.json file if it's not already the case.
+
+Additionnaly you can install dependencies from the command line :
+
+For zendframework/zend-db :
+
+```console
+$ composer require zendframework/zend-db:~2
+```
+
+For doctrine/dbal :
+
+```console
+$ composer require doctrine/dbal:~2
+```
+
+For illuminate/database :
+
+```console
+$ composer require illuminate/database:~5
+```
+
+*You can easily add new drivers by implementing the `DbWrapper\Adapter\AdapterInterface`.*
+
+
+## Motivations
+
+Initially the reason behind the development of `soluble/dbwrapper` was to get
+a reliable, modern and lightweight library to abstract the `PDO_mysql` and `mysqli` driver interfaces.
+
+*If you are looking for a more complete library with extra drivers and a SQL abstraction, 
+take a look at the excellent [`zendframework/zend-db`](https://github.com/zendframework/zend-db) package.*
 
 ## Contributing
 

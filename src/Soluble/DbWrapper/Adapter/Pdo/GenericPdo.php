@@ -21,21 +21,36 @@ abstract class GenericPdo implements AdapterInterface
     public function query($query)
     {
         try {
-            $stmt = $this->resource->query($query, \PDO::FETCH_ASSOC);
+            //$query = "select * from product";
+            $stmt = $this->resource->prepare($query);
+
             if ($stmt === false) {
-                throw new Exception\InvalidArgumentException("Query cannot be executed [$query].");
+                $error = $this->resource->errorInfo();
+                throw new Exception\InvalidArgumentException($error[2]);
             }
+
+            if (!$stmt->execute()) {
+                throw new Exception\InvalidArgumentException(
+                    'Statement could not be executed (' . implode(' - ', $this->resource->errorInfo()) . ')'
+                );
+            };
+
             $results = new Resultset();
-            foreach ($stmt as $row) {
-                $results->append($row);
+            if ($stmt->columnCount() > 0) {
+                while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+                    $results->append($row);
+                }
             }
+
         } catch (Exception\InvalidArgumentException $e) {
             throw $e;
         } catch (\Exception $e) {
-            $msg = "PDOException : {$e->getMessage()} [$query]";
+            $eclass = get_class($e);
+            $msg = "GenericPdo '$eclass' : {$e->getMessage()} [$query]";
             throw new Exception\InvalidArgumentException($msg);
         }
         return $results;
+
     }
 
     /**

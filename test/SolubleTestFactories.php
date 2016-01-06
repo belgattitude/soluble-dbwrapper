@@ -16,8 +16,9 @@ class SolubleTestFactories {
     /**
      * 
      * @param string $type
-     * @param string|database
-     * @return PDO|Mysqli
+     * @param array|null $config
+     * @param string $charset
+     * @return PDO|Mysqli|mixed
      */
     public static function getDbConnection($type, $config=null, $charset="UTF8")
     {
@@ -43,11 +44,55 @@ class SolubleTestFactories {
                 $conn = new \mysqli($hostname,$username,$password,$database);
                 $conn->set_charset($charset);
                 break;
+            case 'capsule5-mysqli' :
+                
+                $params = \SolubleTestFactories::getDbConfiguration('mysqli');
+                $capsule = new \Illuminate\Database\Capsule\Manager();        
+                $capsule->addConnection([
+                    'driver'    => 'mysql',
+                    'host'      => $params['hostname'],
+                    'database'  => $params['database'],
+                    'username'  => $params['username'],
+                    'password'  => $params['password'],
+                    'charset'   => $charset,
+                    'collation' => 'utf8_unicode_ci'
+                ]);
+
+                //$capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher(new Illuminate\Container\Container()));        
+                $conn = $capsule;
+                
+                break;
+           
+            case 'doctrine2-mysqli' :
+                $params = \SolubleTestFactories::getDbConfiguration('mysqli');
+                $connectionParams = array(
+                    'dbname' => $params['database'],
+                    'user' => $params['username'],
+                    'password' => $params['password'],
+                    'host' =>  $params['hostname'],
+                    'driver' => 'mysqli',
+                    'charset' => $charset
+                );
+                $c = new \Doctrine\DBAL\Configuration();
+                $e = new \Doctrine\Common\EventManager();
+                //$r = new \ReflectionClass('Doctrine\Common\EventManager');
+                //var_dump($r->getFilename());
+                //die();
+                $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $c, $e);        
+
+                break;
+            case 'zend-db2-mysqli' :
+                $params = \SolubleTestFactories::getDbConfiguration('mysqli');
+                $params = array_merge($params, array('driver' => 'Mysqli', 'charset' => $charset));
+                $conn = new \Zend\Db\Adapter\Adapter($params);
+                break;
             default:
                 throw new \Exception(__METHOD__ . " Unsupported driver type ($type)");
         }
         return $conn;
     }
+    
+    
     
     /**
      * 
@@ -58,6 +103,9 @@ class SolubleTestFactories {
     {
         switch ($type) {
             case 'mysqli':
+            case 'zend-db2-mysqli':
+            case 'doctrine2-mysqli':
+            case 'capsule5-mysqli':
             case 'pdo:mysql' :    
                 $config = array(
                     'hostname' => $_SERVER['MYSQL_HOSTNAME'],
