@@ -3,10 +3,9 @@
 namespace Soluble\DbWrapper\Connection;
 
 use Soluble\DbWrapper\Adapter\PdoMysqlAdapter;
-use Soluble\DbWrapper\Connection\Mysql\AbstractMysqlConnection;
 use PDO;
 
-class PdoMysqlConnection extends AbstractMysqlConnection implements ConnectionInterface
+class PdoMysqlConnection implements ConnectionInterface
 {
 
     /**
@@ -50,5 +49,25 @@ class PdoMysqlConnection extends AbstractMysqlConnection implements ConnectionIn
     {
         $infos = explode(' ', trim($this->resource->getAttribute(PDO::ATTR_CONNECTION_STATUS)));
         return strtolower($infos[0]);
+    }
+
+    /**
+     * Return current schema/database name
+     *
+     * @throws Exception\RuntimeException
+     * @return string
+     */
+    public function getCurrentSchema()
+    {
+        $query = 'SELECT DATABASE() as current_schema';
+        try {
+            $results = $this->adapter->query($query);
+            if (count($results) == 0 || $results[0]['current_schema'] === null) {
+                return false;
+            }
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException($e->getMessage());
+        }
+        return $results[0]['current_schema'];
     }
 }
