@@ -55,7 +55,7 @@ class MysqliConnection implements ConnectionInterface
      * Return current schema/database name
      *
      * @throws Exception\RuntimeException
-     * @return string
+     * @return string|false
      */
     public function getCurrentSchema()
     {

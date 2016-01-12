@@ -35,7 +35,7 @@
     },
     "require-dev": {
         "doctrine/dbal": ">=2.4.0|<3.0.0", 
-        "doctrine/common": ">=2.4.0|<3.0.0",
+        "doctrine/common": ">=2.5.0|<3.0.0",
         "zendframework/zend-db": ">=2.2.0|<3.0.0",        
         "illuminate/database": ">=4.0.0|<6.0.0"        
     },
