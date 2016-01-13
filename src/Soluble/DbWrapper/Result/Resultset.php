@@ -7,5 +7,4 @@ use ArrayObject;
 class Resultset extends ArrayObject implements ResultInterface
 {
 
-
 }

@@ -2,6 +2,7 @@
 
 namespace Soluble\DbWrapper\Result;
 
-interface ResultInterface
+interface ResultInterface extends \Countable, \Traversable
 {
+
 }

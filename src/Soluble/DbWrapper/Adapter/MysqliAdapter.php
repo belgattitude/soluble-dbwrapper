@@ -50,7 +50,9 @@ class MysqliAdapter implements AdapterInterface
     public function query($query)
     {
         try {
-            $r = $this->resource->query($query);
+
+            //$r = $this->resource->query($query, MYSQLI_STORE_RESULT);
+            $r = $this->resource->query($query, MYSQLI_STORE_RESULT);
 
             $results = new Resultset();
 
@@ -62,6 +64,7 @@ class MysqliAdapter implements AdapterInterface
                 while ($row = $r->fetch_assoc()) {
                     $results->append($row);
                 }
+                $r->close();
             }
         } catch (Exception\InvalidArgumentException $e) {
             throw $e;

@@ -41,6 +41,7 @@ abstract class GenericPdo implements AdapterInterface
                     $results->append($row);
                 }
             }
+            $stmt->closeCursor();
 
         } catch (Exception\InvalidArgumentException $e) {
             throw $e;
