@@ -42,7 +42,6 @@ abstract class GenericPdo implements AdapterInterface
                 }
             }
             $stmt->closeCursor();
-
         } catch (Exception\InvalidArgumentException $e) {
             throw $e;
         } catch (\Exception $e) {
@@ -51,7 +50,6 @@ abstract class GenericPdo implements AdapterInterface
             throw new Exception\InvalidArgumentException($msg);
         }
         return $results;
-
     }
 
     /**

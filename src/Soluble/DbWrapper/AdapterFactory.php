@@ -54,7 +54,8 @@ class AdapterFactory
     {
         if (is_scalar($resource) || is_array($resource)) {
             throw new Exception\InvalidArgumentException("Resource param must be a valid 'resource' link (mysqli, pdo)");
-        } if ($resource instanceof \PDO) {
+        }
+        if ($resource instanceof \PDO) {
             $adapter = self::getAdapterFromPdo($resource);
         } elseif (extension_loaded('mysqli') && $resource instanceof \mysqli) {
             $adapter = new Adapter\MysqliAdapter($resource);
@@ -74,7 +75,6 @@ class AdapterFactory
      */
     protected static function getAdapterFromPdo(\PDO $resource)
     {
-
         $driver = strtolower($resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
         switch ($driver) {
             case 'mysql':

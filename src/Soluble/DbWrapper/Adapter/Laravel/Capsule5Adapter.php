@@ -2,8 +2,6 @@
 
 namespace Soluble\DbWrapper\Adapter\Laravel;
 
-use Soluble\DbWrapper\Exception;
-use Soluble\DbWrapper\Result\Resultset;
 use Soluble\DbWrapper\Adapter\AdapterInterface;
 use Soluble\DbWrapper\Connection\Laravel\Capsule5Connection;
 use Soluble\DbWrapper\Adapter\Pdo\GenericPdo;

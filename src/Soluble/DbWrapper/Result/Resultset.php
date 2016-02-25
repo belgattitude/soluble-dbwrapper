@@ -2,7 +2,6 @@
 
 namespace Soluble\DbWrapper\Result;
 
-
 class Resultset  implements ResultInterface
 {
     /**
@@ -16,65 +15,70 @@ class Resultset  implements ResultInterface
      * @var integer
      */
     protected $count = 0;
-    
+
     /**
      *
      * @var array
      */
     protected $storage=[];
-    
+
     /**
      * 
      
      */
-    public function __construct() {
-        
+    public function __construct()
+    {
         $this->storage = [];
         $this->position = 0;
         $this->count = count($this->storage);
-        
     }
-    
+
     /**
      * {@inheritdoc}
      */
-    public function current() {
+    public function current()
+    {
         return $this->storage[$this->position];
     }
 
     /**
      * {@inheritdoc}
      * @return int position
-     */    
-    public function key() {
+     */
+    public function key()
+    {
         return $this->position;
     }
 
     /**
      * {@inheritdoc}
-     */    
-    public function next() {
+     */
+    public function next()
+    {
         ++$this->position;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rewind() {
+    public function rewind()
+    {
         $this->position=0;
     }
 
     /**
      * {@inheritdoc}
-     */    
-    public function valid() {
+     */
+    public function valid()
+    {
         return isset($this->storage[$this->position]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function count() {
+    public function count()
+    {
         return $this->count;
     }
 
@@ -82,17 +86,19 @@ class Resultset  implements ResultInterface
      * 
      * {@inheritdoc}
      */
-    public function append(array $row) {
+    public function append(array $row)
+    {
         $this->storage[] = $row;
         ++$this->count;
     }
-    
+
 
     /**
      * 
      * {@inheritdoc}
      */
-    public function offsetExists($position) {
+    public function offsetExists($position)
+    {
         return isset($this->storage[$position]);
     }
 
@@ -100,27 +106,29 @@ class Resultset  implements ResultInterface
      * 
      * {@inheritdoc}
      */
-    public function offsetGet($position) {
-        return isset($this->storage[$position]) ? $this->storage[$position] : null;        
-        
+    public function offsetGet($position)
+    {
+        return isset($this->storage[$position]) ? $this->storage[$position] : null;
     }
 
     /**
      * 
      * {@inheritdoc}
      */
-    public function offsetSet($position, $row) {
+    public function offsetSet($position, $row)
+    {
         throw new \Exception('Resultsets are immutable');
     }
 
     /**
      * 
      * {@inheritdoc}
-     */    
-    public function offsetUnset($position) {
+     */
+    public function offsetUnset($position)
+    {
         throw new \Exception("Resultsets are immutable");
     }
-    
+
     /**
      * 
      * @return array
@@ -129,5 +137,4 @@ class Resultset  implements ResultInterface
     {
         return $this->storage;
     }
-
 }
