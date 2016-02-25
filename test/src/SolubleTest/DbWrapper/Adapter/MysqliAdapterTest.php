@@ -41,7 +41,7 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->adapter->query('set @psbtest=1');
         $results = $result = $this->adapter->query('select * from product');
-        $this->assertInstanceOf('ArrayObject', $results);
+        $this->assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
         $this->assertInternalType('array', $results[0]);
 
         try {

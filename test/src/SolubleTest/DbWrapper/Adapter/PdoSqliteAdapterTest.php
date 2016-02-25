@@ -48,7 +48,7 @@ class PdoSqliteAdapterTest extends \PHPUnit_Framework_TestCase
     public function testQuery()
     {
         $results = $result = $this->adapter->query('select * from test');
-        $this->assertInstanceOf('ArrayObject', $results);
+        $this->assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
         $this->assertInternalType('array', $results[0]);
         $this->assertEquals(1, count($results));
 

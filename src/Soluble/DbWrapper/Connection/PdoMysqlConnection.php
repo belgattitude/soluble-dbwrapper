@@ -3,6 +3,7 @@
 namespace Soluble\DbWrapper\Connection;
 
 use Soluble\DbWrapper\Adapter\PdoMysqlAdapter;
+use Soluble\DbWrapper\Exception;
 use PDO;
 
 class PdoMysqlConnection implements ConnectionInterface

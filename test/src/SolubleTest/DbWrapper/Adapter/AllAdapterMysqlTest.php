@@ -72,7 +72,7 @@ class AllAdapterMysqlTest extends \PHPUnit_Framework_TestCase
         foreach ($this->elements as $key => $element) {
             $adapter = $element['adapter'];
             $results = $adapter->query('select * from product');
-            $this->assertInstanceOf('ArrayObject', $results);
+            $this->assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
             $this->assertInternalType('array', $results[0]);
 
             try {

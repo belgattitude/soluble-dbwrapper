@@ -1,5 +1,2 @@
-phpunit.xml
-phpunit_hhvm.xml
-./send-codeclimate-coverage.sh
-logs/
+tmp
 build

@@ -3,6 +3,7 @@
 namespace Soluble\DbWrapper\Connection;
 
 use Soluble\DbWrapper\Adapter\MysqliAdapter;
+use Soluble\DbWrapper\Exception;
 use mysqli;
 
 class MysqliConnection implements ConnectionInterface
