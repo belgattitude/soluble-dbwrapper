@@ -43,6 +43,8 @@ class ResultsetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($row1, $rs->current());
 
         $this->assertInternalType('array', $rs->getArray());
+        $arr = (array) $rs->getArray();
+        $this->assertEquals($arr, $rs->getArray());
     }
 
 }
