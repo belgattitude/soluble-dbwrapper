@@ -2,8 +2,34 @@
 
 namespace Soluble\DbWrapper\Result;
 
-class Resultset  implements ResultInterface
+use ArrayObject;
+use Soluble\DbWrapper\Exception;
+
+class Resultset implements ResultInterface
 {
+
+    const TYPE_ARRAYOBJECT = 'arrayobject';
+    const TYPE_ARRAY  = 'array';
+
+    /**
+     * Allowed return types
+     *
+     * @var array
+     */
+    protected $allowedReturnTypes = [
+        self::TYPE_ARRAYOBJECT,
+        self::TYPE_ARRAY,
+    ];
+
+
+    /**
+     * Return type to use when returning an object from the set
+     *
+     * @var ResultSet::TYPE_ARRAYOBJECT|ResultSet::TYPE_ARRAY
+     */
+    protected $returnType = self::TYPE_ARRAY;
+
+
     /**
      *
      * @var integer 
@@ -18,23 +44,33 @@ class Resultset  implements ResultInterface
 
     /**
      *
-     * @var array
+     * @var array|ArrayObject
      */
-    protected $storage=[];
+    protected $storage;
+
 
     /**
-     * 
-     
+     * Constructor
+     *
+     * @throws Exception\InvalidArgumentException
+     * @param string $returnType
      */
-    public function __construct()
+    public function __construct($returnType = self::TYPE_ARRAY)
     {
-        $this->storage = [];
+        if (!in_array($returnType, $this->allowedReturnTypes)) {
+            throw new Exception\InvalidArgumentException("Unsupported returnType argument ($returnType)");
+        }
+        $this->returnType = $returnType;
+        if ($this->returnType == self::TYPE_ARRAYOBJECT) {
+            $this->storage = new ArrayObject([]);
+        }
         $this->position = 0;
         $this->count = count($this->storage);
     }
 
     /**
      * {@inheritdoc}
+     * @return array|ArrayObject
      */
     public function current()
     {
@@ -83,12 +119,17 @@ class Resultset  implements ResultInterface
     }
 
     /**
+     * Append a row to the end of resultset
      * 
-     * {@inheritdoc}
+     * @param array $row an associative array
      */
     public function append(array $row)
     {
-        $this->storage[] = $row;
+        if ($this->returnType == self::TYPE_ARRAYOBJECT) {
+            $this->storage[] = new ArrayObject($row);
+        } else {
+            $this->storage[] = $row;
+        }
         ++$this->count;
     }
 
@@ -130,11 +171,38 @@ class Resultset  implements ResultInterface
     }
 
     /**
-     * 
+     * Return underlying stored resultset as array
      * @return array
      */
     public function getArray()
     {
-        return $this->storage;
+        return (array) $this->storage;
+    }
+
+    /**
+     * Return underlying stored resultset as ArrayObject
+     * 
+     * Depending on the $returnType Resultset::TYPE_ARRAY|Resultset::TYPE_ARRAYOBJECT you can modify
+     * the internal storage
+     * 
+     * @return ArrayObject
+     */
+    public function getArrayObject()
+    {
+        if ($this->returnType == self::TYPE_ARRAY) {
+            return new ArrayObject($this->storage);
+        } else {
+            return $this->storage;
+        }
+    }
+
+    /**
+     * Return the currently set return type 
+     * @see Resultset::TYPE_ARRAY|Resultset::TYPE_ARRAYOBJECT
+     * @return string
+     */
+    public function getReturnType()
+    {
+        return $this->returnType;
     }
 }

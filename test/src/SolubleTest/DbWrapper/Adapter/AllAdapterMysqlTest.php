@@ -3,6 +3,8 @@
 namespace SolubleTest\DbWrapper\Adapter;
 
 use Soluble\DbWrapper\Adapter;
+use Soluble\DbWrapper\Result\Resultset;
+
 
 class AllAdapterMysqlTest extends \PHPUnit_Framework_TestCase
 {
@@ -66,7 +68,31 @@ class AllAdapterMysqlTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+    
+    public function testResultset() {
 
+        $testedTypes = [
+            Resultset::TYPE_ARRAY => 'array', 
+            Resultset::TYPE_ARRAYOBJECT => 'ArrayObject'
+        ];
+        
+        foreach ($this->elements as $key => $element) {
+            
+            foreach($testedTypes as $resultsetType => $mustbe) {
+            
+                $adapter = $element['adapter'];
+                $results = $adapter->query('select * from product', $resultsetType);
+                $this->assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
+                $this->assertInstanceOf('Soluble\DbWrapper\Result\Resultset', $results);
+                if ($mustbe == 'array') {
+                    $this->assertInternalType('array', $results[0]);
+                } else {
+                    $this->assertInstanceOf($mustbe, $results[0]);
+                }
+            }
+        }
+    }
+    
     public function testQuery()
     {
         foreach ($this->elements as $key => $element) {

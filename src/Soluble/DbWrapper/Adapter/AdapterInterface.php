@@ -10,9 +10,10 @@ interface AdapterInterface
      *
      * @throws \Soluble\DbWrapper\Exception\InvalidArgumentException
      * @param string $query
+     * @param string $resultsetType default to Resultset::ARRAY
      * @return \Soluble\DbWrapper\Result\Resultset
      */
-    public function query($query);
+    public function query($query, $resultsetType = \Soluble\DbWrapper\Result\Resultset::TYPE_ARRAY);
 
 
     /**

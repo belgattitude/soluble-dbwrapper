@@ -47,7 +47,7 @@ class Dbal2Adapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function query($query)
+    public function query($query, $resultsetType = Resultset::TYPE_ARRAY)
     {
         // This error may happen with the libmysql instead of mysqlnd and using set statement (set @test=1)
         // : "Attempt to read a row while there is no result set associated with the statement"
@@ -59,7 +59,7 @@ class Dbal2Adapter implements AdapterInterface
              */
             $r = $this->dbal->query($query);
 
-            $results = new Resultset();
+            $results = new Resultset($resultsetType);
             if ($r === false) {
                 throw new Exception\InvalidArgumentException("Query cannot be executed [$query].");
             } else {

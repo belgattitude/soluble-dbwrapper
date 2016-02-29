@@ -47,14 +47,14 @@ class MysqliAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function query($query)
+    public function query($query, $resultsetType = Resultset::TYPE_ARRAY)
     {
         try {
 
             //$r = $this->resource->query($query, MYSQLI_STORE_RESULT);
             $r = $this->resource->query($query, MYSQLI_STORE_RESULT);
 
-            $results = new Resultset();
+            $results = new Resultset($resultsetType);
 
             if ($r === false) {
                 throw new Exception\InvalidArgumentException("Query cannot be executed [$query].");

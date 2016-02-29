@@ -18,7 +18,7 @@ abstract class GenericPdo implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function query($query)
+    public function query($query, $resultsetType = Resultset::TYPE_ARRAY)
     {
         try {
             //$query = "select * from product";
@@ -35,7 +35,7 @@ abstract class GenericPdo implements AdapterInterface
                 );
             };
 
-            $results = new Resultset();
+            $results = new Resultset($resultsetType);
             if ($stmt->columnCount() > 0) {
                 while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
                     $results->append($row);
