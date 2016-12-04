@@ -8,8 +8,8 @@ if (!$loader = @include __DIR__ . '/../vendor/autoload.php') {
 
 ini_set('error_reporting', E_ALL | E_STRICT);
 $baseDir = dirname(__DIR__);
-require_once(dirname(__FILE__) . '/SolubleTestFactories.php');
+require_once dirname(__FILE__) . '/SolubleTestFactories.php';
 
 $loader = require __DIR__ . '/../vendor/autoload.php';
-$loader->add('SolubleTest', array($baseDir . '/src/', $baseDir . '/test/'));
+$loader->add('SolubleTest', [$baseDir . '/src/', $baseDir . '/test/']);
 $loader->register();

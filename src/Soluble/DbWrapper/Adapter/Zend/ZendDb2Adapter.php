@@ -9,22 +9,18 @@ use Soluble\DbWrapper\Connection\Zend\ZendDb2Connection;
 
 class ZendDb2Adapter implements AdapterInterface
 {
-
     /**
-     *
      * @var \Zend\Db\Adapter\Adapter
      */
     protected $zendAdapter;
 
     /**
-     *
      * @var ZendDb2Connection
      */
     protected $connection;
 
-
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \Zend\Db\Adapter\Adapter $zendAdapter
      */
@@ -34,7 +30,6 @@ class ZendDb2Adapter implements AdapterInterface
         $this->connection = new ZendDb2Connection($this, $zendAdapter);
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -42,7 +37,6 @@ class ZendDb2Adapter implements AdapterInterface
     {
         return $this->zendAdapter->getPlatform()->quoteValue($value);
     }
-
 
     /**
      * {@inheritdoc}
@@ -70,11 +64,13 @@ class ZendDb2Adapter implements AdapterInterface
             $msg = "ZendDb2 adapter query error: {$e->getMessage()} [$query]";
             throw new Exception\InvalidArgumentException($msg);
         }
+
         return $results;
     }
 
     /**
      * {@inheritdoc}
+     *
      * @return ZendDb2Connection
      */
     public function getConnection()

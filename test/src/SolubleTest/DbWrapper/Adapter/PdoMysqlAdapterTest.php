@@ -6,9 +6,7 @@ use Soluble\DbWrapper\Adapter\PdoMysqlAdapter;
 
 class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     *
      * @var PdoMysqlAdapter
      */
     protected $adapter;
@@ -24,11 +22,9 @@ class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorThrowsException()
     {
-
         $this->setExpectedException('\Soluble\DbWrapper\Exception\InvalidArgumentException');
         $adapter = new PdoMysqlAdapter(new \PDO('sqlite::memory:'));
     }
-
 
     public function testQueryWithSet()
     {
@@ -40,7 +36,6 @@ class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
         } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
             $this->assertTrue(true);
         }
-
     }
 
     public function testQuery()
@@ -53,9 +48,8 @@ class PdoMysqlAdapterTest extends \PHPUnit_Framework_TestCase
             $this->adapter->query('selectwhere');
             $this->assertTrue(false, "wrong query didn't throw an exception");
         } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
-            $this->assertTrue(true, "wrong query throwed successfully an exception");
+            $this->assertTrue(true, 'wrong query throwed successfully an exception');
         }
-
     }
 
     public function testQuoteValue()

@@ -9,11 +9,9 @@ use Soluble\DbWrapper\Result\Resultset;
 abstract class GenericPdo implements AdapterInterface
 {
     /**
-     *
      * @var \PDO
      */
     protected $resource;
-
 
     /**
      * {@inheritdoc}
@@ -33,7 +31,7 @@ abstract class GenericPdo implements AdapterInterface
                 throw new Exception\InvalidArgumentException(
                     'Statement could not be executed (' . implode(' - ', $this->resource->errorInfo()) . ')'
                 );
-            };
+            }
 
             $results = new Resultset($resultsetType);
             if ($stmt->columnCount() > 0) {
@@ -49,6 +47,7 @@ abstract class GenericPdo implements AdapterInterface
             $msg = "GenericPdo '$eclass' : {$e->getMessage()} [$query]";
             throw new Exception\InvalidArgumentException($msg);
         }
+
         return $results;
     }
 
@@ -60,11 +59,10 @@ abstract class GenericPdo implements AdapterInterface
         return $this->resource->quote($value);
     }
 
-
     /**
-     * Check extension
+     * Check extension.
+     *
      * @throws Exception\RuntimeException
-     * @return void
      */
     protected function checkEnvironment()
     {

@@ -8,27 +8,23 @@ use Soluble\DbWrapper\Adapter\Pdo\GenericPdo;
 
 class Capsule5Adapter extends GenericPdo implements AdapterInterface
 {
-
     /**
-     *
      * @var \Illuminate\Database\Capsule\Manager
      */
     protected $capsule;
 
     /**
-     *
      * @var Capsule5Connection
      */
     protected $connection;
 
     /**
-     *
      * @var \PDO
      */
     protected $resource;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \Illuminate\Database\Capsule\Manager $capsule
      */
@@ -41,6 +37,7 @@ class Capsule5Adapter extends GenericPdo implements AdapterInterface
 
     /**
      * {@inheritdoc}
+     *
      * @return Capsule5Connection
      */
     public function getConnection()

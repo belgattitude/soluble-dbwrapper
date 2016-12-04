@@ -6,15 +6,12 @@ use Soluble\DbWrapper\Adapter\PdoSqliteAdapter;
 
 class PdoSqliteAdapterTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     *
      * @var \PDO
      */
     protected $connection;
 
     /**
-     *
      * @var PdoSqliteAdapter
      */
     protected $adapter;
@@ -39,11 +36,9 @@ class PdoSqliteAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorThrowsException()
     {
-
         $this->setExpectedException('\Soluble\DbWrapper\Exception\InvalidArgumentException');
         $adapter = new PdoSqliteAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
     }
-
 
     public function testQuery()
     {
@@ -56,7 +51,7 @@ class PdoSqliteAdapterTest extends \PHPUnit_Framework_TestCase
             $this->adapter->query('selectwhere');
             $this->assertTrue(false, "wrong query didn't throw an exception");
         } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
-            $this->assertTrue(true, "wrong query throwed successfully an exception");
+            $this->assertTrue(true, 'wrong query throwed successfully an exception');
         }
     }
 

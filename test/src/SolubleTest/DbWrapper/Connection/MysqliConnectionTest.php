@@ -7,13 +7,10 @@ use Soluble\DbWrapper\Adapter\MysqliAdapter;
 
 class MysqliConnectionTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     *
      * @var Connection\MysqlConnection
      */
     protected $connection;
-
 
     /**
      * Sets up the fixture, for example, opens a network connection.

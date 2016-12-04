@@ -9,22 +9,18 @@ use Soluble\DbWrapper\Connection\MysqliConnection;
 
 class MysqliAdapter implements AdapterInterface
 {
-
     /**
-     *
      * @var \mysqli
      */
     protected $resource;
 
     /**
-     *
      * @var MysqliConnection
      */
     protected $connection;
 
-
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mysqli $resource
      */
@@ -34,7 +30,6 @@ class MysqliAdapter implements AdapterInterface
         $this->connection = new MysqliConnection($this, $resource);
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -43,14 +38,12 @@ class MysqliAdapter implements AdapterInterface
         return "'" . $this->resource->real_escape_string($value) . "'";
     }
 
-
     /**
      * {@inheritdoc}
      */
     public function query($query, $resultsetType = Resultset::TYPE_ARRAY)
     {
         try {
-
             //$r = $this->resource->query($query, MYSQLI_STORE_RESULT);
             $r = $this->resource->query($query, MYSQLI_STORE_RESULT);
 
@@ -72,11 +65,13 @@ class MysqliAdapter implements AdapterInterface
             $msg = "MysqliException: {$e->getMessage()} [$query]";
             throw new Exception\InvalidArgumentException($msg);
         }
+
         return $results;
     }
 
     /**
      * {@inheritdoc}
+     *
      * @return MysqlConnection
      */
     public function getConnection()

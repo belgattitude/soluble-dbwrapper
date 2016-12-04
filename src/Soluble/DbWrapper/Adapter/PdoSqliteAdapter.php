@@ -9,24 +9,22 @@ use PDO;
 
 class PdoSqliteAdapter extends GenericPdo implements AdapterInterface
 {
-
     /**
-     *
      * @var \PDO
      */
     protected $resource;
 
     /**
-     *
      * @var PdoSqliteConnection
      */
     protected $connection;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
+     *
      * @param \PDO $resource
      */
     public function __construct(PDO $resource)
@@ -40,9 +38,9 @@ class PdoSqliteAdapter extends GenericPdo implements AdapterInterface
         $this->connection = new PdoSqliteConnection($this, $resource);
     }
 
-
     /**
      * {@inheritdoc}
+     *
      * @return PdoSqliteConnection
      */
     public function getConnection()

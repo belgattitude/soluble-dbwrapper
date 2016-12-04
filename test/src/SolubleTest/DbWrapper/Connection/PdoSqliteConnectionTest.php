@@ -7,9 +7,7 @@ use Soluble\DbWrapper\Adapter\PdoSqliteAdapter;
 
 class PdoSqliteConnectionTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     *
      * @var Connection\PdoSqliteConnection
      */
     protected $connection;
@@ -24,11 +22,11 @@ class PdoSqliteConnectionTest extends \PHPUnit_Framework_TestCase
         $adapter = new PdoSqliteAdapter($connection);
         $this->connection = $adapter->getConnection();
     }
+
     public function testGetCurrentSchema()
     {
         $current = $this->connection->getCurrentSchema();
         $this->assertEquals('main', $current);
-
     }
 
     public function testGetResource()

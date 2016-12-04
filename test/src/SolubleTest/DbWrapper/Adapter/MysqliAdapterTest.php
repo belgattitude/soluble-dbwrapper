@@ -6,9 +6,7 @@ use Soluble\DbWrapper\Adapter\MysqliAdapter;
 
 class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     *
      * @var MysqliAdapter
      */
     protected $adapter;
@@ -22,8 +20,6 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
         $this->adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
     }
 
-
-
     public function testQueryWithSet()
     {
         $this->adapter->query('set @psbtest=1');
@@ -34,7 +30,6 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
         } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
             $this->assertTrue(true);
         }
-
     }
 
     public function testQuery()
@@ -48,9 +43,8 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
             $this->adapter->query('selectwhere');
             $this->assertTrue(false, "wrong query didn't throw an exception");
         } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
-            $this->assertTrue(true, "wrong query throwed successfully an exception");
+            $this->assertTrue(true, 'wrong query throwed successfully an exception');
         }
-
     }
 
     public function testQuoteValue()

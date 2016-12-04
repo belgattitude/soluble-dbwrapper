@@ -8,24 +8,19 @@ use mysqli;
 
 class MysqliConnection implements ConnectionInterface
 {
-
     /**
-     *
      * @var MysqliAdapter
      */
     protected $adapter;
 
-
     /**
-     *
      * @var \mysqli
      */
     protected $resource;
 
     /**
-     *
      * @param MysqliAdapter $adapter
-     * @param \mysqli $resource
+     * @param \mysqli       $resource
      */
     public function __construct(MysqliAdapter $adapter, mysqli $resource)
     {
@@ -33,9 +28,9 @@ class MysqliConnection implements ConnectionInterface
         $this->resource = $resource;
     }
 
-
     /**
      * {@inheritdoc}
+     *
      * @return \mysqli
      */
     public function getResource()
@@ -49,13 +44,15 @@ class MysqliConnection implements ConnectionInterface
     public function getHost()
     {
         $infos = explode(' ', trim($this->resource->host_info));
+
         return strtolower($infos[0]);
     }
 
     /**
-     * Return current schema/database name
+     * Return current schema/database name.
      *
      * @throws Exception\RuntimeException
+     *
      * @return string|false
      */
     public function getCurrentSchema()
@@ -69,6 +66,7 @@ class MysqliConnection implements ConnectionInterface
         } catch (\Exception $e) {
             throw new Exception\RuntimeException($e->getMessage());
         }
+
         return $results[0]['current_schema'];
     }
 }

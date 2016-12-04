@@ -8,22 +8,18 @@ use Soluble\DbWrapper\Connection\ConnectionInterface;
 
 class Capsule5Connection implements ConnectionInterface
 {
-
     /**
-     *
      * @var AdapterInterface;
      */
     protected $adapter;
 
     /**
-     *
      * @var \Illuminate\Database\Capsule\Manager;
      */
     protected $capsule;
 
-
     /**
-     * @param AdapterInterface $adapter
+     * @param AdapterInterface                     $adapter
      * @param \Illuminate\Database\Capsule\Manager $capsule
      */
     public function __construct(AdapterInterface $adapter, \Illuminate\Database\Capsule\Manager $capsule)
@@ -32,9 +28,9 @@ class Capsule5Connection implements ConnectionInterface
         $this->capsule = $capsule;
     }
 
-
     /**
      * {@inheritdoc}
+     *
      * @return \PDO
      */
     public function getResource()
@@ -44,16 +40,19 @@ class Capsule5Connection implements ConnectionInterface
 
     /**
      * {@inheritdoc}
+     *
      * @throws Exception\UnsupportedFeatureException
      */
     public function getHost()
     {
-        throw new Exception\UnsupportedFeatureException(__METHOD__ . " is not (yet) supported for capsule bridge");
+        throw new Exception\UnsupportedFeatureException(__METHOD__ . ' is not (yet) supported for capsule bridge');
     }
 
     /**
      * {@inheritdoc}
+     *
      * @throws Exception\RuntimeException
+     *
      * @return string
      */
     public function getCurrentSchema()
@@ -61,8 +60,9 @@ class Capsule5Connection implements ConnectionInterface
         try {
             $schema = $this->capsule->getConnection()->getDatabaseName();
         } catch (\Exception $e) {
-            throw new Exception\RuntimeException("Cannot retrieve current schema:" . $e->getMessage());
+            throw new Exception\RuntimeException('Cannot retrieve current schema:' . $e->getMessage());
         }
+
         return $schema;
     }
 }

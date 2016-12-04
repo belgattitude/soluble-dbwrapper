@@ -7,24 +7,19 @@ use PDO;
 
 class PdoSqliteConnection implements ConnectionInterface
 {
-
     /**
-     *
      * @var AdapterInterface
      */
     protected $adapter;
 
-
     /**
-     *
      * @var \PDO
      */
     protected $resource;
 
     /**
-     *
      * @param AdapterInterface $adapter
-     * @param \PDO $resource
+     * @param \PDO             $resource
      */
     public function __construct(AdapterInterface $adapter, PDO $resource)
     {
@@ -37,11 +32,12 @@ class PdoSqliteConnection implements ConnectionInterface
      */
     public function getCurrentSchema()
     {
-        return "main";
+        return 'main';
     }
 
     /**
      * {@inheritdoc}
+     *
      * @return \PDO
      */
     public function getResource()
@@ -54,6 +50,6 @@ class PdoSqliteConnection implements ConnectionInterface
      */
     public function getHost()
     {
-        return "localhost";
+        return 'localhost';
     }
 }

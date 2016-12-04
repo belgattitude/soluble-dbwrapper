@@ -6,7 +6,6 @@ use Soluble\DbWrapper\AdapterFactory;
 
 class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCreateAdapterFromMysqliConnection()
     {
         $conn = \SolubleTestFactories::getDbConnection('mysqli');
@@ -14,7 +13,6 @@ class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\AdapterInterface', $adapter);
         $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\MysqliAdapter', $adapter);
     }
-
 
     public function testCreateAdapterFromPDOMysqlConnection()
     {
@@ -58,11 +56,10 @@ class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\Laravel\Capsule5Adapter', $adapter);
     }
 
-
     public function testCreateAdapterThrowsException2()
     {
         $this->setExpectedException('Soluble\DbWrapper\Exception\InvalidArgumentException');
-        $adapter = AdapterFactory::createAdapterFromResource("a");
+        $adapter = AdapterFactory::createAdapterFromResource('a');
     }
 
     public function testCreateAdapterThrowsException()
@@ -70,7 +67,6 @@ class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Soluble\DbWrapper\Exception\InvalidArgumentException');
         $fct = function () {
             return true;
-
         };
         $adapter = AdapterFactory::createAdapterFromResource($fct);
     }

@@ -9,24 +9,22 @@ use PDO;
 
 class PdoMysqlAdapter extends GenericPdo implements AdapterInterface
 {
-
     /**
-     *
      * @var \PDO
      */
     protected $resource;
 
     /**
-     *
      * @var PdoMysqlConnection
      */
     protected $connection;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
+     *
      * @param \PDO $resource
      */
     public function __construct(PDO $resource)
@@ -42,6 +40,7 @@ class PdoMysqlAdapter extends GenericPdo implements AdapterInterface
 
     /**
      * {@inheritdoc}
+     *
      * @return MysqlConnection
      */
     public function getConnection()

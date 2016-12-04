@@ -7,12 +7,11 @@ use Soluble\DbWrapper\Exception;
 
 class Resultset implements ResultInterface
 {
-
     const TYPE_ARRAYOBJECT = 'arrayobject';
-    const TYPE_ARRAY  = 'array';
+    const TYPE_ARRAY = 'array';
 
     /**
-     * Allowed return types
+     * Allowed return types.
      *
      * @var array
      */
@@ -21,38 +20,33 @@ class Resultset implements ResultInterface
         self::TYPE_ARRAY,
     ];
 
-
     /**
-     * Return type to use when returning an object from the set
+     * Return type to use when returning an object from the set.
      *
      * @var ResultSet::TYPE_ARRAYOBJECT|ResultSet::TYPE_ARRAY
      */
     protected $returnType = self::TYPE_ARRAY;
 
-
     /**
-     *
-     * @var integer 
+     * @var int
      */
     protected $position = 0;
 
     /**
-     *
-     * @var integer
+     * @var int
      */
     protected $count = 0;
 
     /**
-     *
      * @var array|ArrayObject
      */
     protected $storage;
 
-
     /**
-     * Constructor
+     * Constructor.
      *
      * @throws Exception\InvalidArgumentException
+     *
      * @param string $returnType
      */
     public function __construct($returnType = self::TYPE_ARRAY)
@@ -70,6 +64,7 @@ class Resultset implements ResultInterface
 
     /**
      * {@inheritdoc}
+     *
      * @return array|ArrayObject
      */
     public function current()
@@ -79,6 +74,7 @@ class Resultset implements ResultInterface
 
     /**
      * {@inheritdoc}
+     *
      * @return int position
      */
     public function key()
@@ -99,7 +95,7 @@ class Resultset implements ResultInterface
      */
     public function rewind()
     {
-        $this->position=0;
+        $this->position = 0;
     }
 
     /**
@@ -119,8 +115,8 @@ class Resultset implements ResultInterface
     }
 
     /**
-     * Append a row to the end of resultset
-     * 
+     * Append a row to the end of resultset.
+     *
      * @param array $row an associative array
      */
     public function append(array $row)
@@ -133,9 +129,7 @@ class Resultset implements ResultInterface
         ++$this->count;
     }
 
-
     /**
-     * 
      * {@inheritdoc}
      */
     public function offsetExists($position)
@@ -144,7 +138,6 @@ class Resultset implements ResultInterface
     }
 
     /**
-     * 
      * {@inheritdoc}
      */
     public function offsetGet($position)
@@ -153,7 +146,6 @@ class Resultset implements ResultInterface
     }
 
     /**
-     * 
      * {@inheritdoc}
      */
     public function offsetSet($position, $row)
@@ -162,16 +154,16 @@ class Resultset implements ResultInterface
     }
 
     /**
-     * 
      * {@inheritdoc}
      */
     public function offsetUnset($position)
     {
-        throw new \Exception("Resultsets are immutable");
+        throw new \Exception('Resultsets are immutable');
     }
 
     /**
-     * Return underlying stored resultset as array
+     * Return underlying stored resultset as array.
+     *
      * @return array
      */
     public function getArray()
@@ -180,11 +172,11 @@ class Resultset implements ResultInterface
     }
 
     /**
-     * Return underlying stored resultset as ArrayObject
-     * 
+     * Return underlying stored resultset as ArrayObject.
+     *
      * Depending on the $returnType Resultset::TYPE_ARRAY|Resultset::TYPE_ARRAYOBJECT you can modify
      * the internal storage
-     * 
+     *
      * @return ArrayObject
      */
     public function getArrayObject()
@@ -197,8 +189,10 @@ class Resultset implements ResultInterface
     }
 
     /**
-     * Return the currently set return type 
+     * Return the currently set return type.
+     *
      * @see Resultset::TYPE_ARRAY|Resultset::TYPE_ARRAYOBJECT
+     *
      * @return string
      */
     public function getReturnType()

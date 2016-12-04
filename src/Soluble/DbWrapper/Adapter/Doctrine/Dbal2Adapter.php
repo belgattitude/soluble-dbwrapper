@@ -9,22 +9,18 @@ use Soluble\DbWrapper\Connection\Doctrine\Dbal2Connection;
 
 class Dbal2Adapter implements AdapterInterface
 {
-
     /**
-     *
      * @var \Doctrine\DBAL\Connection
      */
     protected $dbal;
 
-
     /**
-     *
      * @var Dbal2Connection
      */
     protected $connection;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \Doctrine\DBAL\Connection $dbal
      */
@@ -34,7 +30,6 @@ class Dbal2Adapter implements AdapterInterface
         $this->connection = new Dbal2Connection($this, $dbal);
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -42,7 +37,6 @@ class Dbal2Adapter implements AdapterInterface
     {
         return $this->dbal->quote($value);
     }
-
 
     /**
      * {@inheritdoc}
@@ -53,7 +47,6 @@ class Dbal2Adapter implements AdapterInterface
         // : "Attempt to read a row while there is no result set associated with the statement"
 
         try {
-
             /**
              * @var \Doctrine\DBAL\Driver\Mysqli\MysqliStatement
              */
@@ -73,11 +66,13 @@ class Dbal2Adapter implements AdapterInterface
             $msg = "Doctrine\Dbal2 adapter query error: {$e->getMessage()} [$query]";
             throw new Exception\InvalidArgumentException($msg);
         }
+
         return $results;
     }
 
     /**
      * {@inheritdoc}
+     *
      * @return Dbal2Connection
      */
     public function getConnection()

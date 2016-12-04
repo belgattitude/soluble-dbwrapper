@@ -8,24 +8,19 @@ use PDO;
 
 class PdoMysqlConnection implements ConnectionInterface
 {
-
     /**
-     *
      * @var PdoMysqlAdapter
      */
     protected $adapter;
 
-
     /**
-     *
      * @var PDO
      */
     protected $resource;
 
     /**
-     *
      * @param PdoMysqlAdapter $adapter
-     * @param PDO $resource
+     * @param PDO             $resource
      */
     public function __construct(PdoMysqlAdapter $adapter, PDO $resource)
     {
@@ -33,9 +28,9 @@ class PdoMysqlConnection implements ConnectionInterface
         $this->resource = $resource;
     }
 
-
     /**
      * {@inheritdoc}
+     *
      * @return PDO
      */
     public function getResource()
@@ -49,13 +44,15 @@ class PdoMysqlConnection implements ConnectionInterface
     public function getHost()
     {
         $infos = explode(' ', trim($this->resource->getAttribute(PDO::ATTR_CONNECTION_STATUS)));
+
         return strtolower($infos[0]);
     }
 
     /**
-     * Return current schema/database name
+     * Return current schema/database name.
      *
      * @throws Exception\RuntimeException
+     *
      * @return string|false
      */
     public function getCurrentSchema()
@@ -69,6 +66,7 @@ class PdoMysqlConnection implements ConnectionInterface
         } catch (\Exception $e) {
             throw new Exception\RuntimeException($e->getMessage());
         }
+
         return $results[0]['current_schema'];
     }
 }

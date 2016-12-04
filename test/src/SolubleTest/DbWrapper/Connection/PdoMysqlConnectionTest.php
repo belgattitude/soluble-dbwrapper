@@ -7,13 +7,10 @@ use Soluble\DbWrapper\Adapter\PdoMysqlAdapter;
 
 class PdoMysqlConnectionTest extends MysqliConnectionTest
 {
-
     /**
-     *
      * @var Connection\MysqlConnection
      */
     protected $connection;
-
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -24,7 +21,6 @@ class PdoMysqlConnectionTest extends MysqliConnectionTest
         $adapter = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
         $this->connection = $adapter->getConnection();
     }
-
 
     public function testGetResource()
     {
