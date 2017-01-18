@@ -82,7 +82,7 @@ Execute SQL
 
 ```php
 <?php
-$connection = $adapter->getConnection()
+$connection = $adapter->getConnection();
 echo $connection->getCurrentSchema();
 echo $connection->getHost();
 
