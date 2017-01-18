@@ -26,9 +26,9 @@ If your project or library is based on one of the supported frameworks, it's alr
 
 | Framework      | Driver                   | Composer requirement                                 |
 |----------------|--------------------------|------------------------------------------------------|
-| Zend Framework | `zendframework/zend-db`  | composer require zendframework/zend-db:~2            |
-| Symfony        | `doctrine/dbal`          | composer require doctrine/dbal:~2                    |
-| Laravel        | `illuminate/database`    | composer require illuminate/database:~5              |
+| Zend Framework | `zendframework/zend-db`  | composer require zendframework/zend-db            |
+| Symfony        | `doctrine/dbal`          | composer require doctrine/dbal                    |
+| Laravel        | `illuminate/database`    | composer require illuminate/database              |
 
 
 ## Connection examples
@@ -86,7 +86,7 @@ try {
 } catch (DbWrapper\Exception\InvalidArgumentException $e) {
     // ...
 }
-1
+
 echo get_class($adapter); // -> `Soluble\DbWrapper\Adapter\Laravel\Capsule5Adapter`
 
 ```
