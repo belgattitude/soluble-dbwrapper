@@ -108,8 +108,8 @@ $params = [
     'driver'    => 'mysqli',
     'charset'   => 'utf8'
 ];
-$dbal = \Doctrine\DBAL\DriverManager::getConnection($params);  
 
+$dbal = \Doctrine\DBAL\DriverManager::getConnection($params);  
 
 try {
     $adapter = DbWrapper\AdapterFactory::createAdapterFromDbal2($dbal);
