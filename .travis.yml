@@ -5,15 +5,12 @@ group: edge
 
 matrix:
   include:
-    - php: 5.4
-    - php: 5.5
     - php: 5.6
       env:
         - EXECUTE_TEST_COVERALLS=true
         - SEND_COVERAGE=true
     - php: 7
     - php: nightly
-    - php: hhvm-3.9
     - php: hhvm-3.12
     - php: hhvm-nightly
   allow_failures:

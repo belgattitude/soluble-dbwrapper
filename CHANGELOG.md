@@ -6,6 +6,10 @@
 
 - Works on PHP7.2-beta2
 
+## Changed 
+
+- Minimum version increased to PHP 5.6
+
 ## 1.1.0 (2016-01-06) Universal drivers
 
 ### Added
