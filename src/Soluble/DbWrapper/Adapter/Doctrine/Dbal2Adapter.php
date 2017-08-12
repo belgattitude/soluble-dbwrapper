@@ -58,7 +58,6 @@ class Dbal2Adapter implements AdapterInterface
                     $results->append((array) $row);
                 }
             }
-
         } catch (\Exception $e) {
             $msg = "Doctrine\Dbal2 adapter query error: {$e->getMessage()} [$query]";
             throw new Exception\InvalidArgumentException($msg);

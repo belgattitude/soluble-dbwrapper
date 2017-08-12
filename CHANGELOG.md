@@ -1,6 +1,14 @@
 # CHANGELOG
 
+## 1.2.0 (2017-08-13) Support for php 7.2beta
+
+### Added
+
+- Works on PHP7.2-beta2
+
 ## 1.1.0 (2016-01-06) Universal drivers
+
+### Added
 
 - Added support for zend-db, laravel and doctrine
 
