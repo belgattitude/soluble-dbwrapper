@@ -44,14 +44,9 @@ class ZendDb2Adapter implements AdapterInterface
     public function query($query, $resultsetType = Resultset::TYPE_ARRAY)
     {
         try {
-            //$r = $this->zendAdapter->query($query, \Zend\Db\Adapter\Adapter::QUERY_MODE_EXECUTE);
             $r = $this->zendAdapter->query($query)->execute();
             $results = new Resultset($resultsetType);
-            if ($r === false) {
-                throw new Exception\InvalidArgumentException(
-                    'Query could not be executed ([$query])'
-                );
-            } elseif ($r instanceof \Zend\Db\ResultSet\ResultSet) {
+            if ($r instanceof \Zend\Db\ResultSet\ResultSet) {
                 foreach ($r as $row) {
                     $results->append((array) $row);
                 }
