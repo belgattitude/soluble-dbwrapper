@@ -15,6 +15,12 @@ class ResultsetTest extends \PHPUnit_Framework_TestCase
     {
     }
 
+    public function testConstructThrowsInvalidArgumentException()
+    {
+        $this->expectException('\Soluble\DbWrapper\Exception\InvalidArgumentException');
+        $rs = new ResultSet('invalidreturntype');
+    }
+
     public function testBehaviourWithArray()
     {
         $row1 = ['name' => 'contact_1', 'address' => 'address_1'];
@@ -71,5 +77,80 @@ class ResultsetTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $rs->getArray());
         $arr = (array) $rs->getArray();
         $this->assertEquals($arr, $rs->getArray());
+    }
+
+    public function testOffsetExists()
+    {
+        $row1 = new ArrayObject(['name' => 'contact_1', 'address' => 'address_1']);
+
+        $rs = new Resultset(Resultset::TYPE_ARRAYOBJECT);
+        $rs->append((array) $row1);
+        $this->assertTrue($rs->offsetExists(0));
+        $this->assertFalse($rs->offsetExists(1));
+    }
+
+    public function testOffsetSetImmutable()
+    {
+        $this->expectException('Exception');
+        $row1 = new ArrayObject(['name' => 'contact_1', 'address' => 'address_1']);
+        $rs = new Resultset(Resultset::TYPE_ARRAYOBJECT);
+        $rs->append((array) $row1);
+
+        $rs->offsetSet(0, 'cool');
+    }
+
+    public function testOffsetUnsetImmutable()
+    {
+        $this->expectException('Exception');
+        $row1 = new ArrayObject(['name' => 'contact_1', 'address' => 'address_1']);
+        $rs = new Resultset(Resultset::TYPE_ARRAYOBJECT);
+        $rs->append((array) $row1);
+
+        $rs->offsetUnset(0);
+    }
+
+    public function testGetArrayObject()
+    {
+        $row1 = new ArrayObject(['name' => 'contact_1', 'address' => 'address_1']);
+        $rs = new Resultset(Resultset::TYPE_ARRAY);
+        $rs->append((array) $row1);
+        $returned = $rs->getArrayObject();
+        $this->assertInstanceOf('ArrayObject', $returned);
+        $firstLine = $returned[0];
+        $this->assertEquals((array) $firstLine, (array) $row1);
+    }
+
+    public function testGetArrayObjectWithArrayObjectType()
+    {
+        $row1 = new ArrayObject(['name' => 'contact_1', 'address' => 'address_1']);
+        $rs = new Resultset(Resultset::TYPE_ARRAYOBJECT);
+        $rs->append((array) $row1);
+        $returned = $rs->getArrayObject();
+        $this->assertInstanceOf('ArrayObject', $returned);
+        $firstLine = $returned[0];
+        $this->assertEquals((array) $firstLine, (array) $row1);
+    }
+
+    public function testKey()
+    {
+        $row1 = new ArrayObject(['name' => 'contact_1', 'address' => 'address_1']);
+        $rs = new Resultset(Resultset::TYPE_ARRAY);
+        $rs->append((array) $row1);
+        foreach ($rs as $idx => $row) {
+            $this->assertEquals(0, $idx);
+            $this->assertEquals(0, $rs->key());
+        }
+    }
+
+    public function testGetReturnType()
+    {
+        $rs1 = new Resultset(Resultset::TYPE_ARRAYOBJECT);
+        $this->assertEquals(Resultset::TYPE_ARRAYOBJECT, $rs1->getReturnType());
+
+        $rs2 = new Resultset(Resultset::TYPE_ARRAY);
+        $this->assertEquals(Resultset::TYPE_ARRAY, $rs2->getReturnType());
+
+        $rs2 = new Resultset();
+        $this->assertEquals(Resultset::TYPE_ARRAY, $rs2->getReturnType());
     }
 }

@@ -56,12 +56,6 @@ class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Soluble\DbWrapper\Adapter\Laravel\Capsule5Adapter', $adapter);
     }
 
-    public function testCreateAdapterThrowsException2()
-    {
-        $this->setExpectedException('Soluble\DbWrapper\Exception\InvalidArgumentException');
-        $adapter = AdapterFactory::createAdapterFromResource('a');
-    }
-
     public function testCreateAdapterThrowsException()
     {
         $this->setExpectedException('Soluble\DbWrapper\Exception\InvalidArgumentException');
@@ -69,5 +63,11 @@ class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
             return true;
         };
         $adapter = AdapterFactory::createAdapterFromResource($fct);
+    }
+
+    public function testCreateAdapterThrowsException2()
+    {
+        $this->setExpectedException('Soluble\DbWrapper\Exception\InvalidArgumentException');
+        $adapter = AdapterFactory::createAdapterFromResource('a');
     }
 }

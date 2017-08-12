@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.2.0 (2017-08-13) Support for php 7.2beta
+## 1.3.0 (2017-08-13) Support for php 7.2beta
 
 ### Added
 
