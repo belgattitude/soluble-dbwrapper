@@ -9,7 +9,7 @@ class AdapterFactory
      *
      * @param \Illuminate\Database\Capsule\Manager $capsule
      *
-     * @return \Soluble\DbWrapper\Adapter\Illuminate\Capsule5Adapter
+     * @return \Soluble\DbWrapper\Adapter\Laravel\Capsule5Adapter
      */
     public static function createAdapterFromCapsule5(\Illuminate\Database\Capsule\Manager $capsule)
     {

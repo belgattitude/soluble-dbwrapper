@@ -53,15 +53,12 @@ class Dbal2Adapter implements AdapterInterface
             $r = $this->dbal->query($query);
 
             $results = new Resultset($resultsetType);
-            if ($r === false) {
-                throw new Exception\InvalidArgumentException("Query cannot be executed [$query].");
-            } else {
-                if ($r->columnCount() > 0) {
-                    while ($row = $r->fetch()) {
-                        $results->append((array) $row);
-                    }
+            if ($r->columnCount() > 0) {
+                while ($row = $r->fetch()) {
+                    $results->append((array) $row);
                 }
             }
+
         } catch (\Exception $e) {
             $msg = "Doctrine\Dbal2 adapter query error: {$e->getMessage()} [$query]";
             throw new Exception\InvalidArgumentException($msg);

@@ -41,7 +41,19 @@
         "zendframework/zend-db": ">=2.2.0|<3.0.0",
         "illuminate/database": ">=4.0.0|<6.0.0"
     },
+    "scripts": {
+        "check": [
+            "@cs-check"
+        ],
+        "fix": [
+            "@cs-fix"
+        ],
+        "test": "vendor/bin/phpunit",
+        "cs-check": "vendor/bin/php-cs-fixer --diff --dry-run -v fix",
+        "cs-fix": "vendor/bin/php-cs-fixer -v fix",
+        "phpstan": "phpstan analyse -l 6 -c phpstan.neon src"
+    },
     "archive": {
-        "exclude": ["test", "doc", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore", "phpcs.xml"]
+        "exclude": ["phpstan.neon", "test", "doc", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore", "phpcs.xml"]
     }
 }

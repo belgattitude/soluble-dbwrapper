@@ -29,7 +29,7 @@ To run tests:
 - Install phpunit
 
   ```console
-  $ composer global require "phpunit/phpunit=*"
+  $ composer global require phpunit/phpunit
   ```
 
   If not already done, ensure that your `~/.bashrc` or `~/.bash_profile` contains

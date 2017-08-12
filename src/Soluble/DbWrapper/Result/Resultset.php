@@ -23,7 +23,7 @@ class Resultset implements ResultInterface
     /**
      * Return type to use when returning an object from the set.
      *
-     * @var ResultSet::TYPE_ARRAYOBJECT|ResultSet::TYPE_ARRAY
+     * @var string ResultSet::TYPE_ARRAYOBJECT|ResultSet::TYPE_ARRAY
      */
     protected $returnType = self::TYPE_ARRAY;
 
@@ -55,8 +55,10 @@ class Resultset implements ResultInterface
             throw new Exception\InvalidArgumentException("Unsupported returnType argument ($returnType)");
         }
         $this->returnType = $returnType;
-        if ($this->returnType == self::TYPE_ARRAYOBJECT) {
+        if ($this->returnType === self::TYPE_ARRAYOBJECT) {
             $this->storage = new ArrayObject([]);
+        } else {
+            $this->storage = [];
         }
         $this->position = 0;
         $this->count = count($this->storage);
