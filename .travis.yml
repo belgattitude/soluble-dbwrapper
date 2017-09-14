@@ -10,6 +10,7 @@ matrix:
         - EXECUTE_TEST_COVERALLS=true
         - SEND_COVERAGE=true
     - php: 7
+    - php: 7.1
     - php: nightly
     - php: hhvm-3.12
     - php: hhvm-nightly
