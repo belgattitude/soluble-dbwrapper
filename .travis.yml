@@ -41,8 +41,8 @@ before_script:
   - mkdir -p build/logs
   - mysql -e "DROP DATABASE IF EXISTS phpunit_soluble_schema_db;" -u root
   - mysql -e "CREATE DATABASE phpunit_soluble_schema_db;" -u root
-  - zcat test/data/mysql/schema.sql.gz | mysql -u root phpunit_soluble_schema_db
-  - zcat test/data/mysql/data.sql.gz | mysql -u root phpunit_soluble_schema_db
+  - zcat tests/data/mysql/schema.sql.gz | mysql -u root phpunit_soluble_schema_db
+  - zcat tests/data/mysql/data.sql.gz | mysql -u root phpunit_soluble_schema_db
   - mysql -e "SHOW DATABASES;" -u root
   - mysql -e "CONNECT phpunit_soluble_schema_db; SHOW TABLES;" -u root  
   - travis_retry composer self-update
