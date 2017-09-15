@@ -45,8 +45,8 @@ before_script:
   - zcat tests/data/mysql/data.sql.gz | mysql -u root phpunit_soluble_schema_db
   - mysql -e "SHOW DATABASES;" -u root
   - mysql -e "CONNECT phpunit_soluble_schema_db; SHOW TABLES;" -u root  
-  - travis_retry composer self-update
-  - travis_retry composer --prefer-source --dev install
+  - composer self-update
+  - composer install
 script: 
   - ./vendor/bin/phpunit -v --coverage-clover=coverage.xml
   - ./vendor/bin/php-cs-fixer --diff --dry-run -v fix
