@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.3.1 (2017-09-15) Support for php 7.2rc1
+
+## Added
+
+- Works on PHP7.2rc1
+
 ## 1.3.0 (2017-08-13) Support for php 7.2beta
 
 ### Added
