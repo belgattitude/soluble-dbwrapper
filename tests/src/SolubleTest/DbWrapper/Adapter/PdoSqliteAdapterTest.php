@@ -2,9 +2,10 @@
 
 namespace SolubleTest\DbWrapper\Adapter;
 
+use PHPUnit\Framework\TestCase;
 use Soluble\DbWrapper\Adapter\PdoSqliteAdapter;
 
-class PdoSqliteAdapterTest extends \PHPUnit_Framework_TestCase
+class PdoSqliteAdapterTest extends TestCase
 {
     /**
      * @var \PDO
@@ -36,7 +37,7 @@ class PdoSqliteAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorThrowsException()
     {
-        $this->setExpectedException('\Soluble\DbWrapper\Exception\InvalidArgumentException');
+        $this->expectException(\Soluble\DbWrapper\Exception\InvalidArgumentException::class);
         $adapter = new PdoSqliteAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
     }
 

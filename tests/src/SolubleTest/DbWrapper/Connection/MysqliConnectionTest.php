@@ -2,10 +2,11 @@
 
 namespace SolubleTest\DbWrapper\Connection;
 
+use PHPUnit\Framework\TestCase;
 use Soluble\DbWrapper\Connection;
 use Soluble\DbWrapper\Adapter\MysqliAdapter;
 
-class MysqliConnectionTest extends \PHPUnit_Framework_TestCase
+class MysqliConnectionTest extends TestCase
 {
     /**
      * @var Connection\MysqlConnection

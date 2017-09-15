@@ -2,12 +2,13 @@
 
 namespace SolubleTest\DbWrapper\Adapter;
 
-use Soluble\DbWrapper\Adapter\MysqliAdapter;
+use PHPUnit\Framework\TestCase;
+use Soluble\DbWrapper\Adapter\PdoMysqlAdapter;
 
-class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
+class PdoMysqlAdapterTest extends TestCase
 {
     /**
-     * @var MysqliAdapter
+     * @var PdoMysqlAdapter
      */
     protected $adapter;
 
@@ -17,7 +18,13 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
+        $this->adapter = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
+    }
+
+    public function testConstructorThrowsException()
+    {
+        $this->expectException(\Soluble\DbWrapper\Exception\InvalidArgumentException::class);
+        $adapter = new PdoMysqlAdapter(new \PDO('sqlite::memory:'));
     }
 
     public function testQueryWithSet()
@@ -34,7 +41,6 @@ class MysqliAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testQuery()
     {
-        $this->adapter->query('set @psbtest=1');
         $results = $result = $this->adapter->query('select * from product');
         $this->assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
         $this->assertInternalType('array', $results[0]);

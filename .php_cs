@@ -114,7 +114,7 @@ return PhpCsFixer\Config::create()
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->in(['src', 'test'])
+            ->in(['src', 'tests'])
     )
 ;
 

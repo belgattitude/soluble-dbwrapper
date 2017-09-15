@@ -1,6 +1,6 @@
 parameters:
 	fileExtensions:
 		- php
-	reportUnmatchedIgnoredErrors: false
+	reportUnmatchedIgnoredErrors: true
 	#ignoreErrors:
 	#	- '#Call to an undefined method Soluble\\Japha\\Interfaces\\JavaObject::#'

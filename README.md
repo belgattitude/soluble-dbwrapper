@@ -148,7 +148,7 @@ The `DbWrapper\Connection\ConnectionInterface` provides information about your c
 | MariaDb    | mysqli, pdo_mysql                                    |
 | Sqlite     | pdo_sqlite                                           |
 
-For examples, see the [native drivers doc](./doc/drivers/native-drivers.md)
+For examples, see the [native drivers doc](./docs/drivers/native-drivers.md)
 
 ### *Userland* implementations
 
@@ -165,7 +165,7 @@ Some of the supported databases can be (incomplete list) :
 (...)
 
 
-For examples, see the [userland drivers doc](./doc/drivers/userland-drivers.md)
+For examples, see the [userland drivers doc](./docs/drivers/userland-drivers.md)
 
 ## Motivations
 
@@ -183,5 +183,4 @@ Contribution and pull request are more than welcome, see the [contribution guide
 
 * [PSR 4 Autoloader](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
 * [PSR 2 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
-* [PSR 1 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
 * [PSR 0 Autoloading standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)

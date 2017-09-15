@@ -2,10 +2,11 @@
 
 namespace SolubleTest\DbWrapper\Connection;
 
+use PHPUnit\Framework\TestCase;
 use Soluble\DbWrapper\Connection;
 use Soluble\DbWrapper\Adapter\PdoSqliteAdapter;
 
-class PdoSqliteConnectionTest extends \PHPUnit_Framework_TestCase
+class PdoSqliteConnectionTest extends TestCase
 {
     /**
      * @var Connection\PdoSqliteConnection

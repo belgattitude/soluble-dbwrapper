@@ -2,10 +2,11 @@
 
 namespace SolubleTest\DbWrapper\Adapter;
 
+use PHPUnit\Framework\TestCase;
 use Soluble\DbWrapper\Adapter;
 use Soluble\DbWrapper\Result\Resultset;
 
-class AllAdapterMysqlTest extends \PHPUnit_Framework_TestCase
+class AllAdapterMysqlTest extends TestCase
 {
     /**
      * @var array

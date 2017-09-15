@@ -2,9 +2,10 @@
 
 namespace SolubleTest\DbWrapper;
 
+use PHPUnit\Framework\TestCase;
 use Soluble\DbWrapper\AdapterFactory;
 
-class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
+class AdapterFactoryTest extends TestCase
 {
     public function testCreateAdapterFromMysqliConnection()
     {
@@ -58,7 +59,7 @@ class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateAdapterThrowsException()
     {
-        $this->setExpectedException('Soluble\DbWrapper\Exception\InvalidArgumentException');
+        $this->expectException(\Soluble\DbWrapper\Exception\InvalidArgumentException::class);
         $fct = function () {
             return true;
         };
@@ -67,7 +68,7 @@ class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateAdapterThrowsException2()
     {
-        $this->setExpectedException('Soluble\DbWrapper\Exception\InvalidArgumentException');
+        $this->expectException(\Soluble\DbWrapper\Exception\InvalidArgumentException::class);
         $adapter = AdapterFactory::createAdapterFromResource('a');
     }
 }

@@ -2,10 +2,11 @@
 
 namespace SolubleTest\DbWrapper\Result;
 
+use PHPUnit\Framework\TestCase;
 use Soluble\DbWrapper\Result\Resultset;
 use ArrayObject;
 
-class ResultsetTest extends \PHPUnit_Framework_TestCase
+class ResultsetTest extends TestCase
 {
     /**
      * Sets up the fixture, for example, opens a network connection.
