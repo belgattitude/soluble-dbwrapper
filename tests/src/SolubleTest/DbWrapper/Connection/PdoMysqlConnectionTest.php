@@ -25,13 +25,13 @@ class PdoMysqlConnectionTest extends MysqliConnectionTest
     public function testGetResource()
     {
         $conn = $this->connection->getResource();
-        $this->assertInstanceOf('PDO', $conn);
+        self::assertInstanceOf('PDO', $conn);
     }
 
     public function testGetHost()
     {
         $params = \SolubleTestFactories::getDbConfiguration('pdo:mysql');
         $host = strtolower($params['hostname']);
-        $this->assertEquals($host, $this->connection->getHost());
+        self::assertEquals($host, $this->connection->getHost());
     }
 }

@@ -27,17 +27,17 @@ class PdoSqliteConnectionTest extends TestCase
     public function testGetCurrentSchema()
     {
         $current = $this->connection->getCurrentSchema();
-        $this->assertEquals('main', $current);
+        self::assertEquals('main', $current);
     }
 
     public function testGetResource()
     {
         $conn = $this->connection->getResource();
-        $this->assertInstanceOf('PDO', $conn);
+        self::assertInstanceOf('PDO', $conn);
     }
 
     public function testGetHost()
     {
-        $this->assertEquals('localhost', $this->connection->getHost());
+        self::assertEquals('localhost', $this->connection->getHost());
     }
 }

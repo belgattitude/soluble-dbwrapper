@@ -56,9 +56,9 @@ class AllAdapterMysqlTest extends TestCase
             $adapter->query('set @psbtest=1');
             try {
                 $adapter->query('set qsd=');
-                $this->assertTrue(false, "wrong execute command didn't throw an exception");
+                self::assertTrue(false, "wrong execute command didn't throw an exception");
             } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
-                $this->assertTrue(true);
+                self::assertTrue(true);
             }
         }
     }
@@ -74,12 +74,12 @@ class AllAdapterMysqlTest extends TestCase
             foreach ($testedTypes as $resultsetType => $mustbe) {
                 $adapter = $element['adapter'];
                 $results = $adapter->query('select * from product', $resultsetType);
-                $this->assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
-                $this->assertInstanceOf('Soluble\DbWrapper\Result\Resultset', $results);
+                self::assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
+                self::assertInstanceOf('Soluble\DbWrapper\Result\Resultset', $results);
                 if ($mustbe == 'array') {
-                    $this->assertInternalType('array', $results[0]);
+                    self::assertInternalType('array', $results[0]);
                 } else {
-                    $this->assertInstanceOf($mustbe, $results[0]);
+                    self::assertInstanceOf($mustbe, $results[0]);
                 }
             }
         }
@@ -90,14 +90,14 @@ class AllAdapterMysqlTest extends TestCase
         foreach ($this->elements as $key => $element) {
             $adapter = $element['adapter'];
             $results = $adapter->query('select * from product');
-            $this->assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
-            $this->assertInternalType('array', $results[0]);
+            self::assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
+            self::assertInternalType('array', $results[0]);
 
             try {
                 $adapter->query('selectwhere');
-                $this->assertTrue(false, "wrong query didn't throw an exception");
+                self::assertTrue(false, "wrong query didn't throw an exception");
             } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
-                $this->assertTrue(true, 'wrong query throwed successfully an exception');
+                self::assertTrue(true, 'wrong query throwed successfully an exception');
             }
         }
     }
@@ -108,7 +108,7 @@ class AllAdapterMysqlTest extends TestCase
             $adapter = $element['adapter'];
             $string = "aa';aa";
             $quoted = $adapter->quoteValue($string);
-            $this->assertEquals("'aa\';aa'", $quoted);
+            self::assertEquals("'aa\';aa'", $quoted);
         }
     }
 
@@ -117,12 +117,12 @@ class AllAdapterMysqlTest extends TestCase
         foreach ($this->elements as $key => $element) {
             $adapter = $element['adapter'];
             $conn = $adapter->getConnection();
-            $this->assertInstanceOf("\Soluble\DbWrapper\Connection\ConnectionInterface", $conn);
+            self::assertInstanceOf("\Soluble\DbWrapper\Connection\ConnectionInterface", $conn);
 
             $params = \SolubleTestFactories::getDbConfiguration('mysqli');
-            $this->assertEquals($params['database'], $conn->getCurrentSchema());
+            self::assertEquals($params['database'], $conn->getCurrentSchema());
 
-            $this->assertInternalType('object', $conn->getResource());
+            self::assertInternalType('object', $conn->getResource());
         }
     }
 }

@@ -44,15 +44,15 @@ class PdoSqliteAdapterTest extends TestCase
     public function testQuery()
     {
         $results = $result = $this->adapter->query('select * from test');
-        $this->assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
-        $this->assertInternalType('array', $results[0]);
-        $this->assertEquals(1, count($results));
+        self::assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
+        self::assertInternalType('array', $results[0]);
+        self::assertEquals(1, count($results));
 
         try {
             $this->adapter->query('selectwhere');
-            $this->assertTrue(false, "wrong query didn't throw an exception");
+            self::assertTrue(false, "wrong query didn't throw an exception");
         } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
-            $this->assertTrue(true, 'wrong query throwed successfully an exception');
+            self::assertTrue(true, 'wrong query throwed successfully an exception');
         }
     }
 
@@ -60,6 +60,6 @@ class PdoSqliteAdapterTest extends TestCase
     {
         $string = "aa';aa";
         $quoted = $this->adapter->quoteValue($string);
-        $this->assertEquals("'aa'';aa'", $quoted);
+        self::assertEquals("'aa'';aa'", $quoted);
     }
 }

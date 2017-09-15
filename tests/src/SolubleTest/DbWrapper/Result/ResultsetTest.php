@@ -28,27 +28,27 @@ class ResultsetTest extends TestCase
         $row2 = ['name' => 'contact_2', 'address' => 'address_2'];
 
         $rs = new Resultset();
-        $this->assertFalse($rs->valid());
-        $this->assertEquals(0, $rs->count());
+        self::assertFalse($rs->valid());
+        self::assertEquals(0, $rs->count());
         $rs->append($row1);
         $rs->append($row2);
 
-        $this->assertEquals(2, count($rs));
-        $this->assertEquals(2, $rs->count());
+        self::assertEquals(2, count($rs));
+        self::assertEquals(2, $rs->count());
 
-        $this->assertEquals($row1, $rs->current());
-        $this->assertEquals($row1, $rs[0]);
-        $this->assertEquals($row2, $rs[1]);
+        self::assertEquals($row1, $rs->current());
+        self::assertEquals($row1, $rs[0]);
+        self::assertEquals($row2, $rs[1]);
 
         $rs->next();
-        $this->assertEquals($row2, $rs->current());
+        self::assertEquals($row2, $rs->current());
 
         $rs->rewind();
-        $this->assertEquals($row1, $rs->current());
+        self::assertEquals($row1, $rs->current());
 
-        $this->assertInternalType('array', $rs->getArray());
+        self::assertInternalType('array', $rs->getArray());
         $arr = (array) $rs->getArray();
-        $this->assertEquals($arr, $rs->getArray());
+        self::assertEquals($arr, $rs->getArray());
     }
 
     public function testBehaviourWithArrayObject()
@@ -57,27 +57,27 @@ class ResultsetTest extends TestCase
         $row2 = new ArrayObject(['name' => 'contact_2', 'address' => 'address_2']);
 
         $rs = new Resultset(Resultset::TYPE_ARRAYOBJECT);
-        $this->assertFalse($rs->valid());
-        $this->assertEquals(0, $rs->count());
+        self::assertFalse($rs->valid());
+        self::assertEquals(0, $rs->count());
         $rs->append((array) $row1);
         $rs->append((array) $row2);
 
-        $this->assertEquals(2, count($rs));
-        $this->assertEquals(2, $rs->count());
+        self::assertEquals(2, count($rs));
+        self::assertEquals(2, $rs->count());
 
-        $this->assertEquals($row1, $rs->current());
-        $this->assertEquals($row1, $rs[0]);
-        $this->assertEquals($row2, $rs[1]);
+        self::assertEquals($row1, $rs->current());
+        self::assertEquals($row1, $rs[0]);
+        self::assertEquals($row2, $rs[1]);
 
         $rs->next();
-        $this->assertEquals($row2, $rs->current());
+        self::assertEquals($row2, $rs->current());
 
         $rs->rewind();
-        $this->assertEquals($row1, $rs->current());
+        self::assertEquals($row1, $rs->current());
 
-        $this->assertInternalType('array', $rs->getArray());
+        self::assertInternalType('array', $rs->getArray());
         $arr = (array) $rs->getArray();
-        $this->assertEquals($arr, $rs->getArray());
+        self::assertEquals($arr, $rs->getArray());
     }
 
     public function testOffsetExists()
@@ -86,8 +86,8 @@ class ResultsetTest extends TestCase
 
         $rs = new Resultset(Resultset::TYPE_ARRAYOBJECT);
         $rs->append((array) $row1);
-        $this->assertTrue($rs->offsetExists(0));
-        $this->assertFalse($rs->offsetExists(1));
+        self::assertTrue($rs->offsetExists(0));
+        self::assertFalse($rs->offsetExists(1));
     }
 
     public function testOffsetSetImmutable()
@@ -116,9 +116,9 @@ class ResultsetTest extends TestCase
         $rs = new Resultset(Resultset::TYPE_ARRAY);
         $rs->append((array) $row1);
         $returned = $rs->getArrayObject();
-        $this->assertInstanceOf('ArrayObject', $returned);
+        self::assertInstanceOf('ArrayObject', $returned);
         $firstLine = $returned[0];
-        $this->assertEquals((array) $firstLine, (array) $row1);
+        self::assertEquals((array) $firstLine, (array) $row1);
     }
 
     public function testGetArrayObjectWithArrayObjectType()
@@ -127,9 +127,9 @@ class ResultsetTest extends TestCase
         $rs = new Resultset(Resultset::TYPE_ARRAYOBJECT);
         $rs->append((array) $row1);
         $returned = $rs->getArrayObject();
-        $this->assertInstanceOf('ArrayObject', $returned);
+        self::assertInstanceOf('ArrayObject', $returned);
         $firstLine = $returned[0];
-        $this->assertEquals((array) $firstLine, (array) $row1);
+        self::assertEquals((array) $firstLine, (array) $row1);
     }
 
     public function testKey()
@@ -138,20 +138,20 @@ class ResultsetTest extends TestCase
         $rs = new Resultset(Resultset::TYPE_ARRAY);
         $rs->append((array) $row1);
         foreach ($rs as $idx => $row) {
-            $this->assertEquals(0, $idx);
-            $this->assertEquals(0, $rs->key());
+            self::assertEquals(0, $idx);
+            self::assertEquals(0, $rs->key());
         }
     }
 
     public function testGetReturnType()
     {
         $rs1 = new Resultset(Resultset::TYPE_ARRAYOBJECT);
-        $this->assertEquals(Resultset::TYPE_ARRAYOBJECT, $rs1->getReturnType());
+        self::assertEquals(Resultset::TYPE_ARRAYOBJECT, $rs1->getReturnType());
 
         $rs2 = new Resultset(Resultset::TYPE_ARRAY);
-        $this->assertEquals(Resultset::TYPE_ARRAY, $rs2->getReturnType());
+        self::assertEquals(Resultset::TYPE_ARRAY, $rs2->getReturnType());
 
         $rs2 = new Resultset();
-        $this->assertEquals(Resultset::TYPE_ARRAY, $rs2->getReturnType());
+        self::assertEquals(Resultset::TYPE_ARRAY, $rs2->getReturnType());
     }
 }

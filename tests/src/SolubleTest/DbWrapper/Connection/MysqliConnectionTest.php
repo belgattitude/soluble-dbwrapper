@@ -26,7 +26,7 @@ class MysqliConnectionTest extends TestCase
     public function testGetCurrentSchema()
     {
         $current = $this->connection->getCurrentSchema();
-        $this->assertEquals(\SolubleTestFactories::getDatabaseName('mysqli'), $current);
+        self::assertEquals(\SolubleTestFactories::getDatabaseName('mysqli'), $current);
 
         $config = \SolubleTestFactories::getDbConfiguration('mysqli');
         unset($config['database']);
@@ -34,19 +34,19 @@ class MysqliConnectionTest extends TestCase
         $adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli', $config));
         $current = $adapter->getConnection()->getCurrentSchema();
 
-        $this->assertFalse($current);
+        self::assertFalse($current);
     }
 
     public function testGetResource()
     {
         $conn = $this->connection->getResource();
-        $this->assertInstanceOf('mysqli', $conn);
+        self::assertInstanceOf('mysqli', $conn);
     }
 
     public function testGetHost()
     {
         $params = \SolubleTestFactories::getDbConfiguration('mysqli');
         $host = strtolower($params['hostname']);
-        $this->assertEquals($host, $this->connection->getHost());
+        self::assertEquals($host, $this->connection->getHost());
     }
 }

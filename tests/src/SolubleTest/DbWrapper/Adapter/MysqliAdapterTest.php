@@ -27,9 +27,9 @@ class MysqliAdapterTest extends TestCase
 
         try {
             $this->adapter->query('set qsd=');
-            $this->assertTrue(false, "wrong execute command didn't throw an exception");
+            self::assertTrue(false, "wrong execute command didn't throw an exception");
         } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
-            $this->assertTrue(true);
+            self::assertTrue(true);
         }
     }
 
@@ -37,14 +37,14 @@ class MysqliAdapterTest extends TestCase
     {
         $this->adapter->query('set @psbtest=1');
         $results = $result = $this->adapter->query('select * from product');
-        $this->assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
-        $this->assertInternalType('array', $results[0]);
+        self::assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
+        self::assertInternalType('array', $results[0]);
 
         try {
             $this->adapter->query('selectwhere');
-            $this->assertTrue(false, "wrong query didn't throw an exception");
+            self::assertTrue(false, "wrong query didn't throw an exception");
         } catch (\Soluble\DbWrapper\Exception\InvalidArgumentException $e) {
-            $this->assertTrue(true, 'wrong query throwed successfully an exception');
+            self::assertTrue(true, 'wrong query throwed successfully an exception');
         }
     }
 
@@ -52,6 +52,6 @@ class MysqliAdapterTest extends TestCase
     {
         $string = "aa';aa";
         $quoted = $this->adapter->quoteValue($string);
-        $this->assertEquals("'aa\';aa'", $quoted);
+        self::assertEquals("'aa\';aa'", $quoted);
     }
 }
