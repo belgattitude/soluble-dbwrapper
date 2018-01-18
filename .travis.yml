@@ -23,9 +23,6 @@ matrix:
   allow_failures:
     - php: nightly
     - php: hhvm-nightly
-    # PHP7.2 failure is due to travis using php7.2-dev,
-    # can safely be removed when updated to rc1
-    - php: 7.2
 
 env:
     global:
