@@ -4,7 +4,7 @@
 
 ## Added
 
-- Travis tests for php7.2
+- Travis builds enforces php7.2
 
 ## Changed
 
