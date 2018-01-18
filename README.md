@@ -10,7 +10,7 @@
 
 ## Introduction
 
-Universal minimalist database wrapper to rule them all (and to not choose).
+Minimalist *(but universal)* database wrapper to rule them all *(and to not choose)*.
 
 ## Features
 
@@ -38,13 +38,6 @@ Instant installation via [composer](http://getcomposer.org/).
 
 ```console
 $ composer require soluble/dbwrapper
-```
-Most modern frameworks will include Composer out of the box, but ensure the following file is included:
-
-```php
-<?php
-// include the Composer autoloader
-require 'vendor/autoload.php';
 ```
 
 ## Quick start
@@ -183,4 +176,3 @@ Contribution and pull request are more than welcome, see the [contribution guide
 
 * [PSR 4 Autoloader](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
 * [PSR 2 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
-* [PSR 0 Autoloading standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
