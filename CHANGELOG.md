@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.3.2 (2018-01-18) Minor zend-db cleanup
+
+## Changed
+
+- Use zend-db statement::`execute()` explicitly instead of `query()` method
+
+
 ## 1.3.1 (2017-09-15) Support for php 7.2rc1
 
 ## Added

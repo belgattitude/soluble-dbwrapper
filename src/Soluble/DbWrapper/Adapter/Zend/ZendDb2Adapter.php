@@ -44,17 +44,15 @@ class ZendDb2Adapter implements AdapterInterface
     public function query($query, $resultsetType = Resultset::TYPE_ARRAY)
     {
         try {
-            $r = $this->zendAdapter->query($query)->execute();
+            $stmt = $this->zendAdapter->createStatement($query);
+            $r = $stmt->execute();
             $results = new Resultset($resultsetType);
-            if ($r instanceof \Zend\Db\ResultSet\ResultSet) {
-                foreach ($r as $row) {
-                    $results->append((array) $row);
-                }
-            } elseif ($r instanceof \Zend\Db\Adapter\Driver\ResultInterface && $r->getFieldCount() > 0) {
+            if ($r->getFieldCount() > 0) {
                 foreach ($r as $row) {
                     $results->append($row);
                 }
             }
+            unset($r);
         } catch (\Exception $e) {
             $msg = "ZendDb2 adapter query error: {$e->getMessage()} [$query]";
             throw new Exception\InvalidArgumentException($msg);

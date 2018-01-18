@@ -63,12 +63,12 @@ class AdapterFactoryTest extends TestCase
         $fct = function () {
             return true;
         };
-        $adapter = AdapterFactory::createAdapterFromResource($fct);
+        AdapterFactory::createAdapterFromResource($fct);
     }
 
     public function testCreateAdapterFromResourceThrowsExceptionInvalidType()
     {
         $this->expectException(\Soluble\DbWrapper\Exception\InvalidArgumentException::class);
-        $adapter = AdapterFactory::createAdapterFromResource('a');
+        AdapterFactory::createAdapterFromResource('a');
     }
 }

@@ -121,7 +121,6 @@ class AllAdapterMysqlTest extends TestCase
 
             $params = \SolubleTestFactories::getDbConfiguration('mysqli');
             self::assertEquals($params['database'], $conn->getCurrentSchema());
-
             self::assertInternalType('object', $conn->getResource());
         }
     }

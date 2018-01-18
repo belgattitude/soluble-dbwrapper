@@ -186,7 +186,10 @@ class Resultset implements ResultInterface
         if ($this->returnType == self::TYPE_ARRAY) {
             return new ArrayObject($this->storage);
         } else {
-            return $this->storage;
+            /** @var ArrayObject $storageAsArrayObject to silent static code analyzers */
+            $storageAsArrayObject = $this->storage;
+
+            return $storageAsArrayObject;
         }
     }
 
