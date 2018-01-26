@@ -6,6 +6,9 @@ group: edge
 matrix:
   include:
     - php: 5.6
+    - php: 5.6
+      env:
+        - COMPOSER_OPTS="--prefer-lowest"
     - php: 7
     - php: 7.1
       env:
@@ -34,17 +37,17 @@ cache:
 
 before_script:
   - mkdir -p test/logs
-  - mkdir -p tests/tmp/cache 
+  - mkdir -p tests/tmp/cache
   - mkdir -p build/logs
   - mysql -e "DROP DATABASE IF EXISTS phpunit_soluble_schema_db;" -u root
   - mysql -e "CREATE DATABASE phpunit_soluble_schema_db;" -u root
   - zcat tests/data/mysql/schema.sql.gz | mysql -u root phpunit_soluble_schema_db
   - zcat tests/data/mysql/data.sql.gz | mysql -u root phpunit_soluble_schema_db
   - mysql -e "SHOW DATABASES;" -u root
-  - mysql -e "CONNECT phpunit_soluble_schema_db; SHOW TABLES;" -u root  
+  - mysql -e "CONNECT phpunit_soluble_schema_db; SHOW TABLES;" -u root
   - composer self-update
   - composer install
-script: 
+script:
   - ./vendor/bin/phpunit -v --coverage-clover=coverage.xml
   - ./vendor/bin/php-cs-fixer --diff --dry-run -v fix
 
