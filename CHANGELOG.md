@@ -1,5 +1,12 @@
 # CHANGELOG
 
+
+## 1.3.3 (2018-06-29) Minor zend-db cleanup
+
+## Changed
+
+- Removed some obsolete tests in MySqliAdapter.
+
 ## 1.3.2 (2018-01-18) Minor zend-db cleanup
 
 ## Added
@@ -34,4 +41,3 @@
 
 ## 1.0.0 (2016-01-02) First stable release
 
-  
