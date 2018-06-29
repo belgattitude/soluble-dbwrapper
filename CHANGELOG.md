@@ -3,9 +3,13 @@
 
 ## 1.3.3 (2018-06-29) Minor zend-db cleanup
 
-## Changed
+### Changed
 
 - Removed some obsolete tests in MySqliAdapter.
+
+### Added
+
+- Q&A support for phpstan ^0.10
 
 ## 1.3.2 (2018-01-18) Minor zend-db cleanup
 
