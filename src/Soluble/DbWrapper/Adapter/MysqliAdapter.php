@@ -51,8 +51,6 @@ class MysqliAdapter implements AdapterInterface
 
             if ($r === false) {
                 throw new Exception\InvalidArgumentException("Query cannot be executed [$query].");
-            } elseif ($r !== true && !$r instanceof \mysqli_result) {
-                throw new Exception\InvalidArgumentException("Query didn't return any result [$query].");
             } elseif ($r instanceof \mysqli_result) {
                 while ($row = $r->fetch_assoc()) {
                     $results->append($row);
