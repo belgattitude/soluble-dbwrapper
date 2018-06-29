@@ -46,7 +46,7 @@ class PdoSqliteAdapterTest extends TestCase
         $results = $result = $this->adapter->query('select * from test');
         self::assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
         self::assertInternalType('array', $results[0]);
-        self::assertEquals(1, count($results));
+        self::assertCount(1, $results);
 
         try {
             $this->adapter->query('selectwhere');

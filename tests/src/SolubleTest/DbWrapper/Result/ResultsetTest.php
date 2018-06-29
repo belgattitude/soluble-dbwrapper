@@ -33,7 +33,7 @@ class ResultsetTest extends TestCase
         $rs->append($row1);
         $rs->append($row2);
 
-        self::assertEquals(2, count($rs));
+        self::assertCount(2, $rs);
         self::assertEquals(2, $rs->count());
 
         self::assertEquals($row1, $rs->current());
@@ -62,7 +62,7 @@ class ResultsetTest extends TestCase
         $rs->append((array) $row1);
         $rs->append((array) $row2);
 
-        self::assertEquals(2, count($rs));
+        self::assertCount(2, $rs);
         self::assertEquals(2, $rs->count());
 
         self::assertEquals($row1, $rs->current());

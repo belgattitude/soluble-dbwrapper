@@ -29,7 +29,7 @@ abstract class GenericPdo implements AdapterInterface
 
             if (!$stmt->execute()) {
                 throw new Exception\InvalidArgumentException(
-                    sprintf('Statement could not be executed (%s)',  implode(' - ', $this->resource->errorInfo()))
+                    sprintf('Statement could not be executed (%s)', implode(' - ', $this->resource->errorInfo()))
                 );
             }
 
