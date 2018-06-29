@@ -2,5 +2,7 @@ parameters:
 	fileExtensions:
 		- php
 	reportUnmatchedIgnoredErrors: true
-	#ignoreErrors:
-	#	- '#Call to an undefined method Soluble\\Japha\\Interfaces\\JavaObject::#'
+	ignoreErrors:
+	    # For now this one is incorrect
+	    - '#Strict comparison using === between PDOStatement and false will always evaluate to false.#'
+
