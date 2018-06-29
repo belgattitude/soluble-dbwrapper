@@ -29,7 +29,7 @@ abstract class GenericPdo implements AdapterInterface
 
             if (!$stmt->execute()) {
                 throw new Exception\InvalidArgumentException(
-                    'Statement could not be executed (' . implode(' - ', $this->resource->errorInfo()) . ')'
+                    sprintf('Statement could not be executed (%s)',  implode(' - ', $this->resource->errorInfo()))
                 );
             }
 
@@ -44,7 +44,7 @@ abstract class GenericPdo implements AdapterInterface
             throw $e;
         } catch (\Exception $e) {
             $eclass = get_class($e);
-            $msg = "GenericPdo '$eclass' : {$e->getMessage()} [$query]";
+            $msg = sprintf("GenericPdo '%s' : %s [%s]", $eclass, $e->getMessage(), $query);
             throw new Exception\InvalidArgumentException($msg);
         }
 
