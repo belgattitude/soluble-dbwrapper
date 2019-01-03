@@ -20,6 +20,7 @@ matrix:
     - php: 7.2
       addons:
         mariadb: 10.2
+    - php: 7.3
     - php: nightly
     - php: hhvm-3.12
     - php: hhvm-nightly
