@@ -1,34 +1,48 @@
 <?php
 
 $header = <<<'EOF'
-
-(c) Sébastien Vanvelthem
-
-This source file is subject to the MIT license that is bundled
-with this source code in the file LICENSE.
+soluble-dbwrapper
+@link      https://github.com/belgattitude/soluble-dbwrapper
+@license   MIT
 EOF;
 
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PSR1' => true,
+        //'header_comment' => array('header' => $header), // disable when code is okay
         '@PSR2' => true,
+        '@PHP71Migration' => true,
         'psr4' => true,
-        //'header_comment' => array('header' => $header),
         'array_syntax' => ['syntax' => 'short'],
 
-        //'strict_comparison' => true,
-        //'strict_param' => true,
+        'strict_comparison' => true,
+        'strict_param' => true,
+
+        'dir_constant' => true,
+        'pow_to_exponentiation' => true,
+        'is_null' => true,
+
+        'no_homoglyph_names' => true,
+        'no_null_property_initialization' => true,
+        'no_php4_constructor' => true,
+        'non_printable_character' => true,
+        'ordered_imports' => true,
+
+        'align_multiline_comment' => true,
 
         /**
          * Extended code rules
          */
-
-        // Adapted from @Symfony
         'binary_operator_spaces' => [
-            'align_double_arrow' => false,
-            'align_equals' => false,
+            // 'align_single_space', 'align_single_space_minimal', 'single_space', null): default fix strategy; defaults to 'single_space'
+            'default' =>  'single_space',
+            'operators' =>
+                [
+                    '=>' => 'align_single_space',
+                    '=' => 'align_single_space_minimal'
+                ]
         ],
+
         'blank_line_after_opening_tag' => true,
         'blank_line_before_return' => true,
         'cast_spaces' => true,
@@ -40,6 +54,7 @@ return PhpCsFixer\Config::create()
         'heredoc_to_nowdoc' => true,
         'include' => true,
         'lowercase_cast' => true,
+        'mb_str_functions' => true,
         'method_separation' => true,
         'native_function_casing' => true,
         'new_with_braces' => true,
@@ -89,7 +104,7 @@ return PhpCsFixer\Config::create()
         'phpdoc_to_comment' => true,
         'phpdoc_trim' => true,
         'phpdoc_types' => true,
-        'phpdoc_var_without_name' => true,
+        'phpdoc_var_without_name' => false,
         'pre_increment' => true,
         'return_type_declaration' => true,
         'self_accessor' => true,
@@ -109,11 +124,14 @@ return PhpCsFixer\Config::create()
 
         'php_unit_construct' => true,
         'php_unit_dedicate_assert' => true,
+        'php_unit_fqcn_annotation' => true,
         'silenced_deprecation_error' => true,
+        'declare_strict_types' => true,
 
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
+            ->name('/\.php|\.php.dist$/')
             ->in(['src', 'tests'])
     )
 ;
