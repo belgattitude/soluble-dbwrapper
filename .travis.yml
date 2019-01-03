@@ -17,10 +17,10 @@ matrix:
         mariadb: 10.2
     - php: 7.3
       env:
-        - COMPOSER_OPTS="--ignore-platform-reqs"
+        - COMPOSER_ARGS="--ignore-platform-reqs"
     - php: nightly
       env:
-        - COMPOSER_OPTS="--ignore-platform-reqs"
+        - COMPOSER_ARGS="--ignore-platform-reqs"
   allow_failures:
     - php: nightly
 
