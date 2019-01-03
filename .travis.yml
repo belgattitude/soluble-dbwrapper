@@ -43,7 +43,7 @@ before_script:
   - mysql -e "SHOW DATABASES;" -u root
   - mysql -e "CONNECT phpunit_soluble_schema_db; SHOW TABLES;" -u root
   - composer self-update
-  - composer install
+  - travis_retry composer -n update --prefer-dist --prefer-stable --no-interaction $COMPOSER_ARGS;
 script:
   - ./vendor/bin/phpunit -v --coverage-clover=coverage.xml
   - ./vendor/bin/php-cs-fixer --diff --dry-run -v fix
