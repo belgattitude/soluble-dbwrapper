@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2.0.0 (2019-01-03) PHP7.1 required
+
+### Added
+
+- PHP 7.1 strict typings
+- PHP 7.3 support
+
+### Removed 
+
+- HHVM support
+- PHP 5.6 & PHP7.0 support
+
 
 ## 1.3.3 (2018-06-29) Minor zend-db cleanup
 
