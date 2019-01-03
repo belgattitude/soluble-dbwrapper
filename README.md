@@ -1,6 +1,6 @@
 # soluble/dbwrapper
 
-[![PHP Version](https://img.shields.io/badge/php-5.6+-ff69b4.svg)](https://packagist.org/packages/soluble/dbwrapper)
+[![PHP 7.1+](https://img.shields.io/badge/php-7.1+-ff69b4.svg)](https://packagist.org/packages/soluble/dbwrapper)
 [![Build Status](https://travis-ci.org/belgattitude/soluble-dbwrapper.png?branch=master)](https://travis-ci.org/belgattitude/soluble-dbwrapper)
 [![codecov](https://codecov.io/gh/belgattitude/soluble-dbwrapper/branch/master/graph/badge.svg)](https://codecov.io/gh/belgattitude/soluble-dbwrapper)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/belgattitude/soluble-dbwrapper/badges/quality-score.png?s=6f3ab91f916bf642f248e82c29857f94cb50bb33)](https://scrutinizer-ci.com/g/belgattitude/soluble-dbwrapper)
@@ -24,9 +24,10 @@ Minimalist *(but universal)* database wrapper to rule them all *(and to not choo
 
 ## Requirements
 
-- PHP engine 5.6+, 7.0+ or HHVM >= 3.9.
+- PHP 7.1 optional ext-mysqli/PDO
 
->  For PHP < 5.6 take the 1.2 version
+> For PHP 5.6+, 7.0+ or HHVM >= 3.9 look at version 1.3.
+> For PHP < 5.6 take the 1.2 version
 
 ## Documentation
 
