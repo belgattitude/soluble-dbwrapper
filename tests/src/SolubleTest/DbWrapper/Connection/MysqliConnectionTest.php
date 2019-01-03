@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace SolubleTest\DbWrapper\Connection;
 
@@ -29,7 +29,8 @@ class MysqliConnectionTest extends TestCase
         self::assertEquals(\SolubleTestFactories::getDatabaseName('mysqli'), $current);
 
         $config = \SolubleTestFactories::getDbConfiguration('mysqli');
-        unset($config['database']);
+
+        $config['database'] = '';
 
         $adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli', $config));
         $current = $adapter->getConnection()->getCurrentSchema();
