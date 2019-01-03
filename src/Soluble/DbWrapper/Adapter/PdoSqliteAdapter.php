@@ -6,6 +6,7 @@ namespace Soluble\DbWrapper\Adapter;
 
 use PDO;
 use Soluble\DbWrapper\Adapter\Pdo\GenericPdo;
+use Soluble\DbWrapper\Connection\ConnectionInterface;
 use Soluble\DbWrapper\Connection\PdoSqliteConnection;
 use Soluble\DbWrapper\Exception;
 
@@ -45,7 +46,7 @@ class PdoSqliteAdapter extends GenericPdo implements AdapterInterface
      *
      * @return PdoSqliteConnection
      */
-    public function getConnection()
+    public function getConnection(): ConnectionInterface
     {
         return $this->connection;
     }

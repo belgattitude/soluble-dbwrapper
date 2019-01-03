@@ -45,7 +45,7 @@ class ZendDb2Connection implements ConnectionInterface
      *
      * @throws Exception\UnsupportedFeatureException
      */
-    public function getHost()
+    public function getHost(): string
     {
         throw new Exception\UnsupportedFeatureException(__METHOD__ . ' is not (yet) supported for zend-db bridge');
     }

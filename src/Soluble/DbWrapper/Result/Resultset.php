@@ -78,10 +78,8 @@ class Resultset implements ResultInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @return int position
      */
-    public function key()
+    public function key(): int
     {
         return $this->position;
     }
@@ -89,7 +87,7 @@ class Resultset implements ResultInterface
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next(): void
     {
         ++$this->position;
     }
@@ -97,7 +95,7 @@ class Resultset implements ResultInterface
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->position = 0;
     }
@@ -105,7 +103,7 @@ class Resultset implements ResultInterface
     /**
      * {@inheritdoc}
      */
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->storage[$this->position]);
     }
@@ -113,7 +111,7 @@ class Resultset implements ResultInterface
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return $this->count;
     }
@@ -123,7 +121,7 @@ class Resultset implements ResultInterface
      *
      * @param array $row an associative array
      */
-    public function append(array $row)
+    public function append(array $row): void
     {
         if ($this->returnType === self::TYPE_ARRAYOBJECT) {
             $this->storage[] = new ArrayObject($row);
@@ -134,15 +132,17 @@ class Resultset implements ResultInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $position
      */
-    public function offsetExists($position)
+    public function offsetExists($position): bool
     {
         return isset($this->storage[$position]);
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $position
+     *
+     * @return mixed
      */
     public function offsetGet($position)
     {
@@ -150,17 +150,18 @@ class Resultset implements ResultInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $position
+     * @param mixed $value
      */
-    public function offsetSet($position, $row)
+    public function offsetSet($position, $value): void
     {
         throw new \Exception('Resultsets are immutable');
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $position
      */
-    public function offsetUnset($position)
+    public function offsetUnset($position): void
     {
         throw new \Exception('Resultsets are immutable');
     }
@@ -170,7 +171,7 @@ class Resultset implements ResultInterface
      *
      * @return array
      */
-    public function getArray()
+    public function getArray(): array
     {
         return (array) $this->storage;
     }
@@ -183,7 +184,7 @@ class Resultset implements ResultInterface
      *
      * @return ArrayObject
      */
-    public function getArrayObject()
+    public function getArrayObject(): ArrayObject
     {
         if ($this->returnType === self::TYPE_ARRAY) {
             return new ArrayObject($this->storage);
@@ -202,7 +203,7 @@ class Resultset implements ResultInterface
      *
      * @return string
      */
-    public function getReturnType()
+    public function getReturnType(): string
     {
         return $this->returnType;
     }

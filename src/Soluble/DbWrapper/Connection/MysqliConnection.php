@@ -22,7 +22,7 @@ class MysqliConnection implements ConnectionInterface
 
     /**
      * @param MysqliAdapter $adapter
-     * @param \mysqli       $resource
+     * @param mysqli        $resource
      */
     public function __construct(MysqliAdapter $adapter, mysqli $resource)
     {
@@ -33,9 +33,9 @@ class MysqliConnection implements ConnectionInterface
     /**
      * {@inheritdoc}
      *
-     * @return \mysqli
+     * @return mysqli
      */
-    public function getResource()
+    public function getResource(): mysqli
     {
         return $this->resource;
     }
@@ -43,7 +43,7 @@ class MysqliConnection implements ConnectionInterface
     /**
      * {@inheritdoc}
      */
-    public function getHost()
+    public function getHost(): string
     {
         $infos = explode(' ', trim($this->resource->host_info));
 

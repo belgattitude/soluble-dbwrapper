@@ -27,5 +27,5 @@ interface ConnectionInterface
      *
      * @return string
      */
-    public function getHost();
+    public function getHost(): string;
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Soluble\DbWrapper\Adapter\Doctrine;
 
 use Soluble\DbWrapper\Adapter\AdapterInterface;
+use Soluble\DbWrapper\Connection\ConnectionInterface;
 use Soluble\DbWrapper\Connection\Doctrine\Dbal2Connection;
 use Soluble\DbWrapper\Exception;
 use Soluble\DbWrapper\Result\Resultset;
@@ -35,7 +36,7 @@ class Dbal2Adapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function quoteValue($value)
+    public function quoteValue($value): string
     {
         return $this->dbal->quote($value);
     }
@@ -43,7 +44,7 @@ class Dbal2Adapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function query($query, $resultsetType = Resultset::TYPE_ARRAY)
+    public function query(string $query, string $resultsetType = Resultset::TYPE_ARRAY): Resultset
     {
         // This error may happen with the libmysql instead of mysqlnd and using set statement (set @test=1)
         // : "Attempt to read a row while there is no result set associated with the statement"
@@ -73,7 +74,7 @@ class Dbal2Adapter implements AdapterInterface
      *
      * @return Dbal2Connection
      */
-    public function getConnection()
+    public function getConnection(): ConnectionInterface
     {
         return $this->connection;
     }

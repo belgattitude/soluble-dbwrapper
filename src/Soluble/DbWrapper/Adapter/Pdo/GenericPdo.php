@@ -18,7 +18,7 @@ abstract class GenericPdo implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function query($query, $resultsetType = Resultset::TYPE_ARRAY)
+    public function query(string $query, string $resultsetType = Resultset::TYPE_ARRAY): Resultset
     {
         try {
             //$query = "select * from product";
@@ -56,7 +56,7 @@ abstract class GenericPdo implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function quoteValue($value)
+    public function quoteValue($value): string
     {
         return $this->resource->quote($value);
     }
@@ -66,7 +66,7 @@ abstract class GenericPdo implements AdapterInterface
      *
      * @throws Exception\RuntimeException
      */
-    protected function checkEnvironment()
+    protected function checkEnvironment(): void
     {
         if (!extension_loaded('PDO')) {
             throw new Exception\RuntimeException('The PDO extension is not loaded');

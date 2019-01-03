@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Adapter;
 
+use Soluble\DbWrapper\Connection\ConnectionInterface;
+use Soluble\DbWrapper\Result\Resultset;
+
 interface AdapterInterface
 {
     /**
@@ -11,26 +14,19 @@ interface AdapterInterface
      *
      * @throws \Soluble\DbWrapper\Exception\InvalidArgumentException
      *
-     * @param string $query
      * @param string $resultsetType default to Resultset::ARRAY
-     *
-     * @return \Soluble\DbWrapper\Result\Resultset
      */
-    public function query($query, $resultsetType = \Soluble\DbWrapper\Result\Resultset::TYPE_ARRAY);
+    public function query(string $query, string $resultsetType = \Soluble\DbWrapper\Result\Resultset::TYPE_ARRAY): Resultset;
 
     /**
      * Quote value for safely build your queries.
      *
      * @param string $value
-     *
-     * @return string quoted string
      */
-    public function quoteValue($value);
+    public function quoteValue($value): string;
 
     /**
      * Return connection object.
-     *
-     * @return \Soluble\DbWrapper\Connection\ConnectionInterface
      */
-    public function getConnection();
+    public function getConnection(): ConnectionInterface;
 }

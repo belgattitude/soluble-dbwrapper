@@ -35,7 +35,7 @@ class PdoMysqlConnection implements ConnectionInterface
      *
      * @return PDO
      */
-    public function getResource()
+    public function getResource(): PDO
     {
         return $this->resource;
     }
@@ -43,7 +43,7 @@ class PdoMysqlConnection implements ConnectionInterface
     /**
      * {@inheritdoc}
      */
-    public function getHost()
+    public function getHost(): string
     {
         $infos = explode(' ', trim($this->resource->getAttribute(PDO::ATTR_CONNECTION_STATUS)));
 

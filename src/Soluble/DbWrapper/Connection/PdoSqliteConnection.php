@@ -40,9 +40,9 @@ class PdoSqliteConnection implements ConnectionInterface
     /**
      * {@inheritdoc}
      *
-     * @return \PDO
+     * @return PDO
      */
-    public function getResource()
+    public function getResource(): PDO
     {
         return $this->resource;
     }
@@ -50,7 +50,7 @@ class PdoSqliteConnection implements ConnectionInterface
     /**
      * {@inheritdoc}
      */
-    public function getHost()
+    public function getHost(): string
     {
         return 'localhost';
     }

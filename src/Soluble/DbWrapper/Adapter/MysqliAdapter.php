@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Soluble\DbWrapper\Adapter;
 
 use mysqli;
+use Soluble\DbWrapper\Connection\ConnectionInterface;
 use Soluble\DbWrapper\Connection\MysqliConnection;
 use Soluble\DbWrapper\Exception;
 use Soluble\DbWrapper\Result\Resultset;
@@ -35,7 +36,7 @@ class MysqliAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function quoteValue($value)
+    public function quoteValue($value): string
     {
         return "'" . $this->resource->real_escape_string($value) . "'";
     }
@@ -43,7 +44,7 @@ class MysqliAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function query($query, $resultsetType = Resultset::TYPE_ARRAY)
+    public function query(string $query, string $resultsetType = Resultset::TYPE_ARRAY): Resultset
     {
         try {
             //$r = $this->resource->query($query, MYSQLI_STORE_RESULT);
@@ -72,9 +73,9 @@ class MysqliAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      *
-     * @return MysqlConnection
+     * @return MysqliConnection
      */
-    public function getConnection()
+    public function getConnection(): ConnectionInterface
     {
         return $this->connection;
     }

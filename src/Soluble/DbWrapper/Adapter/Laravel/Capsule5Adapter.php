@@ -6,6 +6,7 @@ namespace Soluble\DbWrapper\Adapter\Laravel;
 
 use Soluble\DbWrapper\Adapter\AdapterInterface;
 use Soluble\DbWrapper\Adapter\Pdo\GenericPdo;
+use Soluble\DbWrapper\Connection\ConnectionInterface;
 use Soluble\DbWrapper\Connection\Laravel\Capsule5Connection;
 
 class Capsule5Adapter extends GenericPdo implements AdapterInterface
@@ -42,7 +43,7 @@ class Capsule5Adapter extends GenericPdo implements AdapterInterface
      *
      * @return Capsule5Connection
      */
-    public function getConnection()
+    public function getConnection(): ConnectionInterface
     {
         return $this->connection;
     }

@@ -6,6 +6,7 @@ namespace Soluble\DbWrapper\Adapter;
 
 use PDO;
 use Soluble\DbWrapper\Adapter\Pdo\GenericPdo;
+use Soluble\DbWrapper\Connection\ConnectionInterface;
 use Soluble\DbWrapper\Connection\PdoMysqlConnection;
 use Soluble\DbWrapper\Exception;
 
@@ -43,9 +44,9 @@ class PdoMysqlAdapter extends GenericPdo implements AdapterInterface
     /**
      * {@inheritdoc}
      *
-     * @return MysqlConnection
+     * @return PdoMysqlConnection
      */
-    public function getConnection()
+    public function getConnection(): ConnectionInterface
     {
         return $this->connection;
     }

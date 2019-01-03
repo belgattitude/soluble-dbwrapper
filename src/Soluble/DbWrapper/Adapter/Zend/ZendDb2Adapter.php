@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Soluble\DbWrapper\Adapter\Zend;
 
 use Soluble\DbWrapper\Adapter\AdapterInterface;
+use Soluble\DbWrapper\Connection\ConnectionInterface;
 use Soluble\DbWrapper\Connection\Zend\ZendDb2Connection;
 use Soluble\DbWrapper\Exception;
 use Soluble\DbWrapper\Result\Resultset;
@@ -35,7 +36,7 @@ class ZendDb2Adapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function quoteValue($value)
+    public function quoteValue($value): string
     {
         return $this->zendAdapter->getPlatform()->quoteValue($value);
     }
@@ -43,7 +44,7 @@ class ZendDb2Adapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function query($query, $resultsetType = Resultset::TYPE_ARRAY)
+    public function query(string $query, string $resultsetType = Resultset::TYPE_ARRAY): Resultset
     {
         try {
             $stmt    = $this->zendAdapter->createStatement($query);
@@ -68,7 +69,7 @@ class ZendDb2Adapter implements AdapterInterface
      *
      * @return ZendDb2Connection
      */
-    public function getConnection()
+    public function getConnection(): ConnectionInterface
     {
         return $this->connection;
     }

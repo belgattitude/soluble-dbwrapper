@@ -45,7 +45,7 @@ class Capsule5Connection implements ConnectionInterface
      *
      * @throws Exception\UnsupportedFeatureException
      */
-    public function getHost()
+    public function getHost(): string
     {
         throw new Exception\UnsupportedFeatureException(__METHOD__ . ' is not (yet) supported for capsule bridge');
     }

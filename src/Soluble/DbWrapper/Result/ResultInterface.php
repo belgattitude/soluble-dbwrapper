@@ -16,5 +16,5 @@ interface ResultInterface extends Countable, Traversable, Iterator, ArrayAccess
      *
      * @param array $row
      */
-    public function append(array $row);
+    public function append(array $row): void;
 }
