@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Connection\Zend;
 
 use Soluble\DbWrapper\Adapter\AdapterInterface;
-use Soluble\DbWrapper\Exception;
 use Soluble\DbWrapper\Connection\ConnectionInterface;
+use Soluble\DbWrapper\Exception;
 
 class ZendDb2Connection implements ConnectionInterface
 {
@@ -24,7 +26,7 @@ class ZendDb2Connection implements ConnectionInterface
      */
     public function __construct(AdapterInterface $adapter, \Zend\Db\Adapter\Adapter $zendAdapter)
     {
-        $this->adapter = $adapter;
+        $this->adapter     = $adapter;
         $this->zendAdapter = $zendAdapter;
     }
 

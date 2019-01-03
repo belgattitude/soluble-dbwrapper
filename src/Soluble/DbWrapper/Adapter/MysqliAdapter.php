@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Adapter;
 
-use Soluble\DbWrapper\Exception;
 use mysqli;
-use Soluble\DbWrapper\Result\Resultset;
 use Soluble\DbWrapper\Connection\MysqliConnection;
+use Soluble\DbWrapper\Exception;
+use Soluble\DbWrapper\Result\Resultset;
 
 class MysqliAdapter implements AdapterInterface
 {
@@ -26,7 +28,7 @@ class MysqliAdapter implements AdapterInterface
      */
     public function __construct(mysqli $resource)
     {
-        $this->resource = $resource;
+        $this->resource   = $resource;
         $this->connection = new MysqliConnection($this, $resource);
     }
 

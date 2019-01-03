@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Adapter\Zend;
 
-use Soluble\DbWrapper\Exception;
-use Soluble\DbWrapper\Result\Resultset;
 use Soluble\DbWrapper\Adapter\AdapterInterface;
 use Soluble\DbWrapper\Connection\Zend\ZendDb2Connection;
+use Soluble\DbWrapper\Exception;
+use Soluble\DbWrapper\Result\Resultset;
 
 class ZendDb2Adapter implements AdapterInterface
 {
@@ -27,7 +29,7 @@ class ZendDb2Adapter implements AdapterInterface
     public function __construct(\Zend\Db\Adapter\Adapter $zendAdapter)
     {
         $this->zendAdapter = $zendAdapter;
-        $this->connection = new ZendDb2Connection($this, $zendAdapter);
+        $this->connection  = new ZendDb2Connection($this, $zendAdapter);
     }
 
     /**
@@ -44,8 +46,8 @@ class ZendDb2Adapter implements AdapterInterface
     public function query($query, $resultsetType = Resultset::TYPE_ARRAY)
     {
         try {
-            $stmt = $this->zendAdapter->createStatement($query);
-            $r = $stmt->execute();
+            $stmt    = $this->zendAdapter->createStatement($query);
+            $r       = $stmt->execute();
             $results = new Resultset($resultsetType);
             if ($r->getFieldCount() > 0) {
                 foreach ($r as $row) {

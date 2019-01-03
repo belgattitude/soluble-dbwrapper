@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Adapter\Pdo;
 
-use Soluble\DbWrapper\Exception;
 use Soluble\DbWrapper\Adapter\AdapterInterface;
+use Soluble\DbWrapper\Exception;
 use Soluble\DbWrapper\Result\Resultset;
 
 abstract class GenericPdo implements AdapterInterface
@@ -44,7 +46,7 @@ abstract class GenericPdo implements AdapterInterface
             throw $e;
         } catch (\Exception $e) {
             $eclass = get_class($e);
-            $msg = sprintf("GenericPdo '%s' : %s [%s]", $eclass, $e->getMessage(), $query);
+            $msg    = sprintf("GenericPdo '%s' : %s [%s]", $eclass, $e->getMessage(), $query);
             throw new Exception\InvalidArgumentException($msg);
         }
 

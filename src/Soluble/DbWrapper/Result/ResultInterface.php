@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Result;
 
-use Countable;
-use Traversable;
-use Iterator;
 use ArrayAccess;
+use Countable;
+use Iterator;
+use Traversable;
 
 interface ResultInterface extends Countable, Traversable, Iterator, ArrayAccess
 {

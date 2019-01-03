@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SolubleTest\DbWrapper\Adapter;
 
@@ -22,28 +24,28 @@ class AllAdapterMysqlTest extends TestCase
         $elements = [];
 
         // 1. PDO_mysql
-        $pdo_mysql = new Adapter\PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
+        $pdo_mysql                        = new Adapter\PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
         $elements['pdo_mysql']['adapter'] = $pdo_mysql;
 
         // 2. Mysqli
-        $mysqli = new Adapter\MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
+        $mysqli                        = new Adapter\MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
         $elements['mysqli']['adapter'] = $mysqli;
 
         // 3. ZendDb 2.*
-        $zendAdapter = \SolubleTestFactories::getDbConnection('zend-db2-mysqli');
+        $zendAdapter  = \SolubleTestFactories::getDbConnection('zend-db2-mysqli');
         $zend2adapter = new Adapter\Zend\ZendDb2Adapter($zendAdapter);
 
         $elements['zend-db-2']['adapter'] = $zend2adapter;
 
         // 4. Laravel illuminate database
-        $capsule = \SolubleTestFactories::getDbConnection('capsule5-mysqli');
-        $capsuleAdapter = new Adapter\Laravel\Capsule5Adapter($capsule);
+        $capsule                          = \SolubleTestFactories::getDbConnection('capsule5-mysqli');
+        $capsuleAdapter                   = new Adapter\Laravel\Capsule5Adapter($capsule);
         $elements['capsule-5']['adapter'] = $capsuleAdapter;
 
         // 5. Doctrine 2
 
-        $dbal = \SolubleTestFactories::getDbConnection('doctrine2-mysqli');
-        $dbalAdapter = new Adapter\Doctrine\Dbal2Adapter($dbal);
+        $dbal                              = \SolubleTestFactories::getDbConnection('doctrine2-mysqli');
+        $dbalAdapter                       = new Adapter\Doctrine\Dbal2Adapter($dbal);
         $elements['doctrine-2']['adapter'] = $dbalAdapter;
 
         $this->elements = $elements;
@@ -66,7 +68,7 @@ class AllAdapterMysqlTest extends TestCase
     public function testResultset()
     {
         $testedTypes = [
-            Resultset::TYPE_ARRAY => 'array',
+            Resultset::TYPE_ARRAY       => 'array',
             Resultset::TYPE_ARRAYOBJECT => 'ArrayObject'
         ];
 
@@ -76,7 +78,7 @@ class AllAdapterMysqlTest extends TestCase
                 $results = $adapter->query('select * from product', $resultsetType);
                 self::assertInstanceOf('Soluble\DbWrapper\Result\ResultInterface', $results);
                 self::assertInstanceOf('Soluble\DbWrapper\Result\Resultset', $results);
-                if ($mustbe == 'array') {
+                if ($mustbe === 'array') {
                     self::assertInternalType('array', $results[0]);
                 } else {
                     self::assertInstanceOf($mustbe, $results[0]);
@@ -106,8 +108,8 @@ class AllAdapterMysqlTest extends TestCase
     {
         foreach ($this->elements as $key => $element) {
             $adapter = $element['adapter'];
-            $string = "aa';aa";
-            $quoted = $adapter->quoteValue($string);
+            $string  = "aa';aa";
+            $quoted  = $adapter->quoteValue($string);
             self::assertEquals("'aa\';aa'", $quoted);
         }
     }
@@ -116,7 +118,7 @@ class AllAdapterMysqlTest extends TestCase
     {
         foreach ($this->elements as $key => $element) {
             $adapter = $element['adapter'];
-            $conn = $adapter->getConnection();
+            $conn    = $adapter->getConnection();
             self::assertInstanceOf("\Soluble\DbWrapper\Connection\ConnectionInterface", $conn);
 
             $params = \SolubleTestFactories::getDbConfiguration('mysqli');

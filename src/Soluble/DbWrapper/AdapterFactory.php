@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper;
 
@@ -77,7 +79,7 @@ class AdapterFactory
      */
     protected static function getAdapterFromPdo(\PDO $resource)
     {
-        $driver = strtolower($resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
+        $driver = mb_strtolower($resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
         switch ($driver) {
             case 'mysql':
                 $adapter = new Adapter\PdoMysqlAdapter($resource);

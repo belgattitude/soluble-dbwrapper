@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SolubleTest\DbWrapper\Result;
 
+use ArrayObject;
 use PHPUnit\Framework\TestCase;
 use Soluble\DbWrapper\Result\Resultset;
-use ArrayObject;
 
 class ResultsetTest extends TestCase
 {
@@ -94,7 +96,7 @@ class ResultsetTest extends TestCase
     {
         $this->expectException('Exception');
         $row1 = new ArrayObject(['name' => 'contact_1', 'address' => 'address_1']);
-        $rs = new Resultset(Resultset::TYPE_ARRAYOBJECT);
+        $rs   = new Resultset(Resultset::TYPE_ARRAYOBJECT);
         $rs->append((array) $row1);
 
         $rs->offsetSet(0, 'cool');
@@ -104,7 +106,7 @@ class ResultsetTest extends TestCase
     {
         $this->expectException('Exception');
         $row1 = new ArrayObject(['name' => 'contact_1', 'address' => 'address_1']);
-        $rs = new Resultset(Resultset::TYPE_ARRAYOBJECT);
+        $rs   = new Resultset(Resultset::TYPE_ARRAYOBJECT);
         $rs->append((array) $row1);
 
         $rs->offsetUnset(0);
@@ -113,7 +115,7 @@ class ResultsetTest extends TestCase
     public function testGetArrayObject()
     {
         $row1 = new ArrayObject(['name' => 'contact_1', 'address' => 'address_1']);
-        $rs = new Resultset(Resultset::TYPE_ARRAY);
+        $rs   = new Resultset(Resultset::TYPE_ARRAY);
         $rs->append((array) $row1);
         $returned = $rs->getArrayObject();
         self::assertInstanceOf('ArrayObject', $returned);
@@ -124,7 +126,7 @@ class ResultsetTest extends TestCase
     public function testGetArrayObjectWithArrayObjectType()
     {
         $row1 = new ArrayObject(['name' => 'contact_1', 'address' => 'address_1']);
-        $rs = new Resultset(Resultset::TYPE_ARRAYOBJECT);
+        $rs   = new Resultset(Resultset::TYPE_ARRAYOBJECT);
         $rs->append((array) $row1);
         $returned = $rs->getArrayObject();
         self::assertInstanceOf('ArrayObject', $returned);
@@ -135,7 +137,7 @@ class ResultsetTest extends TestCase
     public function testKey()
     {
         $row1 = new ArrayObject(['name' => 'contact_1', 'address' => 'address_1']);
-        $rs = new Resultset(Resultset::TYPE_ARRAY);
+        $rs   = new Resultset(Resultset::TYPE_ARRAY);
         $rs->append((array) $row1);
         foreach ($rs as $idx => $row) {
             self::assertEquals(0, $idx);

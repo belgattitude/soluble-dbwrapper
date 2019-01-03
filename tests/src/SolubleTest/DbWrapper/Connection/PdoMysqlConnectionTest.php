@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SolubleTest\DbWrapper\Connection;
 
-use Soluble\DbWrapper\Connection;
 use Soluble\DbWrapper\Adapter\PdoMysqlAdapter;
+use Soluble\DbWrapper\Connection;
 
 class PdoMysqlConnectionTest extends MysqliConnectionTest
 {
@@ -18,7 +20,7 @@ class PdoMysqlConnectionTest extends MysqliConnectionTest
      */
     protected function setUp()
     {
-        $adapter = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
+        $adapter          = new PdoMysqlAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
         $this->connection = $adapter->getConnection();
     }
 
@@ -31,7 +33,7 @@ class PdoMysqlConnectionTest extends MysqliConnectionTest
     public function testGetHost()
     {
         $params = \SolubleTestFactories::getDbConfiguration('pdo:mysql');
-        $host = strtolower($params['hostname']);
+        $host   = mb_strtolower($params['hostname']);
         self::assertEquals($host, $this->connection->getHost());
     }
 }

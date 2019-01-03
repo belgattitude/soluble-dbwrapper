@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Connection\Doctrine;
 
 use Soluble\DbWrapper\Adapter\AdapterInterface;
-use Soluble\DbWrapper\Exception;
 use Soluble\DbWrapper\Connection\ConnectionInterface;
+use Soluble\DbWrapper\Exception;
 
 class Dbal2Connection implements ConnectionInterface
 {
@@ -25,7 +27,7 @@ class Dbal2Connection implements ConnectionInterface
     public function __construct(AdapterInterface $adapter, \Doctrine\DBAL\Connection $dbal)
     {
         $this->adapter = $adapter;
-        $this->dbal = $dbal;
+        $this->dbal    = $dbal;
     }
 
     /**

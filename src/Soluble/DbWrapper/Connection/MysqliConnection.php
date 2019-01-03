@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Connection;
 
+use mysqli;
 use Soluble\DbWrapper\Adapter\MysqliAdapter;
 use Soluble\DbWrapper\Exception;
-use mysqli;
 
 class MysqliConnection implements ConnectionInterface
 {
@@ -24,7 +26,7 @@ class MysqliConnection implements ConnectionInterface
      */
     public function __construct(MysqliAdapter $adapter, mysqli $resource)
     {
-        $this->adapter = $adapter;
+        $this->adapter  = $adapter;
         $this->resource = $resource;
     }
 
@@ -45,7 +47,7 @@ class MysqliConnection implements ConnectionInterface
     {
         $infos = explode(' ', trim($this->resource->host_info));
 
-        return strtolower($infos[0]);
+        return mb_strtolower($infos[0]);
     }
 
     /**
@@ -60,7 +62,7 @@ class MysqliConnection implements ConnectionInterface
         $query = 'SELECT DATABASE() as current_schema';
         try {
             $results = $this->adapter->query($query);
-            if (count($results) == 0 || $results[0]['current_schema'] === null) {
+            if (count($results) === 0 || $results[0]['current_schema'] === null) {
                 return false;
             }
         } catch (\Exception $e) {

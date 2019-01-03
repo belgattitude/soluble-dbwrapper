@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Connection;
 
-use Soluble\DbWrapper\Adapter\AdapterInterface;
 use PDO;
+use Soluble\DbWrapper\Adapter\AdapterInterface;
 
 class PdoSqliteConnection implements ConnectionInterface
 {
@@ -23,7 +25,7 @@ class PdoSqliteConnection implements ConnectionInterface
      */
     public function __construct(AdapterInterface $adapter, PDO $resource)
     {
-        $this->adapter = $adapter;
+        $this->adapter  = $adapter;
         $this->resource = $resource;
     }
 

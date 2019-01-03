@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SolubleTest\DbWrapper\Connection;
 
 use PHPUnit\Framework\TestCase;
-use Soluble\DbWrapper\Connection;
 use Soluble\DbWrapper\Adapter\PdoSqliteAdapter;
+use Soluble\DbWrapper\Connection;
 
 class PdoSqliteConnectionTest extends TestCase
 {
@@ -19,8 +21,8 @@ class PdoSqliteConnectionTest extends TestCase
      */
     protected function setUp()
     {
-        $connection = new \PDO('sqlite::memory:');
-        $adapter = new PdoSqliteAdapter($connection);
+        $connection       = new \PDO('sqlite::memory:');
+        $adapter          = new PdoSqliteAdapter($connection);
         $this->connection = $adapter->getConnection();
     }
 

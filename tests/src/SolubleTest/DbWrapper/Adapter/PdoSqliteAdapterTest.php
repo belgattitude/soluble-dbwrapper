@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SolubleTest\DbWrapper\Adapter;
 
@@ -24,7 +26,7 @@ class PdoSqliteAdapterTest extends TestCase
     protected function setUp()
     {
         $this->connection = new \PDO('sqlite::memory:');
-        $this->adapter = new PdoSqliteAdapter($this->connection);
+        $this->adapter    = new PdoSqliteAdapter($this->connection);
         $this->createTestTable();
     }
 

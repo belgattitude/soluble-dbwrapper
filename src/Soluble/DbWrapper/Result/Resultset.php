@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Result;
 
@@ -7,8 +9,8 @@ use Soluble\DbWrapper\Exception;
 
 class Resultset implements ResultInterface
 {
-    const TYPE_ARRAYOBJECT = 'arrayobject';
-    const TYPE_ARRAY = 'array';
+    public const TYPE_ARRAYOBJECT = 'arrayobject';
+    public const TYPE_ARRAY       = 'array';
 
     /**
      * Allowed return types.
@@ -51,7 +53,7 @@ class Resultset implements ResultInterface
      */
     public function __construct($returnType = self::TYPE_ARRAY)
     {
-        if (!in_array($returnType, $this->allowedReturnTypes)) {
+        if (!in_array($returnType, $this->allowedReturnTypes, true)) {
             throw new Exception\InvalidArgumentException("Unsupported returnType argument ($returnType)");
         }
         $this->returnType = $returnType;
@@ -61,7 +63,7 @@ class Resultset implements ResultInterface
             $this->storage = [];
         }
         $this->position = 0;
-        $this->count = count($this->storage);
+        $this->count    = count($this->storage);
     }
 
     /**
@@ -123,7 +125,7 @@ class Resultset implements ResultInterface
      */
     public function append(array $row)
     {
-        if ($this->returnType == self::TYPE_ARRAYOBJECT) {
+        if ($this->returnType === self::TYPE_ARRAYOBJECT) {
             $this->storage[] = new ArrayObject($row);
         } else {
             $this->storage[] = $row;
@@ -183,7 +185,7 @@ class Resultset implements ResultInterface
      */
     public function getArrayObject()
     {
-        if ($this->returnType == self::TYPE_ARRAY) {
+        if ($this->returnType === self::TYPE_ARRAY) {
             return new ArrayObject($this->storage);
         } else {
             /** @var ArrayObject $storageAsArrayObject to silent static code analyzers */

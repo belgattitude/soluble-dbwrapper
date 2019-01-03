@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Connection\Laravel;
 
 use Soluble\DbWrapper\Adapter\AdapterInterface;
-use Soluble\DbWrapper\Exception;
 use Soluble\DbWrapper\Connection\ConnectionInterface;
+use Soluble\DbWrapper\Exception;
 
 class Capsule5Connection implements ConnectionInterface
 {

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 class SolubleTestFactories
 {
@@ -9,7 +11,7 @@ class SolubleTestFactories
     {
         $cache_dir = $_SERVER['PHPUNIT_CACHE_DIR'];
         if (!preg_match('/^\//', $cache_dir)) {
-            $cache_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . $cache_dir;
+            $cache_dir = __DIR__ . DIRECTORY_SEPARATOR . $cache_dir;
         }
 
         return $cache_dir;
@@ -30,7 +32,7 @@ class SolubleTestFactories
         $hostname = $config['hostname'];
         $username = $config['username'];
         $password = $config['password'];
-        $database = isset($config['database']) ? $config['database'] : null;
+        $database = $config['database'] ?? null;
         switch ($type) {
             case 'pdo:mysql':
                 $options = [
@@ -48,15 +50,15 @@ class SolubleTestFactories
                 break;
             case 'capsule5-mysqli':
 
-                $params = \SolubleTestFactories::getDbConfiguration('mysqli');
+                $params  = self::getDbConfiguration('mysqli');
                 $capsule = new \Illuminate\Database\Capsule\Manager();
                 $capsule->addConnection([
-                    'driver' => 'mysql',
-                    'host' => $params['hostname'],
-                    'database' => $params['database'],
-                    'username' => $params['username'],
-                    'password' => $params['password'],
-                    'charset' => $charset,
+                    'driver'    => 'mysql',
+                    'host'      => $params['hostname'],
+                    'database'  => $params['database'],
+                    'username'  => $params['username'],
+                    'password'  => $params['password'],
+                    'charset'   => $charset,
                     'collation' => 'utf8_unicode_ci'
                 ]);
 
@@ -66,14 +68,14 @@ class SolubleTestFactories
                 break;
 
             case 'doctrine2-mysqli':
-                $params = \SolubleTestFactories::getDbConfiguration('mysqli');
+                $params           = self::getDbConfiguration('mysqli');
                 $connectionParams = [
-                    'dbname' => $params['database'],
-                    'user' => $params['username'],
+                    'dbname'   => $params['database'],
+                    'user'     => $params['username'],
                     'password' => $params['password'],
-                    'host' => $params['hostname'],
-                    'driver' => 'mysqli',
-                    'charset' => $charset
+                    'host'     => $params['hostname'],
+                    'driver'   => 'mysqli',
+                    'charset'  => $charset
                 ];
                 $c = new \Doctrine\DBAL\Configuration();
                 $e = new \Doctrine\Common\EventManager();
@@ -85,9 +87,9 @@ class SolubleTestFactories
 
                 break;
             case 'zend-db2-mysqli':
-                $params = \SolubleTestFactories::getDbConfiguration('mysqli');
+                $params = self::getDbConfiguration('mysqli');
                 $params = array_merge($params, ['driver' => 'Mysqli', 'charset' => $charset]);
-                $conn = new \Zend\Db\Adapter\Adapter($params);
+                $conn   = new \Zend\Db\Adapter\Adapter($params);
                 break;
             default:
                 throw new \Exception(__METHOD__ . " Unsupported driver type ($type)");

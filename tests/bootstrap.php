@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 if (!$loader = @include __DIR__ . '/../vendor/autoload.php') {
     die('You must set up the project dependencies, run the following commands:' . PHP_EOL .
             'curl -s http://getcomposer.org/installer | php' . PHP_EOL .
@@ -8,7 +10,7 @@ if (!$loader = @include __DIR__ . '/../vendor/autoload.php') {
 
 ini_set('error_reporting', E_ALL | E_STRICT);
 $baseDir = dirname(__DIR__);
-require_once dirname(__FILE__) . '/SolubleTestFactories.php';
+require_once __DIR__ . '/SolubleTestFactories.php';
 
 $loader = require __DIR__ . '/../vendor/autoload.php';
 $loader->add('SolubleTest', [$baseDir . '/src/', $baseDir . '/test/']);

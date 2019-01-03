@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SolubleTest\DbWrapper\Connection;
 
 use PHPUnit\Framework\TestCase;
-use Soluble\DbWrapper\Connection;
 use Soluble\DbWrapper\Adapter\MysqliAdapter;
+use Soluble\DbWrapper\Connection;
 
 class MysqliConnectionTest extends TestCase
 {
@@ -19,7 +21,7 @@ class MysqliConnectionTest extends TestCase
      */
     protected function setUp()
     {
-        $adapter = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
+        $adapter          = new MysqliAdapter(\SolubleTestFactories::getDbConnection('mysqli'));
         $this->connection = $adapter->getConnection();
     }
 
@@ -47,7 +49,7 @@ class MysqliConnectionTest extends TestCase
     public function testGetHost()
     {
         $params = \SolubleTestFactories::getDbConfiguration('mysqli');
-        $host = strtolower($params['hostname']);
+        $host   = mb_strtolower($params['hostname']);
         self::assertEquals($host, $this->connection->getHost());
     }
 }

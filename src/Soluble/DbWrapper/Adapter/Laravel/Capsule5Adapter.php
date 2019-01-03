@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\DbWrapper\Adapter\Laravel;
 
 use Soluble\DbWrapper\Adapter\AdapterInterface;
-use Soluble\DbWrapper\Connection\Laravel\Capsule5Connection;
 use Soluble\DbWrapper\Adapter\Pdo\GenericPdo;
+use Soluble\DbWrapper\Connection\Laravel\Capsule5Connection;
 
 class Capsule5Adapter extends GenericPdo implements AdapterInterface
 {
@@ -30,9 +32,9 @@ class Capsule5Adapter extends GenericPdo implements AdapterInterface
      */
     public function __construct(\Illuminate\Database\Capsule\Manager $capsule)
     {
-        $this->capsule = $capsule;
+        $this->capsule    = $capsule;
         $this->connection = new Capsule5Connection($this, $capsule);
-        $this->resource = $capsule->getConnection()->getPdo();
+        $this->resource   = $capsule->getConnection()->getPdo();
     }
 
     /**

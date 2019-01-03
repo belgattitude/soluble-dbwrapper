@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SolubleTest\DbWrapper;
 
@@ -9,7 +11,7 @@ class AdapterFactoryTest extends TestCase
 {
     public function testCreateAdapterFromMysqliConnection()
     {
-        $conn = \SolubleTestFactories::getDbConnection('mysqli');
+        $conn    = \SolubleTestFactories::getDbConnection('mysqli');
         $adapter = AdapterFactory::createAdapterFromResource($conn);
         self::assertInstanceOf(\Soluble\DbWrapper\Adapter\AdapterInterface::class, $adapter);
         self::assertInstanceOf(\Soluble\DbWrapper\Adapter\MysqliAdapter::class, $adapter);
@@ -17,7 +19,7 @@ class AdapterFactoryTest extends TestCase
 
     public function testCreateAdapterFromPDOMysqlConnection()
     {
-        $conn = \SolubleTestFactories::getDbConnection('pdo:mysql');
+        $conn    = \SolubleTestFactories::getDbConnection('pdo:mysql');
         $adapter = AdapterFactory::createAdapterFromResource($conn);
         self::assertInstanceOf(\Soluble\DbWrapper\Adapter\AdapterInterface::class, $adapter);
         self::assertInstanceOf(\Soluble\DbWrapper\Adapter\PdoMysqlAdapter::class, $adapter);
@@ -26,7 +28,7 @@ class AdapterFactoryTest extends TestCase
     public function testCreateAdapterFromPDOSqliteConnection()
     {
         $connection = new \PDO('sqlite::memory:');
-        $adapter = AdapterFactory::createAdapterFromResource($connection);
+        $adapter    = AdapterFactory::createAdapterFromResource($connection);
         self::assertInstanceOf(\Soluble\DbWrapper\Adapter\AdapterInterface::class, $adapter);
         self::assertInstanceOf(\Soluble\DbWrapper\Adapter\PdoSqliteAdapter::class, $adapter);
     }
@@ -34,7 +36,7 @@ class AdapterFactoryTest extends TestCase
     public function testCreateAdapterFromZendDb2Adapter()
     {
         $zendAdapter = \SolubleTestFactories::getDbConnection('zend-db2-mysqli');
-        $adapter = AdapterFactory::createAdapterFromZendDb2($zendAdapter);
+        $adapter     = AdapterFactory::createAdapterFromZendDb2($zendAdapter);
         self::assertInstanceOf(\Soluble\DbWrapper\Adapter\AdapterInterface::class, $adapter);
         self::assertInstanceOf(\Soluble\DbWrapper\Adapter\Zend\ZendDb2Adapter::class, $adapter);
     }
