@@ -7,7 +7,7 @@ matrix:
   include:
     - php: 7.1
       env:
-        - EXECUTE_TEST_COVERALLS=true
+        - RUN_CS_FIX=true
         - SEND_COVERAGE=true
     - php: 7.1
       env:
@@ -46,7 +46,7 @@ before_script:
   - travis_retry composer -n update --prefer-dist --prefer-stable --no-interaction $COMPOSER_ARGS;
 script:
   - ./vendor/bin/phpunit -v --coverage-clover=coverage.xml
-  - ./vendor/bin/php-cs-fixer --diff --dry-run -v fix
+  - if [[ RUN_CS_FIX == true ]]; then  ./vendor/bin/php-cs-fixer --diff --dry-run -v fix; fi
 
 after_script:
   - if [[ $SEND_COVERAGE == true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
