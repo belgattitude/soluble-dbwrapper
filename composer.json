@@ -31,12 +31,12 @@
     "require-dev": {
         "captainhook/plugin-composer": "^3.0",
         "phpunit/phpunit": "^7.5",
-        "friendsofphp/php-cs-fixer": "^2.11",
+        "friendsofphp/php-cs-fixer": "^2.14",
         "doctrine/dbal": ">=2.5.0|<3.0.0",
         "doctrine/common": ">=2.5.0|<3.0.0",
-        "phpstan/phpstan": "^0.10.5",
-        "phpstan/phpstan-phpunit": "^0.10",
-        "phpstan/phpstan-strict-rules": "^0.10.1",
+        "phpstan/phpstan": "^0.11",
+        "phpstan/phpstan-phpunit": "^0.11",
+        "phpstan/phpstan-strict-rules": "^0.11",
         "zendframework/zend-db": ">=2.2.0|<3.0.0",
         "illuminate/database": ">=4.0.0|<6.0.0"
     },
@@ -65,7 +65,7 @@
         "test": "vendor/bin/phpunit",
         "cs-check": "vendor/bin/php-cs-fixer --diff --dry-run -v fix",
         "cs-fix": "vendor/bin/php-cs-fixer -v fix",
-        "phpstan": "vendor/bin/phpstan analyse -l 6 -c phpstan.neon src"
+        "phpstan": "vendor/bin/phpstan analyse -l max -c phpstan.neon src"
     },
     "archive": {
         "exclude": ["phpstan.neon", "tests", "docs", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore", "phpcs.xml"]
