@@ -47,7 +47,6 @@ class MysqliAdapter implements AdapterInterface
     public function query(string $query, string $resultsetType = Resultset::TYPE_ARRAY): Resultset
     {
         try {
-            //$r = $this->resource->query($query, MYSQLI_STORE_RESULT);
             $r = $this->resource->query($query, MYSQLI_STORE_RESULT);
 
             $results = new Resultset($resultsetType);
