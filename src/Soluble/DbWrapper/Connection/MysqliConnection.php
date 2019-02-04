@@ -16,7 +16,7 @@ class MysqliConnection implements ConnectionInterface
     protected $adapter;
 
     /**
-     * @var \mysqli
+     * @var mysqli
      */
     protected $resource;
 
