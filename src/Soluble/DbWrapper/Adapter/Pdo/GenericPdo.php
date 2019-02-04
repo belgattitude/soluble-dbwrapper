@@ -21,7 +21,6 @@ abstract class GenericPdo implements AdapterInterface
     public function query(string $query, string $resultsetType = Resultset::TYPE_ARRAY): Resultset
     {
         try {
-            //$query = "select * from product";
             $stmt = $this->resource->prepare($query);
 
             if ($stmt === false) {
