@@ -13,7 +13,7 @@ use Soluble\DbWrapper\Result\Resultset;
 class MysqliAdapter implements AdapterInterface
 {
     /**
-     * @var \mysqli
+     * @var mysqli
      */
     protected $resource;
 
