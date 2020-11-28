@@ -25,18 +25,19 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.1 || ^8.0",
         "ext-pdo": "*"
     },
     "require-dev": {
-        "captainhook/plugin-composer": "^3.0",
-        "phpunit/phpunit": "^7.5",
-        "friendsofphp/php-cs-fixer": "^2.14",
-        "doctrine/dbal": ">=2.5.0|<3.0.0",
+        "captainhook/captainhook": "5.4.3",
+        "captainhook/plugin-composer": "5.2.2",
+        "phpstan/phpstan": "0.12.54",
+        "phpstan/phpstan-phpunit": "0.12.16",
+        "phpstan/phpstan-strict-rules": "0.12.5",
+        "phpunit/phpunit": "^7.4 || ^8.0 || ^9.0",
+        "friendsofphp/php-cs-fixer": "^v2.16.7",
+        "doctrine/dbal": ">=2.11.0|<3.0.0",
         "doctrine/common": ">=2.5.0|<3.0.0",
-        "phpstan/phpstan": "^0.11",
-        "phpstan/phpstan-phpunit": "^0.11",
-        "phpstan/phpstan-strict-rules": "^0.11",
         "zendframework/zend-db": ">=2.2.0|<3.0.0",
         "illuminate/database": ">=4.0.0|<6.0.0"
     },

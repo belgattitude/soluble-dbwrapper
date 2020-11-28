@@ -22,11 +22,6 @@ class Dbal2Adapter implements AdapterInterface
      */
     protected $connection;
 
-    /**
-     * Constructor.
-     *
-     * @param \Doctrine\DBAL\Connection $dbal
-     */
     public function __construct(\Doctrine\DBAL\Connection $dbal)
     {
         $this->dbal       = $dbal;
@@ -46,19 +41,12 @@ class Dbal2Adapter implements AdapterInterface
      */
     public function query(string $query, string $resultsetType = Resultset::TYPE_ARRAY): Resultset
     {
-        // This error may happen with the libmysql instead of mysqlnd and using set statement (set @test=1)
-        // : "Attempt to read a row while there is no result set associated with the statement"
-
         try {
-            /**
-             * @var \Doctrine\DBAL\Driver\Mysqli\MysqliStatement
-             */
-            $r = $this->dbal->query($query);
-
+            $r = $this->dbal->executeQuery($query);
             $results = new Resultset($resultsetType);
             if ($r->columnCount() > 0) {
-                while ($row = $r->fetch()) {
-                    $results->append((array) $row);
+                while ($row = $r->fetchAssociative()) {
+                    $results->append($row);
                 }
             }
         } catch (\Exception $e) {

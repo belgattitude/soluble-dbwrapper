@@ -54,16 +54,15 @@ class MysqliConnection implements ConnectionInterface
      * Return current schema/database name.
      *
      * @throws Exception\RuntimeException
-     *
-     * @return string|false
      */
     public function getCurrentSchema()
     {
         $query = 'SELECT DATABASE() as current_schema';
+
         try {
             $results = $this->adapter->query($query);
             if (count($results) === 0 || $results[0]['current_schema'] === null) {
-                return false;
+                return null;
             }
         } catch (\Exception $e) {
             throw new Exception\RuntimeException($e->getMessage());

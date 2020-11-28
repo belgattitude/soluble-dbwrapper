@@ -1,12 +1,14 @@
 includes:
-	- vendor/phpstan/phpstan-strict-rules/rules.neon
-	- vendor/phpstan/phpstan-phpunit/extension.neon
-	- vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
 parameters:
-	fileExtensions:
-		- php
-	reportUnmatchedIgnoredErrors: true
-	ignoreErrors:
-	    # For now this one is incorrect
-	    - '#Strict comparison using === between PDOStatement and false will always evaluate to false.#'
+    fileExtensions:
+        - php
+    checkGenericClassInNonGenericObjectType: false
+    reportUnmatchedIgnoredErrors: true
+    checkMissingIterableValueType: false
+    ignoreErrors:
+        # For now this one is incorrect
+        - '#Strict comparison using === between PDOStatement and false will always evaluate to false.#'
 
