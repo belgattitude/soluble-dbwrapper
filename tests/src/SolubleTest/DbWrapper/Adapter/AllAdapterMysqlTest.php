@@ -15,11 +15,7 @@ class AllAdapterMysqlTest extends TestCase
      */
     protected $elements;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    protected function setUp(): void
     {
         $elements = [];
 
@@ -56,6 +52,7 @@ class AllAdapterMysqlTest extends TestCase
         foreach ($this->elements as $key => $element) {
             $adapter = $element['adapter'];
             $adapter->query('set @psbtest=1');
+
             try {
                 $adapter->query('set qsd=');
                 self::assertTrue(false, "wrong execute command didn't throw an exception");

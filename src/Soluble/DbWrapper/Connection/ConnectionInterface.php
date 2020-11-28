@@ -11,7 +11,10 @@ interface ConnectionInterface
      *
      * @throws \Soluble\DbWrapper\Exception\RuntimeException
      *
-     * @return string|false
+     * @return string|null The name of the database or NULL if a database is not selected.
+     *                     The platforms which don't support the concept of a database (e.g. embedded databases)
+     *                     must always return a string as an indicator of an implicitly selected database.
+     * @return string|null
      */
     public function getCurrentSchema();
 

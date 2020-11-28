@@ -146,7 +146,7 @@ class Resultset implements ResultInterface
      */
     public function offsetGet($position)
     {
-        return isset($this->storage[$position]) ? $this->storage[$position] : null;
+        return $this->storage[$position] ?? null;
     }
 
     /**

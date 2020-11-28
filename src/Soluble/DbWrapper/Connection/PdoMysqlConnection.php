@@ -20,10 +20,6 @@ class PdoMysqlConnection implements ConnectionInterface
      */
     protected $resource;
 
-    /**
-     * @param PdoMysqlAdapter $adapter
-     * @param PDO             $resource
-     */
     public function __construct(PdoMysqlAdapter $adapter, PDO $resource)
     {
         $this->adapter  = $adapter;
@@ -32,8 +28,6 @@ class PdoMysqlConnection implements ConnectionInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @return PDO
      */
     public function getResource(): PDO
     {
@@ -50,20 +44,14 @@ class PdoMysqlConnection implements ConnectionInterface
         return mb_strtolower($infos[0]);
     }
 
-    /**
-     * Return current schema/database name.
-     *
-     * @throws Exception\RuntimeException
-     *
-     * @return string|false
-     */
     public function getCurrentSchema()
     {
         $query = 'SELECT DATABASE() as current_schema';
+
         try {
             $results = $this->adapter->query($query);
             if (count($results) === 0 || $results[0]['current_schema'] === null) {
-                return false;
+                return null;
             }
         } catch (\Exception $e) {
             throw new Exception\RuntimeException($e->getMessage());

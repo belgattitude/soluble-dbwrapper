@@ -19,11 +19,7 @@ class PdoSqliteAdapterTest extends TestCase
      */
     protected $adapter;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->connection = new \PDO('sqlite::memory:');
         $this->adapter    = new PdoSqliteAdapter($this->connection);
@@ -40,7 +36,7 @@ class PdoSqliteAdapterTest extends TestCase
     public function testConstructorThrowsException()
     {
         $this->expectException(\Soluble\DbWrapper\Exception\InvalidArgumentException::class);
-        $adapter = new PdoSqliteAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
+        new PdoSqliteAdapter(\SolubleTestFactories::getDbConnection('pdo:mysql'));
     }
 
     public function testQuery()

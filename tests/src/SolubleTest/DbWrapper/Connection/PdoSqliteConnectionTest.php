@@ -15,11 +15,7 @@ class PdoSqliteConnectionTest extends TestCase
      */
     protected $connection;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    protected function setUp(): void
     {
         $connection       = new \PDO('sqlite::memory:');
         $adapter          = new PdoSqliteAdapter($connection);

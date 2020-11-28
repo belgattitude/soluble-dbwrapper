@@ -20,10 +20,6 @@ class Dbal2Connection implements ConnectionInterface
      */
     protected $dbal;
 
-    /**
-     * @param AdapterInterface          $adapter
-     * @param \Doctrine\DBAL\Connection $dbal
-     */
     public function __construct(AdapterInterface $adapter, \Doctrine\DBAL\Connection $dbal)
     {
         $this->adapter = $adapter;
@@ -54,15 +50,13 @@ class Dbal2Connection implements ConnectionInterface
      * {@inheritdoc}
      *
      * @throws Exception\RuntimeException
-     *
-     * @return string
      */
     public function getCurrentSchema()
     {
         try {
             $schema = $this->dbal->getDatabase();
         } catch (\Exception $e) {
-            throw new Exception\RuntimeException('Cannot retrieve current schema:' . $e->getMessage());
+            throw new Exception\RuntimeException(sprintf('Cannot retrieve current schema: %s', $e->getMessage()));
         }
 
         return $schema;
