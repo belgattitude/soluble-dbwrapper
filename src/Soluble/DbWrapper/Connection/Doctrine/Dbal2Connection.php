@@ -48,6 +48,7 @@ class Dbal2Connection implements ConnectionInterface
 
     /**
      * {@inheritdoc}
+     *
      * @throws Exception\RuntimeException
      */
     public function getCurrentSchema()
@@ -57,6 +58,7 @@ class Dbal2Connection implements ConnectionInterface
         } catch (\Exception $e) {
             throw new Exception\RuntimeException(sprintf('Cannot retrieve current schema: %s', $e->getMessage()));
         }
+
         return $schema;
     }
 }

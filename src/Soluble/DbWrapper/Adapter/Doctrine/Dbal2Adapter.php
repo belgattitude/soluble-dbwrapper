@@ -42,7 +42,7 @@ class Dbal2Adapter implements AdapterInterface
     public function query(string $query, string $resultsetType = Resultset::TYPE_ARRAY): Resultset
     {
         try {
-            $r = $this->dbal->executeQuery($query);
+            $r       = $this->dbal->executeQuery($query);
             $results = new Resultset($resultsetType);
             if ($r->columnCount() > 0) {
                 while ($row = $r->fetchAssociative()) {
